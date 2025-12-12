@@ -1,10 +1,22 @@
 import Nav from '../components/Nav';
 import Layout from '../components/Layout';
+import TOC from '../components/TOC';
 
 export default function PreRide() {
   return (
     <Layout>
       <Nav />
+
+      <TOC 
+        items={[
+          { id: 'mental', label: 'Mental Check-In' },
+          { id: 'hands-on', label: 'Hands-On Body Scan' },
+          { id: 'limbs', label: 'Limb & Joint Assessment' },
+          { id: 'warmup', label: 'Warm-Up Sequence' },
+          { id: 'equipment', label: 'Equipment Integrity Check' },
+          { id: 'go-no-go', label: 'Go/No-Go Assessment' }
+        ]}
+      />
 
       <h1>Pre-Ride Prep</h1>
       <p>
@@ -13,30 +25,38 @@ export default function PreRide() {
         smart preparation can prevent weeks of downtime.
       </p>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>1. Mental Check-In</h2>
+      <h2 id="mental" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        1. Mental Check-In
+      </h2>
       <ul>
         <li>Is the horse alert but not anxious?</li>
-        <li>Is there any unusual stiffness, distraction, or resistance?</li>
-        <li>Is the horse tracking normally from the stall to the grooming area?</li>
+        <li>Any unusual stiffness, distraction, or resistance?</li>
+        <li>Normal tracking from stall to grooming area?</li>
       </ul>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>2. Hands-On Body Scan</h2>
+      <h2 id="hands-on" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        2. Hands-On Body Scan
+      </h2>
       <p>Use light, consistent pressure along key areas:</p>
       <ul>
-        <li>Neck and poll — look for tension or resistance</li>
-        <li>Shoulders — identify warm spots or soreness</li>
-        <li>Back and loin — watch for dipping or tightening</li>
-        <li>Hindquarters — feel for jumpiness, twitching, or asymmetry</li>
+        <li>Neck and poll — feel for tension or resistance</li>
+        <li>Shoulders — check for warm spots or soreness</li>
+        <li>Back and loin — avoid sharp dips or tightening reactions</li>
+        <li>Hindquarters — identify twitching, guarding, or asymmetry</li>
       </ul>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>3. Limb & Joint Assessment</h2>
+      <h2 id="limbs" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        3. Limb & Joint Assessment
+      </h2>
       <ul>
         <li>Check each leg for heat, swelling, or sensitivity</li>
         <li>Flex and extend each limb gently — smooth movement is expected</li>
-        <li>Pick out hooves, checking for packed debris or tenderness</li>
+        <li>Pick out hooves — check for stones, cracks, or tenderness</li>
       </ul>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>4. Warm-Up Sequence</h2>
+      <h2 id="warmup" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        4. Warm-Up Sequence
+      </h2>
       <p>A proper warm-up should:</p>
       <ul>
         <li>Increase circulation gradually</li>
@@ -52,27 +72,29 @@ export default function PreRide() {
         <li>Light trot only once movement is even and relaxed</li>
       </ul>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>5. Equipment Integrity Check</h2>
+      <h2 id="equipment" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        5. Equipment Integrity Check
+      </h2>
       <ul>
         <li>Girth/cinch free of cracks or splits</li>
         <li>Stirrups level and functional</li>
-        <li>Bits smooth and correctly fitted</li>
+        <li>Bit smooth and correctly fitted</li>
         <li>Pad positioned evenly with no folds or debris</li>
-        <li>Boots or wraps applied correctly and securely</li>
+        <li>Boots/wraps applied securely and comfortably</li>
       </ul>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>6. “Go/No-Go” Assessment</h2>
-      <p>
-        Before mounting, ask yourself:
-      </p>
+      <h2 id="go-no-go" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        6. “Go / No-Go” Assessment
+      </h2>
+      <p>Before mounting, ask yourself:</p>
       <ul>
         <li>Is the horse physically ready to work?</li>
         <li>Is the horse mentally in a safe, cooperative state?</li>
-        <li>Is there anything unusual that warrants caution?</li>
+        <li>Did any part of the prep raise a red flag?</li>
       </ul>
 
       <p>
-        If anything feels “off,” pause.  
+        When in doubt, pause.  
         A 5-minute reassessment is always better than a 5-week layup.
       </p>
 
