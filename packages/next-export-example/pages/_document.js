@@ -5,7 +5,11 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* Base PWA Manifest */}
+
+          {/* ============================== */}
+          {/*         BASE PWA SETTINGS       */}
+          {/* ============================== */}
+
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#0f1111" />
 
@@ -13,24 +17,36 @@ class MyDocument extends Document {
           {/*        iOS PWA SUPPORT         */}
           {/* ============================== */}
 
-          {/* iOS Home Screen Icon */}
+          {/* Home Screen Icon */}
           <link rel="apple-touch-icon" href="/192fm.png" />
 
-          {/* iOS Fullscreen Mode */}
+          {/* Enable standalone (full-screen) mode on iOS */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
 
-          {/* iOS Status Bar Style */}
+          {/* Controls status bar appearance */}
           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-          {/* Home Screen Title */}
+          {/* App title shown under the icon */}
           <meta name="apple-mobile-web-app-title" content="Field Manual" />
 
-          {/* iOS Splash Screen (basic version) */}
-          <link rel="apple-touch-startup-image" href="/512fm.png" />
+          {/* ============================== */}
+          {/*         iOS SPLASH SCREENS     */}
+          {/* ============================== */}
+
+          {/* Uses your 512px icon as universal splash screen */}
+          <link rel="apple-touch-startup-image" href="/512fm.png" media="screen and (device-width: 320px) and (device-height: 568px)" />
+          <link rel="apple-touch-startup-image" href="/512fm.png" media="screen and (device-width: 375px) and (device-height: 667px)" />
+          <link rel="apple-touch-startup-image" href="/512fm.png" media="screen and (device-width: 414px) and (device-height: 736px)" />
+          <link rel="apple-touch-startup-image" href="/512fm.png" media="screen and (device-width: 375px) and (device-height: 812px)" />
+          <link rel="apple-touch-startup-image" href="/512fm.png" media="screen and (device-width: 414px) and (device-height: 896px)" />
+          <link rel="apple-touch-startup-image" href="/512fm.png" media="screen and (device-width: 390px) and (device-height: 844px)" />
+          <link rel="apple-touch-startup-image" href="/512fm.png" media="screen and (device-width: 393px) and (device-height: 852px)" />
+          <link rel="apple-touch-startup-image" href="/512fm.png" media="screen and (device-width: 428px) and (device-height: 926px)" />
 
           {/* ============================== */}
-          {/*     Service Worker Support      */}
+          {/*  SERVICE WORKER REGISTRATION   */}
           {/* ============================== */}
+
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -44,13 +60,14 @@ class MyDocument extends Document {
               `
             }}
           />
+
         </Head>
 
         <body>
-          {/* Android "Install App" banner is added dynamically */}
           <Main />
           <NextScript />
         </body>
+
       </Html>
     );
   }
