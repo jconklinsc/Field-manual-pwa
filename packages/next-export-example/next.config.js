@@ -1,17 +1,22 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  // Force Next.js to completely ignore TypeScript mode
+  // Force Next.js to ignore TypeScript mode completely
   typescript: {
     ignoreBuildErrors: true,
   },
 
-  // Disable ESLint during build (old template triggers false errors)
+  // Ignore ESLint during builds (old template triggers false warnings)
   eslint: {
     ignoreDuringBuilds: true,
   },
 
-  // Disable stray telemetry noise
+  // Disable Next.js Image Optimization to avoid installing "sharp"
+  images: {
+    disableStaticImages: true,
+  },
+
+  // Disable telemetry noise
   telemetry: false,
 };
 
