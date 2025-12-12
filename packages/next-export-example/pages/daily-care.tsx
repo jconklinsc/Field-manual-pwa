@@ -1,6 +1,7 @@
 import Nav from '../components/Nav';
 import Layout from '../components/Layout';
 import TOC from '../components/TOC';
+import SectionNav from '../components/SectionNav';
 
 export default function DailyCare() {
   return (
@@ -38,7 +39,6 @@ export default function DailyCare() {
       <h2 id="hands-on" style={{ marginTop: '24px', marginBottom: '12px' }}>
         2. Quick Hands-On Assessment
       </h2>
-      <p>Spend 30 seconds running your hands along the horse’s body:</p>
       <ul>
         <li>Check for new bumps, cuts, swelling, or sensitivity</li>
         <li>Feel for muscle tightness in the neck, shoulders, back, and hindquarters</li>
@@ -48,7 +48,6 @@ export default function DailyCare() {
       <h2 id="movement" style={{ marginTop: '24px', marginBottom: '12px' }}>
         3. Movement Snapshot
       </h2>
-      <p>Observe a few steps at walk and trot:</p>
       <ul>
         <li>Even rhythm</li>
         <li>No short steps or toe-dragging</li>
@@ -70,10 +69,14 @@ export default function DailyCare() {
         5. When Something Feels Off
       </h2>
       <p>
-        If something feels “not quite right,” trust that signal.
+        If something feels “not quite right,” trust that signal.  
         Pause. Observe again. Compare to baseline.
-        Small changes caught early prevent big problems later.
       </p>
+
+      <SectionNav
+        prev={null}
+        next={{ href: '/pre-ride', label: 'Pre-Ride Prep' }}
+      />
 
     </Layout>
   );
