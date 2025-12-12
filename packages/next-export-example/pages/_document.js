@@ -5,10 +5,32 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          {/* Base PWA Manifest */}
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#0f1111" />
 
-          {/* Register Service Worker for Offline Support */}
+          {/* ============================== */}
+          {/*        iOS PWA SUPPORT         */}
+          {/* ============================== */}
+
+          {/* iOS Home Screen Icon */}
+          <link rel="apple-touch-icon" href="/192fm.png" />
+
+          {/* iOS Fullscreen Mode */}
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+
+          {/* iOS Status Bar Style */}
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+          {/* Home Screen Title */}
+          <meta name="apple-mobile-web-app-title" content="Field Manual" />
+
+          {/* iOS Splash Screen (basic version) */}
+          <link rel="apple-touch-startup-image" href="/512fm.png" />
+
+          {/* ============================== */}
+          {/*     Service Worker Support      */}
+          {/* ============================== */}
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -25,6 +47,7 @@ class MyDocument extends Document {
         </Head>
 
         <body>
+          {/* Android "Install App" banner is added dynamically */}
           <Main />
           <NextScript />
         </body>
