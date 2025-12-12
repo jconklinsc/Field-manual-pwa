@@ -1,0 +1,34 @@
+// Global Design System for the Draw It Out® Field Manual PWA
+
+export const styles = {
+  h1: {
+    fontSize: '28px',
+    marginBottom: '12px',
+    fontWeight: '700',
+    color: '#0f1111',
+    lineHeight: 1.25,
+  },
+
+  h2: {
+    fontSize: '22px',
+    marginTop: '32px',
+    marginBottom: '8px',
+    fontWeight: '600',
+    color: '#0f1111',
+    lineHeight: 1.35,
+  },
+
+  paragraph: {
+    marginBottom: '16px',
+    color: '#0f1111',
+    fontSize: '18px',
+    lineHeight: 1.65,
+  },
+
+  list: {
+    marginTop: '8px',
+    marginBottom: '16px',
+    paddingLeft: '20px',
+    lineHeight: 1.65,
+  }
+};
