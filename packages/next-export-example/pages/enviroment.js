@@ -1,10 +1,24 @@
 import Nav from '../components/Nav';
 import Layout from '../components/Layout';
+import TOC from '../components/TOC';
 
 export default function Environment() {
   return (
     <Layout>
       <Nav />
+
+      <TOC
+        items={[
+          { id: 'weather', label: 'Weather Shifts' },
+          { id: 'footing', label: 'Ground & Footing' },
+          { id: 'hauling', label: 'Hauling & Travel Stress' },
+          { id: 'routine', label: 'Routine Disruptions' },
+          { id: 'show', label: 'Show Environment Stress' },
+          { id: 'barn', label: 'Barn Environment Red Flags' },
+          { id: 'behavior', label: 'Behavioral Stress Indicators' },
+          { id: 'reduce', label: 'How to Reduce Environmental Stress' }
+        ]}
+      />
 
       <h1>Environment & Stress</h1>
       <p>
@@ -13,91 +27,97 @@ export default function Environment() {
         stressors quickly so you can adjust before problems appear.
       </p>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>1. Weather Shifts</h2>
-      <p>Sudden changes in weather affect comfort, hydration, and performance.</p>
+      <h2 id="weather" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        1. Weather Shifts
+      </h2>
+      <p>Sudden weather changes affect comfort, hydration, and performance.</p>
       <ul>
-        <li><strong>Cold snaps:</strong> increased stiffness, slower warm-up times</li>
-        <li><strong>Heat waves:</strong> dehydration risk, electrolyte depletion</li>
+        <li><strong>Cold snaps:</strong> increased stiffness, longer warm-up times</li>
+        <li><strong>Heat waves:</strong> dehydration and electrolyte depletion</li>
         <li><strong>High humidity:</strong> harder for horses to cool themselves</li>
-        <li><strong>Windy days:</strong> heightened alertness, spooky behavior</li>
+        <li><strong>Windy days:</strong> heightened alertness and spookiness</li>
       </ul>
-      <p><em>Adjust workload and warm-up based on conditions, not the calendar.</em></p>
+      <p><em>Adjust workload and warm-up based on conditions — not the calendar.</em></p>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>2. Ground & Footing</h2>
-      <p>Footing quality directly affects soundness.</p>
+      <h2 id="footing" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        2. Ground & Footing
+      </h2>
+      <p>Footing quality directly affects soundness and confidence.</p>
       <ul>
-        <li><strong>Deep footing:</strong> increased strain on tendons and ligaments</li>
-        <li><strong>Hard ground:</strong> concussion risk for joints and hooves</li>
-        <li><strong>Uneven surfaces:</strong> higher risk of missteps and minor strains</li>
-        <li><strong>Slippery conditions:</strong> muscle guarding, stifle slipping</li>
+        <li><strong>Deep footing:</strong> tendon and suspensory strain risk</li>
+        <li><strong>Hard ground:</strong> increased joint concussion</li>
+        <li><strong>Uneven surfaces:</strong> missteps and micro-strains</li>
+        <li><strong>Slippery conditions:</strong> muscle guarding and stifle slipping</li>
       </ul>
-      <p>
-        If footing isn’t safe, reduce intensity — even elite riders adjust training days
-        based on ground conditions.
-      </p>
+      <p>If footing isn’t safe, reduce intensity — even elite riders adjust for footing.</p>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>3. Hauling & Travel Stress</h2>
+      <h2 id="hauling" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        3. Hauling & Travel Stress
+      </h2>
       <p>Travel affects hydration, digestion, and mental focus.</p>
       <ul>
         <li>Offer water at every stop</li>
-        <li>Check legs after long hauls for stocking up</li>
-        <li>Expect 12–24 hours of physical and mental “lag” after travel</li>
-        <li>Monitor appetite — hauling suppresses gut movement for many horses</li>
+        <li>Check legs after unloading for stocking up</li>
+        <li>Expect 12–24 hours of mental/physical “lag” after travel</li>
+        <li>Monitor appetite — hauling suppresses gut movement</li>
       </ul>
-      <p>
-        A horse may look fine unloading but still be recovering internally from the trip.
-      </p>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>4. Routine Disruptions</h2>
-      <p>Horses thrive on predictability. Pay attention when routines shift:</p>
+      <h2 id="routine" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        4. Routine Disruptions
+      </h2>
+      <p>Horses thrive on consistency. Watch for stress when routines shift:</p>
       <ul>
         <li>New turnout groups</li>
-        <li>Different feeding times</li>
+        <li>Different feeding schedules</li>
         <li>Stall relocations</li>
-        <li>New barn mates or neighbors</li>
-        <li>Different grooming handling styles</li>
+        <li>New barn neighbors</li>
+        <li>New handlers or grooming styles</li>
       </ul>
-      <p>
-        Even small changes can elevate stress levels and affect performance.
-      </p>
+      <p>Even small changes can elevate stress levels and affect performance.</p>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>5. Show Environment Stress</h2>
+      <h2 id="show" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        5. Show Environment Stress
+      </h2>
       <p>Busy showgrounds overwhelm many horses:</p>
       <ul>
-        <li>Loudspeakers and sudden noises</li>
+        <li>Loudspeakers and PA systems</li>
         <li>Crowded warm-up rings</li>
         <li>New footing and unfamiliar arenas</li>
-        <li>Travel fatigue layered on top</li>
+        <li>Travel fatigue layered with sensory overload</li>
       </ul>
-      <p><em>Plan extra time to settle the horse before working or competing.</em></p>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>6. Barn Environment Red Flags</h2>
+      <h2 id="barn" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        6. Barn Environment Red Flags
+      </h2>
       <p>These often go unnoticed but matter greatly:</p>
       <ul>
-        <li>Ammonia smell in stalls — respiratory irritation risk</li>
-        <li>Poor ventilation in winter — trapped moisture and dust</li>
-        <li>Stagnant water — lower water intake</li>
-        <li>Noisy or chaotic routines — anxious horses</li>
+        <li>Strong ammonia smell — respiratory irritation risk</li>
+        <li>Poor winter ventilation — trapped dust and moisture</li>
+        <li>Dirty or stale water — reduced water intake</li>
+        <li>Chaotic routines — anxious horses</li>
       </ul>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>7. Behavioral Stress Indicators</h2>
-      <p>Stress shows up before physical issues do:</p>
+      <h2 id="behavior" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        7. Behavioral Stress Indicators
+      </h2>
+      <p>Stress appears before physical issues do:</p>
       <ul>
-        <li>Increased spookiness</li>
+        <li>Increased spookiness or startle response</li>
         <li>Jaw or poll tension</li>
-        <li>Shortened stride</li>
-        <li>Reduced appetite</li>
-        <li>More frequent bowel movements</li>
+        <li>Shortened stride or hesitation</li>
+        <li>Reduced appetite or changed manure</li>
         <li>Ear pinning or irritability during grooming</li>
       </ul>
 
-      <h2 style={{ marginTop: '24px', marginBottom: '12px' }}>8. How to Reduce Environmental Stress</h2>
+      <h2 id="reduce" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        8. How to Reduce Environmental Stress
+      </h2>
       <ul>
-        <li>Provide consistent routines</li>
+        <li>Maintain consistent routines whenever possible</li>
         <li>Ensure clean, accessible water at all times</li>
-        <li>Use hand-walking to release travel tension</li>
-        <li>Reduce workload during weather swings</li>
-        <li>Give horses time to settle in new environments</li>
+        <li>Use hand-walking after hauling</li>
+        <li>Reduce workload during extreme weather swings</li>
+        <li>Allow settling time in new environments</li>
       </ul>
 
       <p>
