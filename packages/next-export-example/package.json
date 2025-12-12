@@ -1,7 +1,15 @@
 {
+  "name": "field-manual-app",
+  "version": "1.0.0",
   "private": true,
-  "name": "field-manual-pwa",
-  "workspaces": [
-    "packages/next-export-example"
-  ]
+  "scripts": {
+    "build": "next build",
+    "start": "next start",
+    "dev": "next dev"
+  },
+  "dependencies": {
+    "next": "9.3.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  }
 }
