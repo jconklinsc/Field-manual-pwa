@@ -1,6 +1,8 @@
+import Layout from '../components/Layout';
+
 export default function Home() {
   return (
-    <main style={{ padding: '24px', fontFamily: 'system-ui' }}>
+    <Layout>
       <h1>Field Manual</h1>
       <p>Practical care. Clear decisions.</p>
 
@@ -12,6 +14,6 @@ export default function Home() {
         <li><a href="/environment">Environment & Stress</a></li>
         <li><a href="/quick-reference">Quick Reference</a></li>
       </ul>
-    </main>
+    </Layout>
   );
 }
