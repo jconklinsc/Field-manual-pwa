@@ -5,7 +5,7 @@ export default function Home() {
       <p>Practical care. Clear decisions.</p>
 
       <ul>
-        <li>Daily Care</li>
+        <li><a href="/daily-care">Daily Care</a></li>
         <li>Pre-Ride</li>
         <li>Post-Ride</li>
         <li>Skin & Legs</li>
