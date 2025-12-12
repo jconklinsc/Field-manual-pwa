@@ -1,23 +1,21 @@
 /** @type {import('next').NextConfig} */
 
+// Next.js 9 compatibility settings + PWA allowance
 const nextConfig = {
-  // Force Next.js to ignore TypeScript mode completely
   typescript: {
     ignoreBuildErrors: true,
   },
-
-  // Ignore ESLint during builds (old template triggers false warnings)
   eslint: {
     ignoreDuringBuilds: true,
   },
 
-  // Disable Next.js Image Optimization to avoid installing "sharp"
-  images: {
-    disableStaticImages: true,
+  // Disable Minifier for older Next.js builds to prevent SWC + OpenSSL issues
+  experimental: {
+    swcMinify: false
   },
 
-  // Disable telemetry noise
-  telemetry: false,
+  // Required for stable PWA behavior with a custom service worker
+  poweredByHeader: false,
 };
 
 module.exports = nextConfig;
