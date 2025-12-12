@@ -7,6 +7,7 @@ export default function Layout({ children }) {
       margin: '0 auto',
       lineHeight: '1.6'
     }}>
+      <Header />
       {children}
     </div>
   );
