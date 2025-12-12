@@ -1,14 +1,15 @@
 import Nav from '../components/Nav';
+import Layout from '../components/Layout';
 
 export default function DailyCare() {
   return (
-    <main style={{ padding: '24px', fontFamily: 'system-ui' }}>
+    <Layout>
       <Nav />
       <h1>Daily Care</h1>
       <p>
         This section covers everyday observation, light maintenance,
         and recognizing what normal looks like.
       </p>
-    </main>
+    </Layout>
   );
 }
