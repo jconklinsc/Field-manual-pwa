@@ -1,10 +1,21 @@
 import Nav from '../components/Nav';
 import Layout from '../components/Layout';
+import TOC from '../components/TOC';
 
 export default function DailyCare() {
   return (
     <Layout>
       <Nav />
+
+      <TOC 
+        items={[
+          { id: 'observation', label: 'Daily Observation Checklist' },
+          { id: 'hands-on', label: 'Hands-On Assessment' },
+          { id: 'movement', label: 'Movement Snapshot' },
+          { id: 'hydration', label: 'Hydration & Feed Check' },
+          { id: 'off', label: 'When Something Feels Off' }
+        ]}
+      />
 
       <h1>Daily Care</h1>
       <p>
@@ -12,7 +23,9 @@ export default function DailyCare() {
         Daily care is less about doing more — and more about observing wisely.
       </p>
 
-      <h2>1. Daily Observation Checklist</h2>
+      <h2 id="observation" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        1. Daily Observation Checklist
+      </h2>
       <ul>
         <li>Eyes clear and bright</li>
         <li>Nostrils clean, normal airflow</li>
@@ -22,17 +35,19 @@ export default function DailyCare() {
         <li>Alert but calm demeanor</li>
       </ul>
 
-      <h2>2. Quick Hands-On Assessment</h2>
-      <p>
-        Spend 30 seconds running your hands along the horse’s body:
-      </p>
+      <h2 id="hands-on" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        2. Quick Hands-On Assessment
+      </h2>
+      <p>Spend 30 seconds running your hands along the horse’s body:</p>
       <ul>
         <li>Check for new bumps, cuts, swelling, or sensitivity</li>
         <li>Feel for muscle tightness in the neck, shoulders, back, and hindquarters</li>
         <li>Light palpation along spine — should show no dramatic reactions</li>
       </ul>
 
-      <h2>3. Movement Snapshot</h2>
+      <h2 id="movement" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        3. Movement Snapshot
+      </h2>
       <p>Observe a few steps at walk and trot:</p>
       <ul>
         <li>Even rhythm</li>
@@ -41,7 +56,9 @@ export default function DailyCare() {
         <li>Head level, no bobbing</li>
       </ul>
 
-      <h2>4. Hydration & Feed Check</h2>
+      <h2 id="hydration" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        4. Hydration & Feed Check
+      </h2>
       <ul>
         <li>Water bucket decreased as expected</li>
         <li>Salt availability</li>
@@ -49,10 +66,12 @@ export default function DailyCare() {
         <li>Skin pinch test: returns in under 1 second</li>
       </ul>
 
-      <h2>5. When Something Feels Off</h2>
+      <h2 id="off" style={{ marginTop: '24px', marginBottom: '12px' }}>
+        5. When Something Feels Off
+      </h2>
       <p>
-        If something feels “not quite right,” trust that signal.  
-        Pause. Observe again. Compare to baseline.  
+        If something feels “not quite right,” trust that signal.
+        Pause. Observe again. Compare to baseline.
         Small changes caught early prevent big problems later.
       </p>
 
