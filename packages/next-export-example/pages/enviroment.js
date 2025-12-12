@@ -2,6 +2,7 @@ import Nav from '../components/Nav';
 import Layout from '../components/Layout';
 import TOC from '../components/TOC';
 import SectionNav from '../components/SectionNav';
+import { styles } from '../components/styles';
 
 export default function Environment() {
   return (
@@ -21,101 +22,82 @@ export default function Environment() {
         ]}
       />
 
-      <h1>Environment & Stress</h1>
-      <p>
-        A horse’s environment shapes everything — movement, hydration, breathing, digestion,
-        behavior, and overall soundness. Learn to read environmental stressors early.
+      <h1 style={styles.h1}>Environment & Stress</h1>
+      <p style={styles.paragraph}>
+        A horse’s environment shapes everything — movement, hydration, behavior, soundness,
+        and recovery. Understanding environmental stressors helps prevent issues before they
+        become problems.
       </p>
 
-      <h2 id="weather" style={{ marginTop: '24px', marginBottom: '12px' }}>
-        1. Weather Shifts
-      </h2>
-      <ul>
-        <li><strong>Cold snaps:</strong> stiffness and longer warm-up times</li>
-        <li><strong>Heat waves:</strong> dehydration/electrolyte loss</li>
+      <h2 id="weather" style={styles.h2}>Weather Shifts</h2>
+      <ul style={styles.list}>
+        <li><strong>Cold snaps:</strong> stiffness, longer warm-up times</li>
+        <li><strong>Heat waves:</strong> dehydration, reduced performance</li>
         <li><strong>High humidity:</strong> harder cooling</li>
-        <li><strong>Windy days:</strong> increased alertness/spookiness</li>
+        <li><strong>Windy days:</strong> increased alertness or spookiness</li>
       </ul>
 
-      <h2 id="footing" style={{ marginTop: '24px', marginBottom: '12px' }}>
-        2. Ground & Footing
-      </h2>
-      <ul>
-        <li><strong>Deep footing:</strong> tendon strain</li>
-        <li><strong>Hard footing:</strong> joint concussion risk</li>
-        <li><strong>Uneven ground:</strong> missteps</li>
-        <li><strong>Slippery:</strong> muscle guarding</li>
+      <h2 id="footing" style={styles.h2}>Ground & Footing</h2>
+      <ul style={styles.list}>
+        <li><strong>Deep footing:</strong> tendon strain risk</li>
+        <li><strong>Hard footing:</strong> joint concussion</li>
+        <li><strong>Uneven ground:</strong> missteps or rolled ankles</li>
+        <li><strong>Slick footing:</strong> muscle guarding, hesitation</li>
       </ul>
 
-      <h2 id="hauling" style={{ marginTop: '24px', marginBottom: '12px' }}>
-        3. Hauling & Travel Stress
-      </h2>
-      <ul>
+      <h2 id="hauling" style={styles.h2}>Hauling & Travel Stress</h2>
+      <ul style={styles.list}>
         <li>Offer water frequently</li>
         <li>Check legs after unloading</li>
-        <li>Expect 12–24 hrs of travel fatigue</li>
-        <li>Monitor appetite and manure</li>
+        <li>Expect 12–24 hours of fatigue after long haul</li>
+        <li>Monitor manure and appetite closely</li>
       </ul>
 
-      <h2 id="routine" style={{ marginTop: '24px', marginBottom: '12px' }}>
-        4. Routine Disruptions
-      </h2>
-      <ul>
+      <h2 id="routine" style={styles.h2}>Routine Disruptions</h2>
+      <ul style={styles.list}>
         <li>New turnout groups</li>
         <li>Feeding schedule changes</li>
         <li>Stall relocations</li>
-        <li>Handler/groom changes</li>
+        <li>New handlers or caretakers</li>
       </ul>
 
-      <h2 id="show" style={{ marginTop: '24px', marginBottom: '12px' }}>
-        5. Show Environment Stress
-      </h2>
-      <ul>
-        <li>Loudspeakers & sudden noise</li>
-        <li>Crowded warm-ups</li>
-        <li>New footing</li>
-        <li>Overstimulation + travel fatigue</li>
+      <h2 id="show" style={styles.h2}>Show Environment Stress</h2>
+      <ul style={styles.list}>
+        <li>Loudspeakers, sudden noise</li>
+        <li>Crowded warm-up pens</li>
+        <li>New or deep footing</li>
+        <li>Travel fatigue or unfamiliar surroundings</li>
       </ul>
 
-      <h2 id="barn" style={{ marginTop: '24px', marginBottom: '12px' }}>
-        6. Barn Environment Red Flags
-      </h2>
-      <ul>
+      <h2 id="barn" style={styles.h2}>Barn Environment Red Flags</h2>
+      <ul style={styles.list}>
         <li>Ammonia smell → respiratory irritation</li>
-        <li>Poor ventilation → trapped dust/moisture</li>
-        <li>Stagnant or dirty water</li>
+        <li>Poor ventilation → dust, moisture buildup</li>
+        <li>Stagnant or dirty water sources</li>
         <li>Chaotic routines → anxious horses</li>
       </ul>
 
-      <h2 id="behavior" style={{ marginTop: '24px', marginBottom: '12px' }}>
-        7. Behavioral Stress Indicators
-      </h2>
-      <ul>
-        <li>Spookiness increases</li>
-        <li>Jaw/poll tension</li>
-        <li>Shorter stride</li>
+      <h2 id="behavior" style={styles.h2}>Behavioral Stress Indicators</h2>
+      <ul style={styles.list}>
+        <li>Increased tension through jaw or poll</li>
+        <li>Shorter stride or reluctance to step under</li>
         <li>Reduced appetite</li>
-        <li>Irritability during grooming</li>
+        <li>Noticeable irritability during grooming</li>
       </ul>
 
-      <h2 id="reduce" style={{ marginTop: '24px', marginBottom: '12px' }}>
-        8. How to Reduce Stress
-      </h2>
-      <ul>
+      <h2 id="reduce" style={styles.h2}>How to Reduce Stress</h2>
+      <ul style={styles.list}>
         <li>Maintain consistent routines</li>
-        <li>Ensure clean water access</li>
-        <li>Hand-walk after hauling</li>
-        <li>Reduce workload during extreme weather</li>
+        <li>Ensure access to clean water</li>
         <li>Allow settling time in new environments</li>
+        <li>Lower workload during extreme weather</li>
+        <li>Use predictable warm-up and cool-down patterns</li>
       </ul>
-
-      <p>Environment shapes performance more than riders realize.</p>
 
       <SectionNav
         prev={{ href: '/skin-and-legs', label: 'Skin & Legs' }}
         next={{ href: '/quick-reference', label: 'Quick Reference' }}
       />
-
     </Layout>
   );
 }
