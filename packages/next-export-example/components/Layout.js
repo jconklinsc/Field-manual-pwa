@@ -3,19 +3,28 @@ import Header from './Header';
 
 export default function Layout({ children }) {
   return (
-    <div
+    <div 
       style={{
-        padding: '24px',
+        minHeight: '100vh',
+        background: '#ffffff',
+        color: '#0f1111',
         fontFamily: 'system-ui',
-        maxWidth: '700px',
-        margin: '0 auto',
-        lineHeight: '1.6',
-        position: 'relative'
       }}
     >
       <Drawer />
       <Header />
-      {children}
+
+      <main
+        style={{
+          maxWidth: '720px',
+          margin: '0 auto',
+          padding: '24px 20px 60px',
+          lineHeight: 1.65,
+          fontSize: '18px'
+        }}
+      >
+        {children}
+      </main>
     </div>
   );
 }
