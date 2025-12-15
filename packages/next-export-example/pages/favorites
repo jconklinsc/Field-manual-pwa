@@ -1,0 +1,87 @@
+import { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
+import { styles } from '../components/styles';
+
+const PAGE_MAP = {
+  'daily-care': {
+    title: 'Daily Care',
+    href: '/daily-care'
+  },
+  'pre-ride': {
+    title: 'Pre-Ride Prep',
+    href: '/pre-ride'
+  },
+  'post-ride': {
+    title: 'Post-Ride Recovery',
+    href: '/post-ride'
+  },
+  'skin-and-legs': {
+    title: 'Skin & Legs',
+    href: '/skin-and-legs'
+  },
+  'environment': {
+    title: 'Environment & Stress',
+    href: '/environment'
+  },
+  'quick-reference': {
+    title: 'Quick Reference',
+    href: '/quick-reference'
+  }
+};
+
+export default function Favorites() {
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const raw = localStorage.getItem('dio-fm-favorites');
+    if (!raw) {
+      setFavorites([]);
+      return;
+    }
+
+    try {
+      const ids = JSON.parse(raw);
+      setFavorites(ids);
+    } catch {
+      setFavorites([]);
+    }
+  }, []);
+
+  return (
+    <Layout>
+      <h1 style={styles.h1}>Favorites</h1>
+      <p style={styles.paragraph}>
+        Pages you’ve starred for quick access.
+      </p>
+
+      {favorites.length === 0 && (
+        <p style={styles.paragraph}>
+          You haven’t favorited any sections yet.
+        </p>
+      )}
+
+      <ul style={styles.list}>
+        {favorites.map(id => {
+          const page = PAGE_MAP[id];
+          if (!page) return null;
+
+          return (
+            <li key={id}>
+              <a
+                href={page.href}
+                style={{
+                  textDecoration: 'underline',
+                  fontWeight: 600
+                }}
+              >
+                {page.title}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </Layout>
+  );
+}
