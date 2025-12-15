@@ -80,6 +80,8 @@ function BottomNav() {
       <a href="/pre-ride" style={navStyle}>Pre</a>
       <a href="/post-ride" style={navStyle}>Post</a>
       <a href="/favorites" style={navStyle}>Favorites</a>
+      <a href="/notes" style={navStyle}>Notes</a>
+      <a href="/horses" style={navStyle}>Horses</a>
       <a href="/quick-reference" style={navStyle}>Quick Ref</a>
     </nav>
   );
