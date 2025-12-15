@@ -1,0 +1,85 @@
+import { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
+import { styles } from '../components/styles';
+
+export default function Horses() {
+  const [horses, setHorses] = useState([]);
+  const [newHorse, setNewHorse] = useState('');
+
+  useEffect(() => {
+    const raw = localStorage.getItem('dio-fm-horses');
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        setHorses(parsed.horses || []);
+      } catch {}
+    }
+  }, []);
+
+  const save = (updated) => {
+    localStorage.setItem('dio-fm-horses', JSON.stringify({ horses: updated }));
+    setHorses(updated);
+  };
+
+  const addHorse = () => {
+    if (!newHorse.trim()) return;
+
+    const updated = [
+      ...horses,
+      {
+        id: Date.now().toString(),
+        name: newHorse.trim(),
+        notes: []
+      }
+    ];
+
+    save(updated);
+    setNewHorse('');
+  };
+
+  return (
+    <Layout>
+      <h1 style={styles.h1}>Horse Logs</h1>
+      <p style={styles.paragraph}>
+        Track observations and patterns for each horse.
+      </p>
+
+      <div style={{ marginBottom: '24px' }}>
+        <input
+          value={newHorse}
+          onChange={e => setNewHorse(e.target.value)}
+          placeholder="Add horse name"
+          style={{
+            padding: '10px',
+            fontSize: '16px',
+            width: '70%',
+            marginRight: '8px'
+          }}
+        />
+        <button
+          onClick={addHorse}
+          style={{
+            padding: '10px 14px',
+            fontSize: '16px',
+            background: '#78be20',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px'
+          }}
+        >
+          Add
+        </button>
+      </div>
+
+      <ul style={styles.list}>
+        {horses.map(h => (
+          <li key={h.id}>
+            <a href={`/horses/${h.id}`} style={{ fontWeight: 600 }}>
+              {h.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Layout>
+  );
+}
