@@ -7,7 +7,6 @@ export default function Layout({ children }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Simple fade/slide-in on mount
     setVisible(true);
     return () => setVisible(false);
   }, []);
@@ -18,8 +17,9 @@ export default function Layout({ children }) {
         minHeight: '100vh',
         background: '#ffffff',
         color: '#0f1111',
-        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
-        paddingBottom: '72px' // room for bottom nav
+        fontFamily:
+          'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+        paddingBottom: '72px' // space for bottom nav
       }}
     >
       <Drawer />
@@ -34,16 +34,14 @@ export default function Layout({ children }) {
           fontSize: '18px',
           opacity: visible ? 1 : 0,
           transform: visible ? 'translateY(0px)' : 'translateY(8px)',
-          transition: 'opacity .25s cubic-bezier(0.33,1,0.68,1), transform .25s cubic-bezier(0.33,1,0.68,1)'
+          transition:
+            'opacity .25s cubic-bezier(0.33,1,0.68,1), transform .25s cubic-bezier(0.33,1,0.68,1)'
         }}
       >
         {children}
       </main>
 
-      {/* Native-style bottom nav bar */}
       <BottomNav />
-
-      {/* iOS install instructions modal */}
       <InstallHint />
     </div>
   );
@@ -51,8 +49,8 @@ export default function Layout({ children }) {
 
 function BottomNav() {
   const navStyle = {
-    display: 'flex',
     flex: 1,
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: '13px',
@@ -81,6 +79,7 @@ function BottomNav() {
       <a href="/daily-care" style={navStyle}>Daily</a>
       <a href="/pre-ride" style={navStyle}>Pre</a>
       <a href="/post-ride" style={navStyle}>Post</a>
+      <a href="/favorites" style={navStyle}>Favorites</a>
       <a href="/quick-reference" style={navStyle}>Quick Ref</a>
     </nav>
   );
