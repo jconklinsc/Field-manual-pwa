@@ -1,1 +1,125 @@
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import Layout from '../../components/Layout';
+import { styles } from '../../components/styles';
+
+export default function HorseLog() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [horse, setHorse] = useState(null);
+  const [entry, setEntry] = useState('');
+  const [section, setSection] = useState('Daily Care');
+
+  useEffect(() => {
+    if (!id) return;
+
+    const raw = localStorage.getItem('dio-fm-horses');
+    if (!raw) return;
+
+    try {
+      const parsed = JSON.parse(raw);
+      const found = parsed.horses.find(h => h.id === id);
+      if (found) setHorse(found);
+    } catch {}
+  }, [id]);
+
+  const saveEntry = () => {
+    if (!entry.trim()) return;
+
+    const raw = localStorage.getItem('dio-fm-horses');
+    if (!raw) return;
+
+    const parsed = JSON.parse(raw);
+    const updated = parsed.horses.map(h => {
+      if (h.id !== id) return h;
+
+      return {
+        ...h,
+        notes: [
+          {
+            date: new Date().toISOString().slice(0, 10),
+            section,
+            text: entry.trim()
+          },
+          ...h.notes
+        ]
+      };
+    });
+
+    localStorage.setItem('dio-fm-horses', JSON.stringify({ horses: updated }));
+    setHorse(updated.find(h => h.id === id));
+    setEntry('');
+  };
+
+  if (!horse) return null;
+
+  return (
+    <Layout>
+      <h1 style={styles.h1}>{horse.name}</h1>
+
+      <div style={{ marginBottom: '24px' }}>
+        <select
+          value={section}
+          onChange={e => setSection(e.target.value)}
+          style={{ padding: '8px', marginBottom: '8px' }}
+        >
+          <option>Daily Care</option>
+          <option>Pre-Ride</option>
+          <option>Post-Ride</option>
+          <option>Skin & Legs</option>
+          <option>Environment</option>
+          <option>Quick Reference</option>
+        </select>
+
+        <textarea
+          value={entry}
+          onChange={e => setEntry(e.target.value)}
+          placeholder="Log observation..."
+          rows={4}
+          style={{
+            width: '100%',
+            padding: '10px',
+            fontSize: '16px',
+            marginBottom: '8px'
+          }}
+        />
+
+        <button
+          onClick={saveEntry}
+          style={{
+            padding: '10px 14px',
+            background: '#78be20',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px'
+          }}
+        >
+          Save Entry
+        </button>
+      </div>
+
+      <h2 style={styles.h2}>Log History</h2>
+
+      {horse.notes.length === 0 && (
+        <p style={styles.paragraph}>No entries yet.</p>
+      )}
+
+      {horse.notes.map((n, i) => (
+        <div
+          key={i}
+          style={{
+            border: '1px solid #e5e5e5',
+            borderRadius: '8px',
+            padding: '12px',
+            marginBottom: '12px'
+          }}
+        >
+          <strong>{n.date}</strong> · {n.section}
+          <p style={{ marginTop: '6px' }}>{n.text}</p>
+        </div>
+      ))}
+    </Layout>
+  );
+}
 
