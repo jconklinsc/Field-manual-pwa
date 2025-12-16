@@ -1,14 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   async redirects() {
     return [
       {
         source: '/enviroment',
         destination: '/environment',
-        permanent: true, // 301 redirect
+        permanent: true,
       },
     ];
   },
 };
-
-module.exports = nextConfig;
