@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/enviroment",
+      "destination": "/environment",
+      "permanent": true
+    }
+  ]
+}
