@@ -1,34 +1,125 @@
-// Global Design System for the Draw It Out® Field Manual PWA
+:root {
+  --bg: #ffffff;
+  --ink: #0f1111;
+  --muted: #6b7280;
+  --panel: #f8fafc;
+  --border: #e5e7eb;
+  --accent: #0f1111;
+  --soft: #f1f5f9;
+}
 
-export const styles = {
-  h1: {
-    fontSize: '28px',
-    marginBottom: '12px',
-    fontWeight: '700',
-    color: '#0f1111',
-    lineHeight: 1.25,
-  },
+/* Reset */
+* {
+  box-sizing: border-box;
+}
 
-  h2: {
-    fontSize: '22px',
-    marginTop: '32px',
-    marginBottom: '8px',
-    fontWeight: '600',
-    color: '#0f1111',
-    lineHeight: 1.35,
-  },
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+}
 
-  paragraph: {
-    marginBottom: '16px',
-    color: '#0f1111',
-    fontSize: '18px',
-    lineHeight: 1.65,
-  },
+/* App container */
+.app-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
 
-  list: {
-    marginTop: '8px',
-    marginBottom: '16px',
-    paddingLeft: '20px',
-    lineHeight: 1.65,
-  }
-};
+/* Headings */
+h1 {
+  font-size: 28px;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 24px 0 8px;
+}
+
+h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 24px 0 8px;
+}
+
+/* Text */
+p {
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Links */
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Inputs */
+input,
+textarea {
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  width: 100%;
+  background: #fff;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Buttons */
+button {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: var(--soft);
+  color: var(--ink);
+}
+
+/* Cards */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+/* Lists */
+ul {
+  padding-left: 16px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* Footer calm */
+footer {
+  margin-top: 48px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
