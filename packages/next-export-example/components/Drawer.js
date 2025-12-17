@@ -25,6 +25,7 @@ export default function Drawer() {
       <NavItem router={router} href="/daily-care" label="Daily" />
       <NavItem router={router} href="/environment" label="Env" />
       <NavItem router={router} href="/notes" label="Notes" />
+      <NavItem router={router} href="/horses" label="Horses" />
     </nav>
   );
 }
