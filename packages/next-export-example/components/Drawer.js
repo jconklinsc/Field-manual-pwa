@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Drawer() {
+  const router = useRouter();
+
   return (
     <nav
       style={{
@@ -15,31 +18,31 @@ export default function Drawer() {
         justifyContent: 'space-around',
         alignItems: 'center',
         zIndex: 1000,
-
-        // 🔑 THIS IS THE KEY
         pointerEvents: 'none',
       }}
     >
-      <NavItem href="/" label="Home" />
-      <NavItem href="/daily-care" label="Daily" />
-      <NavItem href="/environment" label="Environment" />
-      <NavItem href="/notes" label="Notes" />
+      <NavItem router={router} href="/" label="Home" />
+      <NavItem router={router} href="/daily-care" label="Daily" />
+      <NavItem router={router} href="/environment" label="Env" />
+      <NavItem router={router} href="/notes" label="Notes" />
     </nav>
   );
 }
 
-function NavItem({ href, label }) {
+function NavItem({ router, href, label }) {
+  const isActive = router.pathname === href;
+
   return (
     <Link href={href}>
       <a
         style={{
-          color: '#fff',
-          textDecoration: 'none',
-          fontSize: '14px',
-          fontWeight: 500,
-
-          // 🔑 RE-ENABLE clicks ONLY on the link
           pointerEvents: 'auto',
+          color: isActive ? '#78be20' : '#fff',
+          fontWeight: isActive ? 700 : 500,
+          fontSize: '14px',
+          textDecoration: 'none',
+          borderBottom: isActive ? '2px solid #78be20' : 'none',
+          paddingBottom: '4px',
         }}
       >
         {label}
