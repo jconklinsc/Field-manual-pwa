@@ -1,5 +1,7 @@
 import Layout from '../components/Layout';
 import FavoriteToggle from '../components/FavoriteToggle';
+import SmartPrompt from '../components/SmartPrompt';
+import SectionLogQuickAdd from '../components/SectionLogQuickAdd';
 
 export default function DailyCare() {
   return (
@@ -9,9 +11,11 @@ export default function DailyCare() {
         <FavoriteToggle id="daily-care" label="Daily Care" />
       </h1>
 
-      <p>
-        Everyday observation, light maintenance, and knowing what “normal” looks like.
-      </p>
+      <p>Everyday observation and baseline checks.</p>
+
+      <SmartPrompt section="Daily Care" />
+
+      <SectionLogQuickAdd section="Daily Care" />
     </Layout>
   );
 }
