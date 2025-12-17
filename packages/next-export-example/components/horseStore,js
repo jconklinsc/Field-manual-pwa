@@ -1,4 +1,4 @@
-const KEY = 'fieldManualHorsesV1';
+const KEY = 'fieldManualHorses';
 
 export function loadHorses() {
   if (typeof window === 'undefined') return [];
