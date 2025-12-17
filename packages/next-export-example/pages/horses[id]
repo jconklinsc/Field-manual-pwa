@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import Layout from '../../components/Layout';
 import TimelineGroup from '../../components/TimelineGroup';
+import WeeklySummary from '../../components/WeeklySummary';
 
 const HORSE_KEY = 'fieldManualHorses';
 
@@ -52,6 +53,10 @@ export default function HorseLog() {
     <Layout>
       <h1>{horse.name}</h1>
 
+      {/* Weekly Summary */}
+      <WeeklySummary entries={entries} />
+
+      {/* Timeline */}
       {entries.length === 0 ? (
         <p>No entries yet.</p>
       ) : (
