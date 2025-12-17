@@ -1,5 +1,7 @@
 import Layout from '../components/Layout';
 import FavoriteToggle from '../components/FavoriteToggle';
+import SmartPrompt from '../components/SmartPrompt';
+import SectionLogQuickAdd from '../components/SectionLogQuickAdd';
 
 export default function PreRide() {
   return (
@@ -9,9 +11,11 @@ export default function PreRide() {
         <FavoriteToggle id="pre-ride" label="Pre-Ride Prep" />
       </h1>
 
-      <p>
-        Preparing the horse’s body, mind, and equipment before work.
-      </p>
+      <p>Prepare body, mind, and equipment.</p>
+
+      <SmartPrompt section="Pre-Ride Prep" />
+
+      <SectionLogQuickAdd section="Pre-Ride Prep" />
     </Layout>
   );
 }
