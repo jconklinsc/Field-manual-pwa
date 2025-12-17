@@ -1,20 +1,10 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import Layout from '../../components/Layout';
-import WeeklySummary from '../../components/WeeklySummary';
 import TimelineGroup from '../../components/TimelineGroup';
+import WeeklySummary from '../../components/WeeklySummary';
 import ExportReport from '../../components/ExportReport';
-
-const HORSE_KEY = 'fieldManualHorses';
-
-function loadHorses() {
-  if (typeof window === 'undefined') return [];
-  try {
-    return JSON.parse(localStorage.getItem(HORSE_KEY) || '[]');
-  } catch {
-    return [];
-  }
-}
+import { loadSafeHorses } from '../../components/safeStore';
 
 export default function HorseLog() {
   const router = useRouter();
@@ -25,7 +15,7 @@ export default function HorseLog() {
   useEffect(() => {
     if (!id) return;
 
-    const horses = loadHorses();
+    const horses = loadSafeHorses();
     const found = horses.find(h => h.id === id);
     setHorse(found || null);
   }, [id]);
@@ -52,108 +42,6 @@ export default function HorseLog() {
       <ExportReport horse={horse} entries={entries} />
 
       <WeeklySummary entries={entries} />
-
-      {entries.length === 0 ? (
-        <p>No entries yet.</p>
-      ) : (
-        <TimelineGroup entries={entries} />
-      )}
-    </Layout>
-  );
-}
-import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
-import Layout from '../../components/Layout';
-import WeeklySummary from '../../components/WeeklySummary';
-import TimelineGroup from '../../components/TimelineGroup';
-import ExportReport from '../../components/ExportReport';
-
-const HORSE_KEY = 'fieldManualHorses';
-
-function loadHorses() {
-  if (typeof window === 'undefined') return [];
-  try {
-    return JSON.parse(localStorage.getItem(HORSE_KEY) || '[]');
-  } catch {
-    return [];
-  }
-}
-
-export default function HorseLog() {
-  const router = useRouter();
-  const { id } = router.query;
-
-  const [horse, setHorse] = useState(null);
-
-  useEffect(() => {
-    if (!id) return;
-
-    const horses = loadHorses();
-    const found = horses.find(h => h.id === id);
-    setHorse(found || null);
-  }, [id]);
-
-  const entries = useMemo(() => {
-    if (!horse || !horse.entries) return [];
-    return [...horse.entries].sort(
-      (a, b) => new Date(b.date) - new Date(a.date)
-    );
-  }, [horse]);
-
-  const signal = useMemo(() => {
-    if (!entries.length) return null;
-
-    const last7 = entries.filter(
-      e => Date.now() - new Date(e.date).getTime() < 7 * 24 * 60 * 60 * 1000
-    );
-
-    const sections = last7.reduce((acc, e) => {
-      acc[e.section] = (acc[e.section] || 0) + 1;
-      return acc;
-    }, {});
-
-    if ((sections['Skin & Legs'] || 0) >= 3) {
-      return 'Skin & Legs has been logged multiple times this week.';
-    }
-
-    if ((sections['Post-Ride Recovery'] || 0) >= 4) {
-      return 'Post-Ride Recovery appears frequently this week.';
-    }
-
-    return null;
-  }, [entries]);
-
-  if (!horse) {
-    return (
-      <Layout>
-        <p>Horse not found.</p>
-      </Layout>
-    );
-  }
-
-  return (
-    <Layout>
-      <h1>{horse.name}</h1>
-
-      <ExportReport horse={horse} entries={entries} />
-
-      <WeeklySummary entries={entries} />
-
-      {signal && (
-        <div
-          style={{
-            marginTop: '16px',
-            padding: '14px',
-            borderRadius: '10px',
-            background: '#fff7ed',
-            border: '1px solid #fed7aa',
-            color: '#7c2d12'
-          }}
-        >
-          <strong>Pattern noticed:</strong>
-          <div style={{ marginTop: '6px' }}>{signal}</div>
-        </div>
-      )}
 
       {entries.length === 0 ? (
         <p>No entries yet.</p>
