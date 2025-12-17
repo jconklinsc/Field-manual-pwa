@@ -1,5 +1,7 @@
 import Layout from '../components/Layout';
 import FavoriteToggle from '../components/FavoriteToggle';
+import SmartPrompt from '../components/SmartPrompt';
+import SectionLogQuickAdd from '../components/SectionLogQuickAdd';
 
 export default function Environment() {
   return (
@@ -9,9 +11,11 @@ export default function Environment() {
         <FavoriteToggle id="environment" label="Environment & Stress" />
       </h1>
 
-      <p>
-        Weather, footing, hauling, routine changes, and environmental stressors.
-      </p>
+      <p>Weather, footing, hauling, and routine changes.</p>
+
+      <SmartPrompt section="Environment & Stress" />
+
+      <SectionLogQuickAdd section="Environment & Stress" />
     </Layout>
   );
 }
