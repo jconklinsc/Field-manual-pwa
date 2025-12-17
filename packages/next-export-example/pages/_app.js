@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { AppProvider } from '../components/AppStore';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -21,13 +22,15 @@ export default function MyApp({ Component, pageProps }) {
   }, [router]);
 
   return (
-    <div
-      style={{
-        opacity: isTransitioning ? 0 : 1,
-        transition: 'opacity 200ms ease',
-      }}
-    >
-      <Component {...pageProps} />
-    </div>
+    <AppProvider>
+      <div
+        style={{
+          opacity: isTransitioning ? 0 : 1,
+          transition: 'opacity 200ms ease',
+        }}
+      >
+        <Component {...pageProps} />
+      </div>
+    </AppProvider>
   );
 }
