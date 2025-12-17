@@ -1,29 +1,17 @@
-import Nav from '../components/Nav';
 import Layout from '../components/Layout';
-import TOC from '../components/TOC';
-import SectionNav from '../components/SectionNav';
-import NotesPanel from '../components/NotesPanel';
-import { styles } from '../components/styles';
+import FavoriteToggle from '../components/FavoriteToggle';
 
 export default function QuickReference() {
   return (
     <Layout>
-      <Nav />
+      <h1>
+        Quick Reference
+        <FavoriteToggle id="quick-reference" label="Quick Reference" />
+      </h1>
 
-      <h1 style={styles.h1}>Quick Reference</h1>
-
-      <ul style={styles.list}>
-        <li>Heat → stop and reassess</li>
-        <li>Swelling → cool and monitor</li>
-        <li>Behavior change → check body first</li>
-      </ul>
-
-      <NotesPanel id="quick-reference" title="Quick Reference" />
-
-      <SectionNav
-        prev={{ href: '/environment', label: 'Environment & Stress' }}
-        next={null}
-      />
+      <p>
+        Fast answers for in-the-moment decisions at the barn or show.
+      </p>
     </Layout>
   );
 }
