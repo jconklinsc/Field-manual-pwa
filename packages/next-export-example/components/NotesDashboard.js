@@ -1,34 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+const NOTES_KEY = 'fieldManualNotes';
+const FAV_KEY = 'fieldManualFavorites';
 
 export default function NotesDashboard() {
   const [notes, setNotes] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [text, setText] = useState('');
+  const [query, setQuery] = useState('');
 
-  // Load saved notes
   useEffect(() => {
-    const saved = localStorage.getItem('fieldManualNotes');
-    if (saved) {
-      setNotes(JSON.parse(saved));
-    }
+    const n = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
+    const f = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+    setNotes(n);
+    setFavorites(f);
   }, []);
 
-  // Save notes automatically
   useEffect(() => {
-    localStorage.setItem('fieldManualNotes', JSON.stringify(notes));
+    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
   }, [notes]);
 
   function addNote() {
     if (!text.trim()) return;
-
     setNotes([
-      {
-        id: Date.now(),
-        text,
-        createdAt: new Date().toISOString(),
-      },
+      { id: Date.now(), text, date: new Date().toISOString() },
       ...notes,
     ]);
-
     setText('');
   }
 
@@ -36,12 +33,62 @@ export default function NotesDashboard() {
     setNotes(notes.filter(n => n.id !== id));
   }
 
+  function exportData() {
+    const payload = {
+      notes,
+      favorites,
+      exportedAt: new Date().toISOString(),
+    };
+
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
+      type: 'application/json',
+    });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'field-manual-notes.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  const filteredNotes = useMemo(() => {
+    if (!query.trim()) return notes;
+    const q = query.toLowerCase();
+    return notes.filter(n => n.text.toLowerCase().includes(q));
+  }, [notes, query]);
+
   return (
-    <section style={{ marginTop: '32px' }}>
+    <section style={{ marginTop: '24px' }}>
+      {favorites.length > 0 && (
+        <section style={{ marginBottom: '20px' }}>
+          <h3>Favorites</h3>
+          <ul>
+            {favorites.map(f => (
+              <li key={f.id}>{f.label}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <input
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        placeholder="Search notes…"
+        style={{
+          width: '100%',
+          padding: '10px',
+          fontSize: '16px',
+          borderRadius: '6px',
+          border: '1px solid #ccc',
+          marginBottom: '12px',
+        }}
+      />
+
       <textarea
         value={text}
         onChange={e => setText(e.target.value)}
-        placeholder="Write a note..."
+        placeholder="Write a note…"
         rows={4}
         style={{
           width: '100%',
@@ -49,48 +96,57 @@ export default function NotesDashboard() {
           fontSize: '16px',
           borderRadius: '6px',
           border: '1px solid #ccc',
-          resize: 'vertical',
         }}
       />
 
-      <button
-        onClick={addNote}
-        style={{
-          marginTop: '12px',
-          padding: '10px 16px',
-          background: '#0f1111',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '6px',
-          cursor: 'pointer',
-        }}
-      >
-        Add Note
-      </button>
+      <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+        <button
+          onClick={addNote}
+          style={{
+            padding: '10px 14px',
+            background: '#0f1111',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+          }}
+        >
+          Add Note
+        </button>
+
+        <button
+          onClick={exportData}
+          style={{
+            padding: '10px 14px',
+            background: '#eee',
+            border: '1px solid #ccc',
+            borderRadius: '6px',
+          }}
+        >
+          Export
+        </button>
+      </div>
 
       <ul style={{ marginTop: '24px', padding: 0 }}>
-        {notes.map(note => (
+        {filteredNotes.map(n => (
           <li
-            key={note.id}
+            key={n.id}
             style={{
               listStyle: 'none',
-              padding: '12px',
-              marginBottom: '12px',
               background: '#f7f7f7',
+              padding: '12px',
+              marginBottom: '10px',
               borderRadius: '6px',
             }}
           >
-            <div style={{ whiteSpace: 'pre-wrap' }}>{note.text}</div>
-
+            <div style={{ whiteSpace: 'pre-wrap' }}>{n.text}</div>
             <button
-              onClick={() => deleteNote(note.id)}
+              onClick={() => deleteNote(n.id)}
               style={{
-                marginTop: '8px',
+                marginTop: '6px',
                 background: 'none',
                 border: 'none',
                 color: '#c00',
                 cursor: 'pointer',
-                fontSize: '14px',
               }}
             >
               Delete
