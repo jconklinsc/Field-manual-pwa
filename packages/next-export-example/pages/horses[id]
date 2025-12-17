@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import Layout from '../../components/Layout';
-import TimelineGroup from '../../components/TimelineGroup';
 import WeeklySummary from '../../components/WeeklySummary';
+import TimelineGroup from '../../components/TimelineGroup';
+import ExportReport from '../../components/ExportReport';
 
 const HORSE_KEY = 'fieldManualHorses';
 
@@ -26,12 +27,7 @@ export default function HorseLog() {
 
     const horses = loadHorses();
     const found = horses.find(h => h.id === id);
-
-    if (!found) {
-      setHorse(null);
-    } else {
-      setHorse(found);
-    }
+    setHorse(found || null);
   }, [id]);
 
   const entries = useMemo(() => {
@@ -53,10 +49,10 @@ export default function HorseLog() {
     <Layout>
       <h1>{horse.name}</h1>
 
-      {/* Weekly Summary */}
+      <ExportReport horse={horse} entries={entries} />
+
       <WeeklySummary entries={entries} />
 
-      {/* Timeline */}
       {entries.length === 0 ? (
         <p>No entries yet.</p>
       ) : (
