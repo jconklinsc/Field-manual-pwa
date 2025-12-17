@@ -1,140 +1,61 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import Layout from '../../components/Layout';
+import TimelineGroup from '../../components/TimelineGroup';
 
-const KEY = 'fieldManualHorses';
-
-const SECTIONS = [
-  'All',
-  'Daily Care',
-  'Pre-Ride Prep',
-  'Post-Ride Recovery',
-  'Skin & Legs',
-  'Environment & Stress',
-  'Quick Reference'
-];
+const HORSE_KEY = 'fieldManualHorses';
 
 function loadHorses() {
+  if (typeof window === 'undefined') return [];
   try {
-    const raw = localStorage.getItem(KEY);
-    return raw ? JSON.parse(raw) : [];
+    return JSON.parse(localStorage.getItem(HORSE_KEY) || '[]');
   } catch {
     return [];
   }
 }
 
-function saveHorses(horses) {
-  localStorage.setItem(KEY, JSON.stringify(horses));
-}
-
-export default function HorseLogPage() {
+export default function HorseLog() {
   const router = useRouter();
   const { id } = router.query;
 
-  const [horses, setHorses] = useState([]);
-  const [filter, setFilter] = useState('All');
+  const [horse, setHorse] = useState(null);
 
   useEffect(() => {
-    setHorses(loadHorses());
-  }, []);
+    if (!id) return;
 
-  const horse = useMemo(() => {
-    if (!id) return null;
-    return horses.find(h => h.id === id) || null;
-  }, [horses, id]);
+    const horses = loadHorses();
+    const found = horses.find(h => h.id === id);
+
+    if (!found) {
+      setHorse(null);
+    } else {
+      setHorse(found);
+    }
+  }, [id]);
 
   const entries = useMemo(() => {
     if (!horse || !horse.entries) return [];
-    if (filter === 'All') return horse.entries;
-    return horse.entries.filter(e => e.section === filter);
-  }, [horse, filter]);
-
-  function exportHorseLog() {
-    if (!horse) return;
-
-    const blob = new Blob(
-      [JSON.stringify(horse, null, 2)],
-      { type: 'application/json' }
+    return [...horse.entries].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
     );
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${horse.name.replace(/\s+/g, '_')}-log.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
+  }, [horse]);
 
   if (!horse) {
     return (
       <Layout>
-        <h1>Horse Log</h1>
-        <p>Loading…</p>
+        <p>Horse not found.</p>
       </Layout>
     );
   }
 
   return (
     <Layout>
-      <p>
-        <a href="/horses">← Back to Horses</a>
-      </p>
-
       <h1>{horse.name}</h1>
-
-      <button
-        onClick={exportHorseLog}
-        style={{
-          marginBottom: '12px',
-          padding: '8px 12px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
-          background: '#eee'
-        }}
-      >
-        Export Log
-      </button>
-
-      <div style={{ marginBottom: '16px' }}>
-        <label><strong>Filter by section</strong></label>
-        <select
-          value={filter}
-          onChange={e => setFilter(e.target.value)}
-          style={{
-            width: '100%',
-            padding: '8px',
-            marginTop: '6px'
-          }}
-        >
-          {SECTIONS.map(s => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
-      </div>
 
       {entries.length === 0 ? (
         <p>No entries yet.</p>
       ) : (
-        entries.map(entry => (
-          <div
-            key={entry.id}
-            style={{
-              marginBottom: '12px',
-              padding: '12px',
-              borderRadius: '8px',
-              background: '#f7f7f7',
-              border: '1px solid #e5e5e5'
-            }}
-          >
-            <div style={{ fontSize: '13px', color: '#555' }}>
-              <strong>{new Date(entry.date).toLocaleString()}</strong> · {entry.section}
-            </div>
-
-            <div style={{ whiteSpace: 'pre-wrap', marginTop: '6px' }}>
-              {entry.text}
-            </div>
-          </div>
-        ))
+        <TimelineGroup entries={entries} />
       )}
     </Layout>
   );
