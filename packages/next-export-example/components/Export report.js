@@ -1,0 +1,67 @@
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useState } from 'react';
+import Layout from '../../components/Layout';
+import TimelineGroup from '../../components/TimelineGroup';
+import WeeklySummary from '../../components/WeeklySummary';
+
+const HORSE_KEY = 'fieldManualHorses';
+
+function loadHorses() {
+  if (typeof window === 'undefined') return [];
+  try {
+    return JSON.parse(localStorage.getItem(HORSE_KEY) || '[]');
+  } catch {
+    return [];
+  }
+}
+
+export default function HorseLog() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [horse, setHorse] = useState(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const horses = loadHorses();
+    const found = horses.find(h => h.id === id);
+
+    if (!found) {
+      setHorse(null);
+    } else {
+      setHorse(found);
+    }
+  }, [id]);
+
+  const entries = useMemo(() => {
+    if (!horse || !horse.entries) return [];
+    return [...horse.entries].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+  }, [horse]);
+
+  if (!horse) {
+    return (
+      <Layout>
+        <p>Horse not found.</p>
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout>
+      <h1>{horse.name}</h1>
+
+      {/* Weekly Summary */}
+      <WeeklySummary entries={entries} />
+
+      {/* Timeline */}
+      {entries.length === 0 ? (
+        <p>No entries yet.</p>
+      ) : (
+        <TimelineGroup entries={entries} />
+      )}
+    </Layout>
+  );
+}
