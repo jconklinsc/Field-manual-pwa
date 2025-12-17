@@ -5,7 +5,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-
           {/* ============================== */}
           {/*         BASE PWA SETTINGS       */}
           {/* ============================== */}
@@ -67,24 +66,6 @@ class MyDocument extends Document {
           <link rel="apple-touch-startup-image" href="/splash/ipad-pro-10-lan.png" media="(device-width: 1112px) and (device-height: 834px) and (orientation: landscape)" />
           <link rel="apple-touch-startup-image" href="/splash/ipad-pro-11-land.png" media="(device-width: 1194px) and (device-height: 834px) and (orientation: landscape)" />
           <link rel="apple-touch-startup-image" href="/splash/ipad-pro-12-9-land.png" media="(device-width: 1366px) and (device-height: 1024px) and (orientation: landscape)" />
-
-          {/* ============================== */}
-          {/*     SERVICE WORKER            */}
-          {/* ============================== */}
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                if ('serviceWorker' in navigator) {
-                  window.addEventListener('load', () => {
-                    navigator.serviceWorker
-                      .register('/sw.js')
-                      .catch(err => console.log('SW registration failed:', err));
-                  });
-                }
-              `
-            }}
-          />
-
         </Head>
 
         <body>
