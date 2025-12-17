@@ -1,5 +1,7 @@
 import Layout from '../components/Layout';
 import FavoriteToggle from '../components/FavoriteToggle';
+import SmartPrompt from '../components/SmartPrompt';
+import SectionLogQuickAdd from '../components/SectionLogQuickAdd';
 
 export default function PostRide() {
   return (
@@ -9,9 +11,11 @@ export default function PostRide() {
         <FavoriteToggle id="post-ride" label="Post-Ride Recovery" />
       </h1>
 
-      <p>
-        Cool-down routines, soreness checks, and recovery steps.
-      </p>
+      <p>Cooldown routines and post-work recovery.</p>
+
+      <SmartPrompt section="Post-Ride Recovery" />
+
+      <SectionLogQuickAdd section="Post-Ride Recovery" />
     </Layout>
   );
 }
