@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import Layout from '../../components/Layout';
-import { loadHorses, saveHorses } from '../../components/horseStore';
+
+const KEY = 'fieldManualHorses';
 
 const SECTIONS = [
+  'All',
   'Daily Care',
   'Pre-Ride Prep',
   'Post-Ride Recovery',
@@ -12,13 +14,25 @@ const SECTIONS = [
   'Quick Reference'
 ];
 
+function loadHorses() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveHorses(horses) {
+  localStorage.setItem(KEY, JSON.stringify(horses));
+}
+
 export default function HorseLogPage() {
   const router = useRouter();
   const { id } = router.query;
 
   const [horses, setHorses] = useState([]);
-  const [text, setText] = useState('');
-  const [section, setSection] = useState(SECTIONS[0]);
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     setHorses(loadHorses());
@@ -29,58 +43,17 @@ export default function HorseLogPage() {
     return horses.find(h => h.id === id) || null;
   }, [horses, id]);
 
-  function persist(updated) {
-    setHorses(updated);
-    saveHorses(updated);
-  }
-
-  function addEntry() {
-    if (!horse) return;
-    if (!text.trim()) return;
-
-    const entry = {
-      id: String(Date.now()),
-      date: new Date().toISOString(),
-      section,
-      text: text.trim()
-    };
-
-    const updated = horses.map(h =>
-      h.id === horse.id
-        ? { ...h, entries: [entry, ...(h.entries || [])] }
-        : h
-    );
-
-    persist(updated);
-    setText('');
-  }
-
-  function deleteEntry(entryId) {
-    if (!horse) return;
-
-    const updated = horses.map(h =>
-      h.id === horse.id
-        ? {
-            ...h,
-            entries: h.entries.filter(e => e.id !== entryId)
-          }
-        : h
-    );
-
-    persist(updated);
-  }
+  const entries = useMemo(() => {
+    if (!horse || !horse.entries) return [];
+    if (filter === 'All') return horse.entries;
+    return horse.entries.filter(e => e.section === filter);
+  }, [horse, filter]);
 
   function exportHorseLog() {
     if (!horse) return;
 
-    const payload = {
-      horse: horse.name,
-      exportedAt: new Date().toISOString(),
-      entries: horse.entries
-    };
-
     const blob = new Blob(
-      [JSON.stringify(payload, null, 2)],
+      [JSON.stringify(horse, null, 2)],
       { type: 'application/json' }
     );
 
@@ -96,10 +69,7 @@ export default function HorseLogPage() {
     return (
       <Layout>
         <h1>Horse Log</h1>
-        <p>Loading horse data…</p>
-        <p>
-          <a href="/horses">← Back to Horses</a>
-        </p>
+        <p>Loading…</p>
       </Layout>
     );
   }
@@ -115,28 +85,25 @@ export default function HorseLogPage() {
       <button
         onClick={exportHorseLog}
         style={{
-          marginBottom: '16px',
+          marginBottom: '12px',
           padding: '8px 12px',
           borderRadius: '6px',
           border: '1px solid #ccc',
-          background: '#eee',
-          cursor: 'pointer'
+          background: '#eee'
         }}
       >
-        Export Horse Log
+        Export Log
       </button>
 
-      <div style={{ marginBottom: '12px' }}>
-        <label style={{ fontWeight: 700 }}>Section</label>
+      <div style={{ marginBottom: '16px' }}>
+        <label><strong>Filter by section</strong></label>
         <select
-          value={section}
-          onChange={e => setSection(e.target.value)}
+          value={filter}
+          onChange={e => setFilter(e.target.value)}
           style={{
             width: '100%',
-            padding: '10px',
-            marginTop: '6px',
-            borderRadius: '6px',
-            border: '1px solid #ccc'
+            padding: '8px',
+            marginTop: '6px'
           }}
         >
           {SECTIONS.map(s => (
@@ -145,42 +112,10 @@ export default function HorseLogPage() {
         </select>
       </div>
 
-      <textarea
-        value={text}
-        onChange={e => setText(e.target.value)}
-        placeholder="What did you notice? What changed? What will you check next time?"
-        rows={4}
-        style={{
-          width: '100%',
-          padding: '12px',
-          fontSize: '16px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
-          resize: 'vertical'
-        }}
-      />
-
-      <button
-        onClick={addEntry}
-        style={{
-          marginTop: '10px',
-          padding: '10px 14px',
-          borderRadius: '6px',
-          border: 'none',
-          background: '#0f1111',
-          color: '#fff',
-          cursor: 'pointer'
-        }}
-      >
-        Add Entry
-      </button>
-
-      <h2 style={{ marginTop: '28px' }}>History</h2>
-
-      {horse.entries.length === 0 ? (
+      {entries.length === 0 ? (
         <p>No entries yet.</p>
       ) : (
-        horse.entries.map(entry => (
+        entries.map(entry => (
           <div
             key={entry.id}
             style={{
@@ -198,20 +133,6 @@ export default function HorseLogPage() {
             <div style={{ whiteSpace: 'pre-wrap', marginTop: '6px' }}>
               {entry.text}
             </div>
-
-            <button
-              onClick={() => deleteEntry(entry.id)}
-              style={{
-                marginTop: '8px',
-                background: 'none',
-                border: 'none',
-                color: '#c00',
-                cursor: 'pointer',
-                fontSize: '14px'
-              }}
-            >
-              Delete
-            </button>
           </div>
         ))
       )}
