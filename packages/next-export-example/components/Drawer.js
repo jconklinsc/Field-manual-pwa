@@ -8,25 +8,27 @@ export default function Drawer() {
         bottom: 0,
         left: 0,
         right: 0,
-        height: '64px',              // ✅ explicit height
+        height: '64px',
         background: '#0f1111',
         borderTop: '1px solid #222',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
         zIndex: 1000,
-        pointerEvents: 'auto',       // ✅ explicitly clickable
+
+        // 🔑 THIS IS THE KEY
+        pointerEvents: 'none',
       }}
     >
-      <NavLink href="/" label="Home" />
-      <NavLink href="/daily-care" label="Daily" />
-      <NavLink href="/environment" label="Environment" />
-      <NavLink href="/notes" label="Notes" />
+      <NavItem href="/" label="Home" />
+      <NavItem href="/daily-care" label="Daily" />
+      <NavItem href="/environment" label="Environment" />
+      <NavItem href="/notes" label="Notes" />
     </nav>
   );
 }
 
-function NavLink({ href, label }) {
+function NavItem({ href, label }) {
   return (
     <Link href={href}>
       <a
@@ -35,6 +37,9 @@ function NavLink({ href, label }) {
           textDecoration: 'none',
           fontSize: '14px',
           fontWeight: 500,
+
+          // 🔑 RE-ENABLE clicks ONLY on the link
+          pointerEvents: 'auto',
         }}
       >
         {label}
