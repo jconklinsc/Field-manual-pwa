@@ -1,125 +1,189 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Layout from '../../components/Layout';
-import { styles } from '../../components/styles';
+import { loadHorses, saveHorses } from '../../components/horseStore';
+
+const SECTIONS = [
+  'Daily Care',
+  'Pre-Ride Prep',
+  'Post-Ride Recovery',
+  'Skin & Legs',
+  'Environment & Stress',
+  'Quick Reference'
+];
 
 export default function HorseLog() {
   const router = useRouter();
   const { id } = router.query;
 
-  const [horse, setHorse] = useState(null);
-  const [entry, setEntry] = useState('');
-  const [section, setSection] = useState('Daily Care');
+  const [horses, setHorses] = useState([]);
+  const [text, setText] = useState('');
+  const [section, setSection] = useState(SECTIONS[0]);
 
   useEffect(() => {
-    if (!id) return;
+    setHorses(loadHorses());
+  }, []);
 
-    const raw = localStorage.getItem('dio-fm-horses');
-    if (!raw) return;
+  const horse = useMemo(() => {
+    if (!id) return null;
+    return horses.find(h => h.id === id) || null;
+  }, [horses, id]);
 
-    try {
-      const parsed = JSON.parse(raw);
-      const found = parsed.horses.find(h => h.id === id);
-      if (found) setHorse(found);
-    } catch {}
-  }, [id]);
+  function save(updated) {
+    setHorses(updated);
+    saveHorses(updated);
+  }
 
-  const saveEntry = () => {
-    if (!entry.trim()) return;
+  function addEntry() {
+    if (!horse) return;
+    const trimmed = text.trim();
+    if (!trimmed) return;
 
-    const raw = localStorage.getItem('dio-fm-horses');
-    if (!raw) return;
+    const entry = {
+      id: String(Date.now()),
+      date: new Date().toISOString(),
+      section,
+      text: trimmed
+    };
 
-    const parsed = JSON.parse(raw);
-    const updated = parsed.horses.map(h => {
-      if (h.id !== id) return h;
+    const updated = horses.map(h =>
+      h.id === horse.id ? { ...h, entries: [entry, ...h.entries] } : h
+    );
 
-      return {
-        ...h,
-        notes: [
-          {
-            date: new Date().toISOString().slice(0, 10),
-            section,
-            text: entry.trim()
-          },
-          ...h.notes
-        ]
-      };
-    });
+    save(updated);
+    setText('');
+  }
 
-    localStorage.setItem('dio-fm-horses', JSON.stringify({ horses: updated }));
-    setHorse(updated.find(h => h.id === id));
-    setEntry('');
-  };
+  function deleteEntry(entryId) {
+    if (!horse) return;
+    const updated = horses.map(h =>
+      h.id === horse.id
+        ? { ...h, entries: h.entries.filter(e => e.id !== entryId) }
+        : h
+    );
+    save(updated);
+  }
 
-  if (!horse) return null;
+  if (!horse) {
+    return (
+      <Layout>
+        <h1>Horse Log</h1>
+        <p style={{ color: '#555' }}>
+          Loading… If this page was opened before horses loaded, go back and try again.
+        </p>
+        <p>
+          <a href="/horses">← Back to Horses</a>
+        </p>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
-      <h1 style={styles.h1}>{horse.name}</h1>
+      <p>
+        <a href="/horses">← Back to Horses</a>
+      </p>
 
-      <div style={{ marginBottom: '24px' }}>
+      <h1>{horse.name}</h1>
+      <p style={{ color: '#555' }}>
+        Log observations by section. Entries are saved offline on this device.
+      </p>
+
+      <div style={{ marginTop: '16px' }}>
+        <label style={{ display: 'block', fontWeight: 700, marginBottom: '6px' }}>
+          Section
+        </label>
         <select
           value={section}
           onChange={e => setSection(e.target.value)}
-          style={{ padding: '8px', marginBottom: '8px' }}
-        >
-          <option>Daily Care</option>
-          <option>Pre-Ride</option>
-          <option>Post-Ride</option>
-          <option>Skin & Legs</option>
-          <option>Environment</option>
-          <option>Quick Reference</option>
-        </select>
-
-        <textarea
-          value={entry}
-          onChange={e => setEntry(e.target.value)}
-          placeholder="Log observation..."
-          rows={4}
           style={{
             width: '100%',
             padding: '10px',
-            fontSize: '16px',
-            marginBottom: '8px'
-          }}
-        />
-
-        <button
-          onClick={saveEntry}
-          style={{
-            padding: '10px 14px',
-            background: '#78be20',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '6px'
+            borderRadius: '6px',
+            border: '1px solid #ccc',
+            fontSize: '16px'
           }}
         >
-          Save Entry
-        </button>
+          {SECTIONS.map(s => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
       </div>
 
-      <h2 style={styles.h2}>Log History</h2>
-
-      {horse.notes.length === 0 && (
-        <p style={styles.paragraph}>No entries yet.</p>
-      )}
-
-      {horse.notes.map((n, i) => (
-        <div
-          key={i}
+      <div style={{ marginTop: '12px' }}>
+        <label style={{ display: 'block', fontWeight: 700, marginBottom: '6px' }}>
+          Entry
+        </label>
+        <textarea
+          value={text}
+          onChange={e => setText(e.target.value)}
+          placeholder="What did you notice? What changed? What will you check next time?"
+          rows={4}
           style={{
-            border: '1px solid #e5e5e5',
-            borderRadius: '8px',
+            width: '100%',
             padding: '12px',
-            marginBottom: '12px'
+            borderRadius: '6px',
+            border: '1px solid #ccc',
+            fontSize: '16px',
+            resize: 'vertical'
           }}
-        >
-          <strong>{n.date}</strong> · {n.section}
-          <p style={{ marginTop: '6px' }}>{n.text}</p>
+        />
+      </div>
+
+      <button
+        onClick={addEntry}
+        style={{
+          marginTop: '10px',
+          padding: '10px 14px',
+          borderRadius: '6px',
+          border: 'none',
+          background: '#0f1111',
+          color: '#fff',
+          cursor: 'pointer'
+        }}
+      >
+        Add Entry
+      </button>
+
+      <h2 style={{ marginTop: '28px' }}>History</h2>
+
+      {horse.entries.length === 0 ? (
+        <p>No entries yet.</p>
+      ) : (
+        <div style={{ marginTop: '10px' }}>
+          {horse.entries.map(e => (
+            <div
+              key={e.id}
+              style={{
+                border: '1px solid #e5e5e5',
+                borderRadius: '8px',
+                padding: '12px',
+                marginBottom: '12px',
+                background: '#f7f7f7'
+              }}
+            >
+              <div style={{ fontSize: '13px', color: '#555', marginBottom: '6px' }}>
+                <strong>{new Date(e.date).toLocaleString()}</strong> · {e.section}
+              </div>
+              <div style={{ whiteSpace: 'pre-wrap' }}>{e.text}</div>
+
+              <button
+                onClick={() => deleteEntry(e.id)}
+                style={{
+                  marginTop: '8px',
+                  background: 'none',
+                  border: 'none',
+                  color: '#c00',
+                  cursor: 'pointer',
+                  fontSize: '14px'
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </Layout>
   );
 }
-
