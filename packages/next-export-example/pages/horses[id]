@@ -12,7 +12,7 @@ const SECTIONS = [
   'Quick Reference'
 ];
 
-export default function HorseLog() {
+export default function HorseLogPage() {
   const router = useRouter();
   const { id } = router.query;
 
@@ -29,48 +29,74 @@ export default function HorseLog() {
     return horses.find(h => h.id === id) || null;
   }, [horses, id]);
 
-  function save(updated) {
+  function persist(updated) {
     setHorses(updated);
     saveHorses(updated);
   }
 
   function addEntry() {
     if (!horse) return;
-    const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!text.trim()) return;
 
     const entry = {
       id: String(Date.now()),
       date: new Date().toISOString(),
       section,
-      text: trimmed
+      text: text.trim()
     };
 
     const updated = horses.map(h =>
-      h.id === horse.id ? { ...h, entries: [entry, ...h.entries] } : h
+      h.id === horse.id
+        ? { ...h, entries: [entry, ...(h.entries || [])] }
+        : h
     );
 
-    save(updated);
+    persist(updated);
     setText('');
   }
 
   function deleteEntry(entryId) {
     if (!horse) return;
+
     const updated = horses.map(h =>
       h.id === horse.id
-        ? { ...h, entries: h.entries.filter(e => e.id !== entryId) }
+        ? {
+            ...h,
+            entries: h.entries.filter(e => e.id !== entryId)
+          }
         : h
     );
-    save(updated);
+
+    persist(updated);
+  }
+
+  function exportHorseLog() {
+    if (!horse) return;
+
+    const payload = {
+      horse: horse.name,
+      exportedAt: new Date().toISOString(),
+      entries: horse.entries
+    };
+
+    const blob = new Blob(
+      [JSON.stringify(payload, null, 2)],
+      { type: 'application/json' }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${horse.name.replace(/\s+/g, '_')}-log.json`;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   if (!horse) {
     return (
       <Layout>
         <h1>Horse Log</h1>
-        <p style={{ color: '#555' }}>
-          Loading… If this page was opened before horses loaded, go back and try again.
-        </p>
+        <p>Loading horse data…</p>
         <p>
           <a href="/horses">← Back to Horses</a>
         </p>
@@ -85,23 +111,32 @@ export default function HorseLog() {
       </p>
 
       <h1>{horse.name}</h1>
-      <p style={{ color: '#555' }}>
-        Log observations by section. Entries are saved offline on this device.
-      </p>
 
-      <div style={{ marginTop: '16px' }}>
-        <label style={{ display: 'block', fontWeight: 700, marginBottom: '6px' }}>
-          Section
-        </label>
+      <button
+        onClick={exportHorseLog}
+        style={{
+          marginBottom: '16px',
+          padding: '8px 12px',
+          borderRadius: '6px',
+          border: '1px solid #ccc',
+          background: '#eee',
+          cursor: 'pointer'
+        }}
+      >
+        Export Horse Log
+      </button>
+
+      <div style={{ marginBottom: '12px' }}>
+        <label style={{ fontWeight: 700 }}>Section</label>
         <select
           value={section}
           onChange={e => setSection(e.target.value)}
           style={{
             width: '100%',
             padding: '10px',
+            marginTop: '6px',
             borderRadius: '6px',
-            border: '1px solid #ccc',
-            fontSize: '16px'
+            border: '1px solid #ccc'
           }}
         >
           {SECTIONS.map(s => (
@@ -110,25 +145,20 @@ export default function HorseLog() {
         </select>
       </div>
 
-      <div style={{ marginTop: '12px' }}>
-        <label style={{ display: 'block', fontWeight: 700, marginBottom: '6px' }}>
-          Entry
-        </label>
-        <textarea
-          value={text}
-          onChange={e => setText(e.target.value)}
-          placeholder="What did you notice? What changed? What will you check next time?"
-          rows={4}
-          style={{
-            width: '100%',
-            padding: '12px',
-            borderRadius: '6px',
-            border: '1px solid #ccc',
-            fontSize: '16px',
-            resize: 'vertical'
-          }}
-        />
-      </div>
+      <textarea
+        value={text}
+        onChange={e => setText(e.target.value)}
+        placeholder="What did you notice? What changed? What will you check next time?"
+        rows={4}
+        style={{
+          width: '100%',
+          padding: '12px',
+          fontSize: '16px',
+          borderRadius: '6px',
+          border: '1px solid #ccc',
+          resize: 'vertical'
+        }}
+      />
 
       <button
         onClick={addEntry}
@@ -150,39 +180,40 @@ export default function HorseLog() {
       {horse.entries.length === 0 ? (
         <p>No entries yet.</p>
       ) : (
-        <div style={{ marginTop: '10px' }}>
-          {horse.entries.map(e => (
-            <div
-              key={e.id}
+        horse.entries.map(entry => (
+          <div
+            key={entry.id}
+            style={{
+              marginBottom: '12px',
+              padding: '12px',
+              borderRadius: '8px',
+              background: '#f7f7f7',
+              border: '1px solid #e5e5e5'
+            }}
+          >
+            <div style={{ fontSize: '13px', color: '#555' }}>
+              <strong>{new Date(entry.date).toLocaleString()}</strong> · {entry.section}
+            </div>
+
+            <div style={{ whiteSpace: 'pre-wrap', marginTop: '6px' }}>
+              {entry.text}
+            </div>
+
+            <button
+              onClick={() => deleteEntry(entry.id)}
               style={{
-                border: '1px solid #e5e5e5',
-                borderRadius: '8px',
-                padding: '12px',
-                marginBottom: '12px',
-                background: '#f7f7f7'
+                marginTop: '8px',
+                background: 'none',
+                border: 'none',
+                color: '#c00',
+                cursor: 'pointer',
+                fontSize: '14px'
               }}
             >
-              <div style={{ fontSize: '13px', color: '#555', marginBottom: '6px' }}>
-                <strong>{new Date(e.date).toLocaleString()}</strong> · {e.section}
-              </div>
-              <div style={{ whiteSpace: 'pre-wrap' }}>{e.text}</div>
-
-              <button
-                onClick={() => deleteEntry(e.id)}
-                style={{
-                  marginTop: '8px',
-                  background: 'none',
-                  border: 'none',
-                  color: '#c00',
-                  cursor: 'pointer',
-                  fontSize: '14px'
-                }}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
+              Delete
+            </button>
+          </div>
+        ))
       )}
     </Layout>
   );
