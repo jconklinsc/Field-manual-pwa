@@ -36,8 +36,8 @@ export default function SmartPrompt({ section }) {
         marginTop: '20px',
         padding: '14px',
         borderRadius: '8px',
-        background: '#f1f5f9',
-        border: '1px solid #e2e8f0'
+        background: '#fff6e8',
+        border: '1px solid #e7d6c0'
       }}
     >
       <strong>Last time you logged this:</strong>

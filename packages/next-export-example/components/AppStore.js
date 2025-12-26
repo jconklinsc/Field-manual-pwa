@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { safeGet, safeSet } from './safeStorage';
 
 const AppContext = createContext();
 
@@ -9,22 +10,22 @@ export function AppProvider({ children }) {
 
   // Load from localStorage
   useEffect(() => {
-    setHorses(JSON.parse(localStorage.getItem('horses') || '[]'));
-    setFavorites(JSON.parse(localStorage.getItem('favorites') || '[]'));
-    setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
+    setHorses(safeGet('horses', []));
+    setFavorites(safeGet('favorites', []));
+    setNotes(safeGet('notes', []));
   }, []);
 
   // Persist
   useEffect(() => {
-    localStorage.setItem('horses', JSON.stringify(horses));
+    safeSet('horses', horses);
   }, [horses]);
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    safeSet('favorites', favorites);
   }, [favorites]);
 
   useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes));
+    safeSet('notes', notes);
   }, [notes]);
 
   return (

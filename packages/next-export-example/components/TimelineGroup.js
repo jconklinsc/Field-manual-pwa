@@ -36,12 +36,12 @@ export default function TimelineGroup({ entries }) {
                 style={{
                   padding: '12px',
                   marginBottom: '8px',
-                  borderRadius: '8px',
-                  background: '#f7f7f7',
-                  border: '1px solid #e5e5e5'
+                  borderRadius: '12px',
+                  background: '#fffaf4',
+                  border: '1px solid #e6d9c8'
                 }}
               >
-                <div style={{ fontSize: '12px', color: '#555' }}>
+                <div style={{ fontSize: '12px', color: '#6b6256' }}>
                   {new Date(entry.date).toLocaleString()} · {entry.section}
                 </div>
 
