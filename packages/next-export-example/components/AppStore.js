@@ -7,6 +7,7 @@ export function AppProvider({ children }) {
   const [horses, setHorses] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [hydrated, setHydrated] = useState(false);
 
   // Load from localStorage
   useEffect(() => {

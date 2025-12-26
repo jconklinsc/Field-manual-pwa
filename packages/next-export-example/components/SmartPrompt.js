@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { readJson } from './storage';
 
 const HORSE_KEY = 'fieldManualHorses';
 
@@ -7,7 +8,7 @@ export default function SmartPrompt({ section }) {
 
   useEffect(() => {
     try {
-      const horses = JSON.parse(localStorage.getItem(HORSE_KEY) || '[]');
+      const horses = readJson(HORSE_KEY, []);
 
       const allEntries = horses.flatMap(h =>
         (h.entries || []).map(e => ({
@@ -23,9 +24,7 @@ export default function SmartPrompt({ section }) {
       if (matches.length > 0) {
         setRecent(matches[0]);
       }
-    } catch {
-      // fail silently
-    }
+    } catch {}
   }, [section]);
 
   if (!recent) return null;

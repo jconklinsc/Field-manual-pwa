@@ -3,16 +3,12 @@ import { useEffect, useMemo, useState } from 'react';
 import Layout from '../../components/Layout';
 import TimelineGroup from '../../components/TimelineGroup';
 import WeeklySummary from '../../components/WeeklySummary';
+import { readJson } from './storage';
 
 const HORSE_KEY = 'fieldManualHorses';
 
 function loadHorses() {
-  if (typeof window === 'undefined') return [];
-  try {
-    return JSON.parse(localStorage.getItem(HORSE_KEY) || '[]');
-  } catch {
-    return [];
-  }
+  return readJson(HORSE_KEY, []);
 }
 
 export default function HorseLog() {

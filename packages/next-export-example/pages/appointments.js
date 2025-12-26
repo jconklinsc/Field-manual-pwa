@@ -1,21 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
 import Layout from '../components/Layout';
 import ArticleCard from '../components/ArticleCard';
+import { readJson, writeJson } from '../components/storage';
 
 const APPOINTMENTS_KEY = 'fieldManualAppointments';
 
 function loadAppointments() {
-  if (typeof window === 'undefined') return [];
-  try {
-    return JSON.parse(localStorage.getItem(APPOINTMENTS_KEY) || '[]');
-  } catch {
-    return [];
-  }
+  return readJson(APPOINTMENTS_KEY, []);
 }
 
 function saveAppointments(items) {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(APPOINTMENTS_KEY, JSON.stringify(items));
+  writeJson(APPOINTMENTS_KEY, items);
 }
 
 export default function Appointments() {

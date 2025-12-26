@@ -13,24 +13,14 @@ export default function NotesDashboard() {
   const [status, setStatus] = useState('');
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      const n = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
-      setNotes(Array.isArray(n) ? n : []);
-    } catch {
-      setNotes([]);
-    }
-    try {
-      const f = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
-      setFavorites(Array.isArray(f) ? f : []);
-    } catch {
-      setFavorites([]);
-    }
+    const n = readJson(NOTES_KEY, []);
+    setNotes(Array.isArray(n) ? n : []);
+    const f = readJson(FAV_KEY, []);
+    setFavorites(Array.isArray(f) ? f : []);
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+    writeJson(NOTES_KEY, notes);
   }, [notes]);
 
   function addNote() {
@@ -41,9 +31,7 @@ export default function NotesDashboard() {
       ...notes,
     ];
     setNotes(next);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(NOTES_KEY, JSON.stringify(next));
-    }
+    writeJson(NOTES_KEY, next);
     setText('');
     setError('');
     setStatus('Note saved.');
