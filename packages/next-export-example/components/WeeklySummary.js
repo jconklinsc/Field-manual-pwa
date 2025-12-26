@@ -26,8 +26,8 @@ export default function WeeklySummary({ entries }) {
         marginTop: '24px',
         padding: '16px',
         borderRadius: '10px',
-        background: '#f0fdf4',
-        border: '1px solid #bbf7d0'
+        background: '#f3f8ea',
+        border: '1px solid #cfe3b5'
       }}
     >
       <strong>This week’s activity</strong>

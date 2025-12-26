@@ -12,8 +12,8 @@ export default function Drawer() {
         left: 0,
         right: 0,
         height: '64px',
-        background: '#0f1111',
-        borderTop: '1px solid #222',
+        background: '#2a241d',
+        borderTop: '1px solid #3a3128',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -43,7 +43,10 @@ function NavItem({ router, href, label }) {
           fontSize: '14px',
           textDecoration: 'none',
           borderBottom: isActive ? '2px solid #78be20' : 'none',
-          paddingBottom: '4px',
+          padding: '10px 12px',
+          borderRadius: '999px',
+          minWidth: '64px',
+          textAlign: 'center',
         }}
       >
         {label}
