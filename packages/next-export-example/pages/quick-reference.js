@@ -26,7 +26,11 @@ export default function QuickReference() {
         </p>
       </ArticleCard>
 
-      <ArticleCard title="Horse Feels Off Under Saddle" eyebrow="In-depth article">
+      <ArticleCard
+        id="off-under-saddle"
+        title="Horse Feels Off Under Saddle"
+        eyebrow="Guide"
+      >
         <p>
           Pause the ride. Check feet, tack placement, and back sensitivity. If
           the issue persists, dismount and log what you feel. Patterns show up
@@ -34,7 +38,7 @@ export default function QuickReference() {
         </p>
       </ArticleCard>
 
-      <ArticleCard title="When to Call for Help" eyebrow="In-depth article">
+      <ArticleCard title="When to Call for Help" eyebrow="Guide">
         <p>
           Call the vet for persistent pain, severe colic signs, or sudden
           non-weight-bearing lameness. Note time, symptoms, and any changes in

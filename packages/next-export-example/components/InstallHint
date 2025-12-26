@@ -45,14 +45,14 @@ export default function InstallHint() {
       }}
     >
       <div style={{ flex: 1 }}>
-        To install the Field Manual, tap the share button and choose “Add to Home Screen”.
+        To install the Draw It Out Field Manual, tap the share button and choose “Add to Home Screen”.
       </div>
       <button
         onClick={handleClose}
         style={{
           background: 'transparent',
           border: 'none',
-          color: '#78be20',
+          color: '#b6855a',
           cursor: 'pointer',
           fontSize: '16px'
         }}

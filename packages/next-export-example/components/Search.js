@@ -2,6 +2,16 @@ import { useState } from 'react';
 
 export default function Search({ data = [] }) {
   const [query, setQuery] = useState('');
+  const resultStyle = {
+    display: 'block',
+    padding: '14px 16px',
+    borderRadius: '16px',
+    border: '1px solid #e6d9c8',
+    background: '#fffaf4',
+    textDecoration: 'none',
+    color: '#2a241d',
+    boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)'
+  };
 
   const normalizedQuery = query.trim().toLowerCase();
   const results = normalizedQuery.length > 0
@@ -16,7 +26,7 @@ export default function Search({ data = [] }) {
     <div style={{ marginBottom: '24px' }}>
       <input
         type="text"
-        placeholder="Search the Field Manual..."
+        placeholder="Search the Draw It Out Field Manual..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={(e) => {
@@ -36,7 +46,7 @@ export default function Search({ data = [] }) {
       />
 
       {normalizedQuery.length > 0 && (
-        <div style={{ marginTop: '16px' }}>
+        <div style={{ marginTop: '16px', display: 'grid', gap: '12px' }}>
           {results.length === 0 ? (
             <p style={{ color: '#9b4a1b' }}>No results found.</p>
           ) : (
@@ -44,12 +54,7 @@ export default function Search({ data = [] }) {
               <a
                 key={item.href}
                 href={item.href}
-                style={{
-                  fontSize: '16px',
-                  textDecoration: 'underline',
-                  fontWeight: '600',
-                  color: '#2a241d'
-                }}
+                style={resultStyle}
               >
                 <div style={{ fontSize: '16px', fontWeight: 600 }}>
                   {item.title}

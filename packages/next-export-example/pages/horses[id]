@@ -48,7 +48,7 @@ export default function HorseLog() {
 
       <WeeklySummary entries={entries} />
 
-      <ArticleCard title="Log Like a Pro" eyebrow="In-depth article">
+      <ArticleCard title="Log Like a Pro" eyebrow="Guide">
         <p>
           Short notes win. Record the section, what changed, and how it resolved.
           When you review a month from now, you’ll remember the why, not just

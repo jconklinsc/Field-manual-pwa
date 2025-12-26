@@ -31,14 +31,30 @@ export default function PreRide() {
         </ul>
       </ArticleCard>
 
-      <ArticleCard title="Body Scan + Flexion" eyebrow="In-depth article">
+      <ArticleCard
+        id="hands-on"
+        title="Body Scan + Flexion"
+        eyebrow="Guide"
+      >
         <p>
           Run hands down the neck, shoulders, back, and hindquarters. Flex each
           joint gently and compare side to side for stiffness or tenderness.
         </p>
       </ArticleCard>
 
-      <ArticleCard title="Tack and Fit Audit" eyebrow="In-depth article">
+      <ArticleCard
+        id="limbs"
+        title="Limb & Joint Assessment"
+        eyebrow="Guide"
+      >
+        <p>
+          Check for heat or swelling along tendons and joints before saddling.
+          Walk a short straight line and watch for uneven rhythm or hesitation.
+          If a limb feels different, note it and adjust the plan.
+        </p>
+      </ArticleCard>
+
+      <ArticleCard title="Tack and Fit Audit" eyebrow="Guide">
         <p>
           Confirm saddle balance, girth alignment, and bit placement. Even small
           fit shifts show up as reluctance or uneven movement. If anything feels

@@ -31,7 +31,7 @@ export default function PostRide() {
         </ul>
       </ArticleCard>
 
-      <ArticleCard title="Legs, Hooves, and Heat" eyebrow="In-depth article">
+      <ArticleCard title="Legs, Hooves, and Heat" eyebrow="Guide">
         <p>
           Use your hands to confirm even temperature in all four legs. Some
           horses hold heat in the hocks or front hooves after fast work. Cold
@@ -39,7 +39,7 @@ export default function PostRide() {
         </p>
       </ArticleCard>
 
-      <ArticleCard title="Next-Day Readiness" eyebrow="In-depth article">
+      <ArticleCard id="next-day" title="Next-Day Readiness" eyebrow="Guide">
         <p>
           The morning after a workout, repeat the baseline scan. Compare notes
           from today with how they show up tomorrow so you can adjust workload.

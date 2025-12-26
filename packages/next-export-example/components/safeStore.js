@@ -1,20 +1,20 @@
-import { readJson, writeJson } from './storage';
+import { safeGet, safeSet } from './safeStorage';
 
 const HORSE_KEY = 'fieldManualHorses';
 
 export function loadSafeHorses() {
-  const primary = readJson(HORSE_KEY, null);
+  const primary = safeGet(HORSE_KEY, null);
   if (primary) return primary;
 
-  const legacy = readJson('dio-fm-horses', null);
+  const legacy = safeGet('dio-fm-horses', null);
   if (legacy?.horses) {
-    writeJson(HORSE_KEY, legacy.horses);
+    safeSet(HORSE_KEY, legacy.horses);
     return legacy.horses;
   }
 
-  const legacyFlat = readJson('horses', null);
+  const legacyFlat = safeGet('horses', null);
   if (legacyFlat) {
-    writeJson(HORSE_KEY, legacyFlat);
+    safeSet(HORSE_KEY, legacyFlat);
     return legacyFlat;
   }
 
@@ -22,5 +22,5 @@ export function loadSafeHorses() {
 }
 
 export function saveSafeHorses(horses) {
-  writeJson(HORSE_KEY, horses);
+  return safeSet(HORSE_KEY, horses);
 }

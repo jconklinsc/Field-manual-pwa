@@ -2,6 +2,21 @@ import Link from 'next/link';
 import BackToTop from './BackToTop';
 
 export default function Layout({ children }) {
+  const navLinkStyle = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '8px 14px',
+    borderRadius: '999px',
+    border: '1px solid #dccfc1',
+    background: '#f1e6d9',
+    color: '#2a241d',
+    textDecoration: 'none',
+    fontWeight: 600,
+    fontSize: '13px',
+    minHeight: '38px'
+  };
+
   return (
     <div
       style={{
@@ -12,6 +27,7 @@ export default function Layout({ children }) {
       }}
     >
       <div
+        id="top"
         style={{
           maxWidth: '860px',
           margin: '0 auto',
@@ -26,21 +42,21 @@ export default function Layout({ children }) {
             paddingBottom: '14px',
             borderBottom: '1px solid #e4d7c7',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '12px'
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            gap: '16px'
           }}
         >
           <Link href="/">
             <a
               style={{
-                fontSize: '20px',
+                fontSize: '22px',
                 fontWeight: 700,
                 textDecoration: 'none',
                 color: '#2a241d'
               }}
             >
-              Field Manual
+              Draw It Out Field Manual
             </a>
           </Link>
           <span style={{ color: '#78be20', fontWeight: 600 }}>
@@ -61,6 +77,7 @@ export default function Layout({ children }) {
         >
           Offline ready · Built for calm, consistent care.
         </footer>
+        <BackToTop />
       </div>
     </div>
   );

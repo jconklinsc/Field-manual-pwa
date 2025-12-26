@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
 import Layout from '../components/Layout';
 import ArticleCard from '../components/ArticleCard';
-import { readJson, writeJson } from '../components/storage';
+import { safeGet, safeSet } from '../components/safeStorage';
 
 const APPOINTMENTS_KEY = 'fieldManualAppointments';
 
 function loadAppointments() {
-  return readJson(APPOINTMENTS_KEY, []);
+  return safeGet(APPOINTMENTS_KEY, []);
 }
 
 function saveAppointments(items) {
-  writeJson(APPOINTMENTS_KEY, items);
+  safeSet(APPOINTMENTS_KEY, items);
 }
 
 export default function Appointments() {
@@ -107,7 +107,7 @@ export default function Appointments() {
         cracks.
       </p>
 
-      <ArticleCard title="Stay Ahead of the Calendar" eyebrow="In-depth article">
+      <ArticleCard title="Stay Ahead of the Calendar" eyebrow="Guide">
         <p>
           Log each appointment with a date, time, and quick notes. When the week
           gets busy, this list keeps the next visit front and center.
@@ -208,8 +208,8 @@ export default function Appointments() {
             padding: '10px 16px',
             borderRadius: '999px',
             border: 'none',
-            background: '#78be20',
-            color: '#1f2a10',
+            background: '#b6855a',
+            color: '#2a241d',
             fontWeight: 600
           }}
         >
@@ -252,10 +252,13 @@ export default function Appointments() {
                   onClick={() => removeAppointment(item.id)}
                   style={{
                     marginTop: '8px',
-                    background: 'none',
-                    border: 'none',
+                    padding: '6px 12px',
+                    borderRadius: '999px',
+                    border: '1px solid #dccfc1',
+                    background: '#fff0e6',
                     color: '#9b4a1b',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    fontWeight: 600
                   }}
                 >
                   Remove

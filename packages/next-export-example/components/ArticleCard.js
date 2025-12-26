@@ -1,6 +1,7 @@
-export default function ArticleCard({ title, eyebrow, children }) {
+export default function ArticleCard({ title, eyebrow, children, id }) {
   return (
     <section
+      id={id}
       style={{
         marginTop: '18px',
         padding: '18px',

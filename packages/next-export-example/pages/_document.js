@@ -19,7 +19,7 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" href="/192fm.png" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-          <meta name="apple-mobile-web-app-title" content="Field Manual" />
+          <meta name="apple-mobile-web-app-title" content="Draw It Out Field Manual" />
 
           {/* ============================== */}
           {/*       iOS SPLASH SCREENS       */}

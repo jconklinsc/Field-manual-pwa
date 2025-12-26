@@ -31,7 +31,20 @@ export default function SkinAndLegs() {
         </ul>
       </ArticleCard>
 
-      <ArticleCard title="Skin Health, Rain, and Recovery" eyebrow="In-depth article">
+      <ArticleCard title="Digital Pulse Check" id="digital-pulse" eyebrow="Guide">
+        <p>
+          Place your fingers lightly at the fetlock to feel the digital pulse.
+          A steady, gentle pulse is normal. A strong, bounding pulse paired with
+          heat is a signal to slow down and monitor closely.
+        </p>
+        <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
+          <li>Compare left to right every time.</li>
+          <li>Note any change in heat or tenderness.</li>
+          <li>Log the finding with the day’s workload.</li>
+        </ul>
+      </ArticleCard>
+
+      <ArticleCard title="Skin Health, Rain, and Recovery" eyebrow="Guide">
         <p>
           Wet weather can spark scratches, rain rot, or pastern irritation. Keep
           legs dry, clip excess hair, and watch for flaking or crusting. If you
@@ -39,7 +52,7 @@ export default function SkinAndLegs() {
         </p>
       </ArticleCard>
 
-      <ArticleCard title="Hoof Signals" eyebrow="In-depth article">
+      <ArticleCard title="Hoof Signals" eyebrow="Guide">
         <p>
           Warm hooves after work are common, but a pounding digital pulse or
           uneven heat pattern is not. Keep farrier cycles consistent and shorten

@@ -19,7 +19,7 @@ export default function Header() {
           color: '#0f1111'
         }}
       >
-        Draw It Out® Field Manual
+        Draw It Out Field Manual
       </h2>
     </header>
   );

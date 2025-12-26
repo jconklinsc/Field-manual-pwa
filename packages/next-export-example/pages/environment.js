@@ -30,7 +30,7 @@ export default function Environment() {
         </ul>
       </ArticleCard>
 
-      <ArticleCard title="Footing + Terrain" eyebrow="In-depth article">
+      <ArticleCard id="footing" title="Footing + Terrain" eyebrow="Guide">
         <p>
           Deep footing builds strength but strains tendons. Hard ground increases
           concussion. Log what they worked on so you can connect footing with how
@@ -38,7 +38,7 @@ export default function Environment() {
         </p>
       </ArticleCard>
 
-      <ArticleCard title="Routine Changes" eyebrow="In-depth article">
+      <ArticleCard title="Routine Changes" eyebrow="Guide">
         <p>
           Hauling, feed changes, or new pasture mates can impact appetite and
           attitude. Flag any change with a quick note and check TPR twice that

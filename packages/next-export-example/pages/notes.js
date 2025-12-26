@@ -10,7 +10,7 @@ export default function Notes() {
         Keep daily notes in one calm space. The more detail you capture, the
         faster you can spot trends.
       </p>
-      <ArticleCard title="Field Notes That Matter" eyebrow="In-depth article">
+      <ArticleCard title="Field Notes That Matter" eyebrow="Guide">
         <p>
           Add short, specific observations: “Left hind warm after turnout” or
           “Stretched down longer than usual.” Pair notes with dates so you can

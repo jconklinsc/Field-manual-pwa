@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { readJson, readText, writeJson, writeText } from './storage';
+import { safeGet, safeSet } from './safeStorage';
 
 export default function NotesPanel({ id, title }) {
   const [note, setNote] = useState('');
@@ -8,21 +8,21 @@ export default function NotesPanel({ id, title }) {
   const favoritesKey = 'fieldManualFavorites';
 
   useEffect(() => {
-    const storedNote = readText(`dio-fm-notes-${id}`, '');
+    const storedNote = safeGet(`dio-fm-notes-${id}`, '');
     if (storedNote) setNote(storedNote);
 
-    const favs = readJson(favoritesKey, []);
+    const favs = safeGet(favoritesKey, []);
     setIsFavorite(favs.some(item => item.id === id));
   }, [id]);
 
   const handleNoteChange = (e) => {
     const v = e.target.value;
     setNote(v);
-    writeText(`dio-fm-notes-${id}`, v);
+    safeSet(`dio-fm-notes-${id}`, v);
   };
 
   const toggleFavorite = () => {
-    const favs = readJson(favoritesKey, []);
+    const favs = safeGet(favoritesKey, []);
 
     let nextFavs;
     if (isFavorite) {
@@ -36,7 +36,10 @@ export default function NotesPanel({ id, title }) {
       setIsFavorite(true);
     }
 
-    writeJson(favoritesKey, nextFavs);
+    safeSet(favoritesKey, nextFavs);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('favoritesUpdated'));
+    }
   };
 
   return (
@@ -70,7 +73,7 @@ export default function NotesPanel({ id, title }) {
           onClick={toggleFavorite}
           style={{
             background: 'none',
-            color: isFavorite ? '#78be20' : '#6b6256',
+            color: isFavorite ? '#b6855a' : '#6b6256',
             border: 'none',
             padding: 0,
             fontSize: '14px',
