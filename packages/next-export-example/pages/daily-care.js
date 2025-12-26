@@ -19,11 +19,7 @@ export default function DailyCare() {
         confidence in the barn.
       </p>
 
-      <ArticleCard
-        id="observation"
-        title="Morning Baseline Walkthrough"
-        eyebrow="Daily routine"
-      >
+      <ArticleCard title="Morning Baseline Walkthrough" eyebrow="Daily routine">
         <p>
           Start with a two-minute scan: posture, breathing rhythm, appetite, and
           attitude. Note the small shifts before they become big signals.

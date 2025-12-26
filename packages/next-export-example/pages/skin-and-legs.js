@@ -18,11 +18,7 @@ export default function SkinAndLegs() {
         article digs into the small signals that prevent bigger setbacks.
       </p>
 
-      <ArticleCard
-        id="daily-check"
-        title="Daily Leg Inspection"
-        eyebrow="Daily routine"
-      >
+      <ArticleCard title="Daily Leg Inspection" eyebrow="Daily routine">
         <p>
           Start at the hoof and move up. Legs should stay clean and cool when a
           horse is comfortable. If stocking up appears after a stall day,

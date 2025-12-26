@@ -59,29 +59,9 @@ export default function Layout({ children }) {
               Draw It Out Field Manual
             </a>
           </Link>
-          <nav
-            aria-label="Primary"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '10px'
-            }}
-          >
-            <a href="/" style={navLinkStyle}>Home</a>
-            <a href="/daily-care" style={navLinkStyle}>Daily Care</a>
-            <a href="/pre-ride" style={navLinkStyle}>Pre-Ride</a>
-            <a href="/post-ride" style={navLinkStyle}>Post-Ride</a>
-            <a href="/skin-and-legs" style={navLinkStyle}>Skin & Legs</a>
-            <a href="/environment" style={navLinkStyle}>Environment</a>
-            <a href="/quick-reference" style={navLinkStyle}>Quick Reference</a>
-            <a href="/horses" style={navLinkStyle}>Horse Logs</a>
-            <a href="/notes" style={navLinkStyle}>Notes</a>
-            <a href="/favorites" style={navLinkStyle}>Favorites</a>
-            <a href="/appointments" style={navLinkStyle}>Appointments</a>
-            <a href="/products" style={navLinkStyle}>Products</a>
-            <a href="/articles" style={navLinkStyle}>In-Depth Articles</a>
-            <a href="/horse-health-terms" style={navLinkStyle}>Health Terms</a>
-          </nav>
+          <span style={{ color: '#78be20', fontWeight: 600 }}>
+            Care Edition
+          </span>
         </header>
 
         <main>{children}</main>
@@ -95,10 +75,7 @@ export default function Layout({ children }) {
             color: '#6b6256'
           }}
         >
-          <div style={{ marginBottom: '10px' }}>
-            Offline ready · Built for calm, consistent care.
-          </div>
-          <a href="#top" style={navLinkStyle}>Jump to top</a>
+          Offline ready · Built for calm, consistent care.
         </footer>
         <BackToTop />
       </div>

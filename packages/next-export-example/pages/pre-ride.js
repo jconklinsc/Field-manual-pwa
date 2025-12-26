@@ -19,11 +19,7 @@ export default function PreRide() {
         ride.
       </p>
 
-      <ArticleCard
-        id="mental"
-        title="Mental Readiness Check"
-        eyebrow="Daily routine"
-      >
+      <ArticleCard title="Mental Readiness Check" eyebrow="Daily routine">
         <p>
           Before you tack up, watch eyes, ears, and breathing. A calm horse is a
           safe, sound ride.

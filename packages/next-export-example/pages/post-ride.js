@@ -18,11 +18,7 @@ export default function PostRide() {
         post-ride care like its own short training session.
       </p>
 
-      <ArticleCard
-        id="cooldown"
-        title="Cool-Down Sequence"
-        eyebrow="Daily routine"
-      >
+      <ArticleCard title="Cool-Down Sequence" eyebrow="Daily routine">
         <p>
           Walk until respiration normalizes and the skin feels cool to the touch.
           Add extra time after hills and finish with a loose rein stretch to

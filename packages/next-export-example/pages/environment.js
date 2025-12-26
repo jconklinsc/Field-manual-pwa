@@ -18,7 +18,7 @@ export default function Environment() {
         routine shifts show up in their bodies and behavior.
       </p>
 
-      <ArticleCard id="weather" title="Weather Shifts" eyebrow="Daily routine">
+      <ArticleCard title="Weather Shifts" eyebrow="Daily routine">
         <p>
           Cold snaps can tighten muscles. Humidity spikes can dull energy.
           Adjust warm-up time, water intake, and workload with the forecast.

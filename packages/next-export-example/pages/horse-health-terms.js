@@ -426,7 +426,7 @@ export default function HorseHealthTerms() {
         care, observation, and quick decision-making.
       </p>
 
-      <ArticleCard title="How to Use This Library" eyebrow="Guide">
+      <ArticleCard title="How to Use This Library" eyebrow="Daily routine">
         <p>
           Keep this glossary open during checks or while writing notes. Subtle
           changes can be easy to miss, so precise language helps you catch

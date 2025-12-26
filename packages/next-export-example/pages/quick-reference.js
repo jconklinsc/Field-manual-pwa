@@ -18,11 +18,7 @@ export default function QuickReference() {
         and consistent. Use it as a calm checklist in the moment.
       </p>
 
-      <ArticleCard
-        id="leg-heat"
-        title="Heat or Swelling in a Leg"
-        eyebrow="Daily routine"
-      >
+      <ArticleCard title="Heat or Swelling in a Leg" eyebrow="Daily routine">
         <p>
           Stop, assess, and compare legs side by side. If heat is focal or
           swelling is sudden, reduce workload and cold hose. Follow with gentle
