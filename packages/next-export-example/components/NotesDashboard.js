@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { readJson, writeJson } from './storage';
+import { safeGet, safeSet } from './safeStorage';
 
 const NOTES_KEY = 'fieldManualNotes';
 const FAV_KEY = 'fieldManualFavorites';
@@ -9,6 +9,8 @@ export default function NotesDashboard() {
   const [favorites, setFavorites] = useState([]);
   const [text, setText] = useState('');
   const [query, setQuery] = useState('');
+  const [error, setError] = useState('');
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     const n = readJson(NOTES_KEY, []);
@@ -31,6 +33,9 @@ export default function NotesDashboard() {
     setNotes(next);
     writeJson(NOTES_KEY, next);
     setText('');
+    setError('');
+    setStatus('Note saved.');
+    setTimeout(() => setStatus(''), 2000);
   }
 
   function deleteNote(id) {
@@ -90,8 +95,12 @@ export default function NotesDashboard() {
       />
 
       <textarea
+        id="notes-input"
         value={text}
-        onChange={e => setText(e.target.value)}
+        onChange={e => {
+          setText(e.target.value);
+          if (error) setError('');
+        }}
         placeholder="Write a note…"
         rows={4}
         style={{
@@ -103,8 +112,9 @@ export default function NotesDashboard() {
         }}
       />
 
-      <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+      <div style={{ display: 'flex', gap: '12px', marginTop: '16px', flexWrap: 'wrap' }}>
         <button
+          type="button"
           onClick={addNote}
           style={{
             padding: '10px 14px',
@@ -115,10 +125,11 @@ export default function NotesDashboard() {
             fontWeight: 600,
           }}
         >
-          Add Note
+          Save Note
         </button>
 
         <button
+          type="button"
           onClick={exportData}
           style={{
             padding: '10px 14px',
@@ -128,9 +139,11 @@ export default function NotesDashboard() {
             fontWeight: 600,
           }}
         >
-          Export
+          Export Notes
         </button>
       </div>
+      {error && <p style={{ color: '#9b4a1b', marginTop: '8px' }}>{error}</p>}
+      {status && <p style={{ color: '#2a241d', marginTop: '8px' }}>{status}</p>}
 
       <ul style={{ marginTop: '24px', padding: 0 }}>
         {filteredNotes.map(n => (
@@ -150,10 +163,13 @@ export default function NotesDashboard() {
               onClick={() => deleteNote(n.id)}
               style={{
                 marginTop: '6px',
-                background: 'none',
-                border: 'none',
-                color: '#c00',
+                padding: '6px 12px',
+                borderRadius: '999px',
+                border: '1px solid #e6d9c8',
+                background: '#fff0e6',
+                color: '#9b4a1b',
                 cursor: 'pointer',
+                fontWeight: 600,
               }}
             >
               Delete

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import BackToTop from './BackToTop';
 
 export default function Layout({ children }) {
   return (

@@ -43,7 +43,10 @@ function NavItem({ router, href, label }) {
           fontSize: '14px',
           textDecoration: 'none',
           borderBottom: isActive ? '2px solid #78be20' : 'none',
-          paddingBottom: '4px',
+          padding: '10px 12px',
+          borderRadius: '999px',
+          minWidth: '64px',
+          textAlign: 'center',
         }}
       >
         {label}

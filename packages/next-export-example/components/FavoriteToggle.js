@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { readJson, writeJson } from './storage';
+import { safeGet, safeSet } from './safeStorage';
 
 const KEY = 'fieldManualFavorites';
 
@@ -7,12 +7,14 @@ export default function FavoriteToggle({ id, label }) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const stored = readJson(KEY, []);
+    if (typeof window === 'undefined') return;
+    const stored = safeGet(KEY, []);
     setActive(stored.some(f => f.id === id));
   }, [id]);
 
   function toggle() {
-    const stored = readJson(KEY, []);
+    if (typeof window === 'undefined') return;
+    const stored = safeGet(KEY, []);
 
     let updated;
     if (active) {
@@ -21,8 +23,12 @@ export default function FavoriteToggle({ id, label }) {
       updated = [...stored.filter(f => f.id !== id), { id, label }];
     }
 
-    writeJson(KEY, updated);
+    const saved = safeSet(KEY, updated);
+    if (!saved) return;
     setActive(!active);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('favoritesUpdated'));
+    }
   }
 
   return (

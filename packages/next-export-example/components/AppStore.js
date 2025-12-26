@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { readJson, writeJson } from './storage';
+import { safeGet, safeSet } from './safeStorage';
 
 const AppContext = createContext();
 
@@ -11,26 +11,22 @@ export function AppProvider({ children }) {
 
   // Load from localStorage
   useEffect(() => {
-    setHorses(readJson('horses', []));
-    setFavorites(readJson('favorites', []));
-    setNotes(readJson('notes', []));
-    setHydrated(true);
+    setHorses(safeGet('horses', []));
+    setFavorites(safeGet('favorites', []));
+    setNotes(safeGet('notes', []));
   }, []);
 
   // Persist
   useEffect(() => {
-    if (!hydrated) return;
-    writeJson('horses', horses);
+    safeSet('horses', horses);
   }, [horses]);
 
   useEffect(() => {
-    if (!hydrated) return;
-    writeJson('favorites', favorites);
+    safeSet('favorites', favorites);
   }, [favorites]);
 
   useEffect(() => {
-    if (!hydrated) return;
-    writeJson('notes', notes);
+    safeSet('notes', notes);
   }, [notes]);
 
   return (
