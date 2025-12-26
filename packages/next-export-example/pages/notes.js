@@ -7,37 +7,16 @@ export default function Notes() {
     <Layout>
       <h1>Notes</h1>
       <p>
-        Keep daily notes in one calm space. The more detail you capture, the
-        faster you can spot trends.
+        Keep Rory and Nudge’s daily notes in one calm space. The more detail you
+        capture, the faster you can spot trends.
       </p>
-      <ArticleCard
-        title="Field Notes That Matter"
-        eyebrow="In-depth article"
-        href="/articles#field-notes-that-matter"
-      >
+      <ArticleCard title="Field Notes That Matter" eyebrow="In-depth article">
         <p>
-          Add short, specific observations, then pair them with dates so you
-          can track how changes respond to rest, work, or weather.
+          Add short, specific observations: “Nudge left hind warm after turnout”
+          or “Rory stretched down longer than usual.” Pair notes with dates so
+          you can track how changes respond to rest, work, or weather.
         </p>
       </ArticleCard>
-      <div style={{ marginTop: '16px' }}>
-        <a
-          href="#notes-input"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            padding: '8px 14px',
-            borderRadius: '999px',
-            border: '1px solid #dccfc1',
-            background: '#f1e6d9',
-            color: '#2a241d',
-            fontWeight: 600,
-            textDecoration: 'none'
-          }}
-        >
-          Add Note
-        </a>
-      </div>
       <NotesDashboard />
     </Layout>
   );
