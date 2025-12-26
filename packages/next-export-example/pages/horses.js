@@ -58,8 +58,8 @@ export default function HorsesPage() {
     <Layout>
       <h1>Horses</h1>
       <p>
-        Track Rory and Nudge as individuals. Each horse has a dedicated log so
-        you can spot patterns in workload, recovery, and behavior.
+        Track each horse as an individual. Dedicated logs help you spot
+        patterns in workload, recovery, and behavior.
       </p>
       <ArticleCard title="Build a Record" eyebrow="In-depth article">
         <p>

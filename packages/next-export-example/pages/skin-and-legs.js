@@ -14,14 +14,15 @@ export default function SkinAndLegs() {
       </h1>
 
       <p>
-        Rory and Nudge show their earliest clues through skin, legs, and hooves.
-        This article digs into the small signals that prevent bigger setbacks.
+        Horses show their earliest clues through skin, legs, and hooves. This
+        article digs into the small signals that prevent bigger setbacks.
       </p>
 
-      <ArticleCard title="Daily Leg Inspection" eyebrow="Rory + Nudge">
+      <ArticleCard title="Daily Leg Inspection" eyebrow="Daily routine">
         <p>
-          Start at the hoof and move up. Rory’s legs stay clean and cool when
-          he’s happy. Nudge can stock up after a stall day, so movement matters.
+          Start at the hoof and move up. Legs should stay clean and cool when a
+          horse is comfortable. If stocking up appears after a stall day,
+          prioritize movement.
         </p>
         <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
           <li>Compare left to right for heat or thickening.</li>
@@ -41,8 +42,8 @@ export default function SkinAndLegs() {
       <ArticleCard title="Hoof Signals" eyebrow="In-depth article">
         <p>
           Warm hooves after work are common, but a pounding digital pulse or
-          uneven heat pattern is not. Rory responds to regular farrier cycles;
-          Nudge needs shorter intervals when footing is hard.
+          uneven heat pattern is not. Keep farrier cycles consistent and shorten
+          intervals when footing is hard.
         </p>
       </ArticleCard>
 

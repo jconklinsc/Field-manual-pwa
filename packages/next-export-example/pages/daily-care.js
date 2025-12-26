@@ -14,16 +14,15 @@ export default function DailyCare() {
       </h1>
 
       <p>
-        Rory and Nudge thrive on steady, repeatable routines. Use this daily
-        care guide to lock in baseline observations, catch early changes, and
-        build calm confidence in the barn.
+        Horses thrive on steady, repeatable routines. Use this daily care guide
+        to lock in baseline observations, catch early changes, and build calm
+        confidence in the barn.
       </p>
 
-      <ArticleCard title="Morning Baseline Walkthrough" eyebrow="Rory + Nudge">
+      <ArticleCard title="Morning Baseline Walkthrough" eyebrow="Daily routine">
         <p>
           Start with a two-minute scan: posture, breathing rhythm, appetite, and
-          attitude. Rory is steady and stoic, while Nudge tells you everything
-          with his ears. Note the small shifts before they become big signals.
+          attitude. Note the small shifts before they become big signals.
         </p>
         <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
           <li>Check gum moisture and color for hydration and circulation.</li>
@@ -34,9 +33,8 @@ export default function DailyCare() {
 
       <ArticleCard title="Hands-On Body Map" eyebrow="In-depth article">
         <p>
-          Work methodically from poll to tail. Rory prefers a firm, even touch
-          over quick pats; Nudge relaxes with slow circles on the shoulders. Use
-          the same sequence daily so you notice subtle asymmetry.
+          Work methodically from poll to tail. Use a consistent, even touch and
+          repeat the same sequence daily so you notice subtle asymmetry.
         </p>
         <p>
           If you find a hot spot, mark it in your log and compare tomorrow. Pair
@@ -47,8 +45,8 @@ export default function DailyCare() {
       <ArticleCard title="Daily Movement Snapshot" eyebrow="In-depth article">
         <p>
           Watch three straight lines: walk away, walk toward, and a loose circle.
-          Rory typically warms up quickly; if he shortens a stride, flag it. With
-          Nudge, look for toe drag or hesitation in the first 10 steps.
+          If a stride shortens, flag it. Look for toe drag or hesitation in the
+          first 10 steps.
         </p>
         <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
           <li>Compare footfalls left vs. right.</li>

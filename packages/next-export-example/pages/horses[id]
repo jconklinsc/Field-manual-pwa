@@ -40,8 +40,8 @@ export default function HorseLog() {
     <Layout>
       <h1>{horse.name}</h1>
       <p>
-        This is {horse.name}’s working log for Rory + Nudge-style care. Capture
-        wins, warnings, and the small signals that keep them sound.
+        This is {horse.name}’s working log for consistent care. Capture wins,
+        warnings, and the small signals that keep them sound.
       </p>
 
       <ExportReport horse={horse} entries={entries} />

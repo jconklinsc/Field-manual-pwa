@@ -44,7 +44,7 @@ export default function Layout({ children }) {
             </a>
           </Link>
           <span style={{ color: '#78be20', fontWeight: 600 }}>
-            Rory + Nudge Edition
+            Care Edition
           </span>
         </header>
 
@@ -59,8 +59,7 @@ export default function Layout({ children }) {
             color: '#6b6256'
           }}
         >
-          Offline ready · Built for calm, consistent care with Rory and Nudge in
-          mind.
+          Offline ready · Built for calm, consistent care.
         </footer>
       </div>
     </div>
