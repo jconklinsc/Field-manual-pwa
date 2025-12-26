@@ -20,27 +20,152 @@ export default function Home() {
           listStyle: 'none',
           padding: 0,
           marginTop: '24px',
-          fontSize: '18px',
-          lineHeight: '1.8'
+          display: 'grid',
+          gap: '12px'
         }}
       >
         <li>
-          <a href="/daily-care">Daily Care</a>
+          <a
+            href="/daily-care"
+            style={{
+              display: 'block',
+              padding: '14px 16px',
+              borderRadius: '16px',
+              border: '1px solid #e6d9c8',
+              background: '#fffaf4',
+              boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+              fontWeight: 600,
+              color: '#2a241d'
+            }}
+          >
+            Daily Care
+          </a>
         </li>
         <li>
-          <a href="/pre-ride">Pre-Ride Prep</a>
+          <a href="/pre-ride" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Pre-Ride Prep
+          </a>
         </li>
         <li>
-          <a href="/post-ride">Post-Ride Recovery</a>
+          <a href="/post-ride" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Post-Ride Recovery
+          </a>
         </li>
         <li>
-          <a href="/skin-and-legs">Skin & Legs</a>
+          <a href="/skin-and-legs" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Skin & Legs
+          </a>
         </li>
         <li>
-          <a href="/environment">Environment & Stress</a>
+          <a href="/environment" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Environment & Stress
+          </a>
         </li>
         <li>
-          <a href="/quick-reference">Quick Reference</a>
+          <a href="/quick-reference" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Quick Reference
+          </a>
+        </li>
+        <li>
+          <a href="/horse-health-terms" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Horse Health Terms Library
+          </a>
+        </li>
+        <li>
+          <a href="/appointments" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Vet & Farrier Appointments
+          </a>
+        </li>
+        <li>
+          <a href="/products" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Draw It Out Best Sellers
+          </a>
+        </li>
+        <li>
+          <a href="/articles" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            In-Depth Articles
+          </a>
         </li>
         <li>
           <a href="/horse-health-terms">Horse Health Terms Library</a>
@@ -49,10 +174,32 @@ export default function Home() {
         <hr style={{ margin: '16px 0' }} />
 
         <li>
-          <a href="/horses">Horse Logs</a>
+          <a href="/horses" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Horse Logs
+          </a>
         </li>
         <li>
-          <a href="/notes">Notes</a>
+          <a href="/notes" style={{
+            display: 'block',
+            padding: '14px 16px',
+            borderRadius: '16px',
+            border: '1px solid #e6d9c8',
+            background: '#fffaf4',
+            boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+            fontWeight: 600,
+            color: '#2a241d'
+          }}>
+            Notes
+          </a>
         </li>
         <li>
           <a href="/favorites">

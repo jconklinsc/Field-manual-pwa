@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Search({ data }) {
+export default function Search({ data = [] }) {
   const [query, setQuery] = useState('');
 
   const normalizedQuery = query.trim().toLowerCase();
@@ -48,9 +48,11 @@ export default function Search({ data }) {
                 }}
               >
                 {item.title}
-              </a>
-              <p style={{ marginTop: '4px' }}>{item.preview}</p>
-            </div>
+              </div>
+              <p style={{ margin: '4px 0 0', color: '#4a4036' }}>
+                {item.preview}
+              </p>
+            </a>
           ))}
         </div>
       )}

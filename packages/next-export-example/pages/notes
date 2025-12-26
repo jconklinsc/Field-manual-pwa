@@ -56,7 +56,11 @@ function BottomNav() {
     fontSize: '13px',
     textDecoration: 'none',
     color: '#0f1111',
-    padding: '4px 0'
+    padding: '6px 10px',
+    borderRadius: '999px',
+    border: '1px solid #e6d9c8',
+    background: '#fffaf4',
+    fontWeight: 600
   };
 
   return (
