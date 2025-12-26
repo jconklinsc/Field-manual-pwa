@@ -6,6 +6,17 @@ import { loadSafeHorses, saveSafeHorses } from '../components/safeStore';
 export default function HorsesPage() {
   const [horses, setHorses] = useState([]);
   const [name, setName] = useState('');
+  const [error, setError] = useState('');
+  const [status, setStatus] = useState('');
+
+  function createHorseId() {
+    try {
+      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
+    } catch {}
+    return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+  }
 
   function createHorseId() {
     if (typeof crypto !== 'undefined' && crypto.randomUUID) {
@@ -19,7 +30,10 @@ export default function HorsesPage() {
   }, []);
 
   function addHorse() {
-    if (!name.trim()) return;
+    if (!name.trim()) {
+      setError('Enter a horse name to add.');
+      return;
+    }
 
     const updated = [
       ...horses,
@@ -30,9 +44,14 @@ export default function HorsesPage() {
       }
     ];
 
+    const saved = saveSafeHorses(updated);
     setHorses(updated);
-    saveSafeHorses(updated);
+    if (!saved) {
+      setError('Saved for this session only.');
+    }
     setName('');
+    setStatus('Horse added.');
+    setTimeout(() => setStatus(''), 2000);
   }
 
   return (
@@ -51,8 +70,15 @@ export default function HorsesPage() {
 
       <div style={{ marginBottom: '16px' }}>
         <input
+          id="horse-name-input"
           value={name}
-          onChange={e => setName(e.target.value)}
+          onChange={e => {
+            setName(e.target.value);
+            if (error) setError('');
+          }}
+          onKeyDown={e => {
+            if (e.key === 'Enter') addHorse();
+          }}
           placeholder="Horse name"
           style={{
             padding: '8px',
@@ -76,14 +102,34 @@ export default function HorsesPage() {
           Add
         </button>
       </div>
+      {error && (
+        <p style={{ color: '#9b4a1b', marginTop: '-8px' }}>{error}</p>
+      )}
+      {status && <p style={{ color: '#2a241d', marginTop: '-8px' }}>{status}</p>}
 
       {horses.length === 0 ? (
         <p>No horses yet. Add your current string to get started.</p>
       ) : (
-        <ul>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
           {horses.map(horse => (
             <li key={horse.id} style={{ marginBottom: '8px' }}>
-              <a href={`/horses/${horse.id}`}>{horse.name}</a>
+              <a
+                href={`/horses/${horse.id}`}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  padding: '10px 16px',
+                  borderRadius: '999px',
+                  border: '1px solid #dccfc1',
+                  background: '#f1e6d9',
+                  color: '#2a241d',
+                  fontWeight: 600,
+                  minHeight: '44px',
+                  textDecoration: 'none'
+                }}
+              >
+                {horse.name}
+              </a>
             </li>
           ))}
         </ul>
