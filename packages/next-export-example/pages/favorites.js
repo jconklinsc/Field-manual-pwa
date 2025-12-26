@@ -7,23 +7,9 @@ export default function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const horses = loadSafeHorses();
-    const favs = [];
-
-    horses.forEach(horse => {
-      horse.entries.forEach(entry => {
-        if (entry.favorite) {
-          favs.push({
-            horseName: horse.name,
-            ...entry
-          });
-        }
-      });
-    });
-
-    setFavorites(
-      favs.sort((a, b) => new Date(b.date) - new Date(a.date))
-    );
+    if (typeof window === 'undefined') return;
+    const stored = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
+    setFavorites(stored);
   }, []);
 
   return (
@@ -45,15 +31,14 @@ export default function FavoritesPage() {
         <p>No favorites yet.</p>
       ) : (
         <ul style={{ paddingLeft: '16px' }}>
-          {favorites.map((item, idx) => (
-            <li key={idx} style={{ marginBottom: '12px' }}>
-              <strong>{item.horseName}</strong>
-              <div style={{ fontSize: '12px', color: '#6b7280' }}>
-                {new Date(item.date).toLocaleDateString()} · {item.section}
-              </div>
-              <div>{item.text}</div>
-            </li>
-          ))}
+          {favorites.map(item => {
+            const href = PAGE_LINKS[item.id];
+            return (
+              <li key={item.id} style={{ marginBottom: '12px' }}>
+                {href ? <a href={href}>{item.label}</a> : <span>{item.label}</span>}
+              </li>
+            );
+          })}
         </ul>
       )}
     </Layout>

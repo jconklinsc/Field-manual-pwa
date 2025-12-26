@@ -88,6 +88,9 @@ export default function Horses() {
           </li>
         ))}
       </ul>
+      {horses.length === 0 && (
+        <p>No horses yet. Add your current string to get started.</p>
+      )}
     </Layout>
   );
 }

@@ -7,6 +7,13 @@ export default function HorsesPage() {
   const [horses, setHorses] = useState([]);
   const [name, setName] = useState('');
 
+  function createHorseId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+  }
+
   useEffect(() => {
     setHorses(loadSafeHorses());
   }, []);
@@ -17,7 +24,7 @@ export default function HorsesPage() {
     const updated = [
       ...horses,
       {
-        id: crypto.randomUUID(),
+        id: createHorseId(),
         name: name.trim(),
         entries: []
       }
@@ -71,7 +78,7 @@ export default function HorsesPage() {
       </div>
 
       {horses.length === 0 ? (
-        <p>No horses yet.</p>
+        <p>No horses yet. Add your current string to get started.</p>
       ) : (
         <ul>
           {horses.map(horse => (

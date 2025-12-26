@@ -10,22 +10,37 @@ export default function NotesDashboard() {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    const n = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
-    const f = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
-    setNotes(n);
-    setFavorites(f);
+    if (typeof window === 'undefined') return;
+    try {
+      const n = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
+      setNotes(Array.isArray(n) ? n : []);
+    } catch {
+      setNotes([]);
+    }
+    try {
+      const f = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+      setFavorites(Array.isArray(f) ? f : []);
+    } catch {
+      setFavorites([]);
+    }
   }, []);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
   }, [notes]);
 
   function addNote() {
-    if (!text.trim()) return;
-    setNotes([
-      { id: Date.now(), text, date: new Date().toISOString() },
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    const next = [
+      { id: Date.now(), text: trimmed, date: new Date().toISOString() },
       ...notes,
-    ]);
+    ];
+    setNotes(next);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(NOTES_KEY, JSON.stringify(next));
+    }
     setText('');
   }
 

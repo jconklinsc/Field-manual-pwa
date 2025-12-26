@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 export default function NotesPanel({ id, title }) {
   const [note, setNote] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+  const favoriteLabel = title || id;
+  const favoritesKey = 'fieldManualFavorites';
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -10,11 +12,11 @@ export default function NotesPanel({ id, title }) {
     const storedNote = window.localStorage.getItem(`dio-fm-notes-${id}`);
     if (storedNote) setNote(storedNote);
 
-    const favRaw = window.localStorage.getItem('dio-fm-favorites');
+    const favRaw = window.localStorage.getItem(favoritesKey);
     if (favRaw) {
       try {
         const favs = JSON.parse(favRaw);
-        setIsFavorite(favs.includes(id));
+        setIsFavorite(favs.some(item => item.id === id));
       } catch {}
     }
   }, [id]);
@@ -30,7 +32,7 @@ export default function NotesPanel({ id, title }) {
   const toggleFavorite = () => {
     if (typeof window === 'undefined') return;
 
-    const favRaw = window.localStorage.getItem('dio-fm-favorites');
+    const favRaw = window.localStorage.getItem(favoritesKey);
     let favs = [];
     if (favRaw) {
       try {
@@ -40,14 +42,17 @@ export default function NotesPanel({ id, title }) {
 
     let nextFavs;
     if (isFavorite) {
-      nextFavs = favs.filter((x) => x !== id);
+      nextFavs = favs.filter((item) => item.id !== id);
       setIsFavorite(false);
     } else {
-      nextFavs = [...new Set([...favs, id])];
+      nextFavs = [
+        ...favs.filter((item) => item.id !== id),
+        { id, label: favoriteLabel }
+      ];
       setIsFavorite(true);
     }
 
-    window.localStorage.setItem('dio-fm-favorites', JSON.stringify(nextFavs));
+    window.localStorage.setItem(favoritesKey, JSON.stringify(nextFavs));
   };
 
   return (
