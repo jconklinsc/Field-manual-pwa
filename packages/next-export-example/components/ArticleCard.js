@@ -1,22 +1,13 @@
-export default function ArticleCard({ title, eyebrow, children, href }) {
-  const Wrapper = href ? 'a' : 'section';
-
-  const wrapperProps = href ? { href } : {};
-
+export default function ArticleCard({ title, eyebrow, children }) {
   return (
-    <Wrapper
-      {...wrapperProps}
+    <section
       style={{
-        display: 'block',
-        marginTop: '22px',
-        padding: '20px',
-        borderRadius: '18px',
+        marginTop: '18px',
+        padding: '18px',
+        borderRadius: '16px',
         border: '1px solid #e6d9c8',
         background: '#fffaf4',
-        boxShadow: '0 16px 30px rgba(37, 28, 20, 0.12)',
-        textDecoration: 'none',
-        color: 'inherit',
-        cursor: href ? 'pointer' : 'default'
+        boxShadow: '0 10px 30px rgba(37, 28, 20, 0.08)'
       }}
     >
       {eyebrow && (
@@ -47,11 +38,6 @@ export default function ArticleCard({ title, eyebrow, children, href }) {
       <div style={{ color: '#4a4036', fontSize: '15px', lineHeight: 1.7 }}>
         {children}
       </div>
-      {href && (
-        <div style={{ marginTop: '14px', fontWeight: 600, color: '#2a241d' }}>
-          Open full article →
-        </div>
-      )}
-    </Wrapper>
+    </section>
   );
 }

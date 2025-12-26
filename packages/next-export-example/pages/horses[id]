@@ -40,19 +40,15 @@ export default function HorseLog() {
     <Layout>
       <h1>{horse.name}</h1>
       <p>
-        This is {horse.name}’s working log. Capture wins, warnings, and the
-        small signals that keep them sound.
+        This is {horse.name}’s working log for Rory + Nudge-style care. Capture
+        wins, warnings, and the small signals that keep them sound.
       </p>
 
       <ExportReport horse={horse} entries={entries} />
 
       <WeeklySummary entries={entries} />
 
-      <ArticleCard
-        title="Log Like a Pro"
-        eyebrow="In-depth article"
-        href="/articles#log-like-a-pro"
-      >
+      <ArticleCard title="Log Like a Pro" eyebrow="In-depth article">
         <p>
           Short notes win. Record the section, what changed, and how it resolved.
           When you review a month from now, you’ll remember the why, not just

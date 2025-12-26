@@ -33,10 +33,7 @@ export default function NotesDashboard() {
 
   function addNote() {
     const trimmed = text.trim();
-    if (!trimmed) {
-      setError('Write a note before saving.');
-      return;
-    }
+    if (!trimmed) return;
     const next = [
       { id: Date.now(), text: trimmed, date: new Date().toISOString() },
       ...notes,
@@ -127,14 +124,12 @@ export default function NotesDashboard() {
         <button
           onClick={addNote}
           style={{
-            padding: '12px 18px',
+            padding: '10px 14px',
             background: '#78be20',
             color: '#1f2a10',
             border: 'none',
             borderRadius: '999px',
-            fontWeight: 700,
-            cursor: 'pointer',
-            minWidth: '140px',
+            fontWeight: 600,
           }}
         >
           Save Note
@@ -143,12 +138,11 @@ export default function NotesDashboard() {
         <button
           onClick={exportData}
           style={{
-            padding: '12px 18px',
+            padding: '10px 14px',
             background: '#fffaf4',
             border: '1px solid #dccfc1',
             borderRadius: '999px',
-            fontWeight: 700,
-            minWidth: '140px',
+            fontWeight: 600,
           }}
         >
           Export Notes
