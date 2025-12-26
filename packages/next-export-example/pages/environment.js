@@ -14,13 +14,13 @@ export default function Environment() {
       </h1>
 
       <p>
-        Rory and Nudge react to the world around them. Track how weather, footing,
-        and routine shifts show up in their bodies and behavior.
+        Horses react to the world around them. Track how weather, footing, and
+        routine shifts show up in their bodies and behavior.
       </p>
 
-      <ArticleCard title="Weather Shifts" eyebrow="Rory + Nudge">
+      <ArticleCard title="Weather Shifts" eyebrow="Daily routine">
         <p>
-          Rory stiffens in cold snaps. Nudge gets dull when humidity spikes.
+          Cold snaps can tighten muscles. Humidity spikes can dull energy.
           Adjust warm-up time, water intake, and workload with the forecast.
         </p>
         <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
@@ -41,8 +41,8 @@ export default function Environment() {
       <ArticleCard title="Routine Changes" eyebrow="In-depth article">
         <p>
           Hauling, feed changes, or new pasture mates can impact appetite and
-          attitude. For Rory and Nudge, we flag any change with a quick note and
-          check TPR twice that day.
+          attitude. Flag any change with a quick note and check TPR twice that
+          day.
         </p>
       </ArticleCard>
 

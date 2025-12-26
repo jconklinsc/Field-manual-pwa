@@ -24,8 +24,8 @@ export default function FavoritesPage() {
     <Layout>
       <h1>Favorites</h1>
       <p>
-        Your starred Rory + Nudge entries live here, organized so you can
-        revisit key moments in seconds.
+        Your starred entries live here, organized so you can revisit key moments
+        in seconds.
       </p>
       <ArticleCard title="Why Save Favorites?" eyebrow="In-depth article">
         <p>

@@ -14,15 +14,15 @@ export default function QuickReference() {
       </h1>
 
       <p>
-        When Rory or Nudge feels “off,” this quick reference keeps decisions
-        clear and consistent. Use it as a calm checklist in the moment.
+        When a horse feels “off,” this quick reference keeps decisions clear
+        and consistent. Use it as a calm checklist in the moment.
       </p>
 
-      <ArticleCard title="Heat or Swelling in a Leg" eyebrow="Rory + Nudge">
+      <ArticleCard title="Heat or Swelling in a Leg" eyebrow="Daily routine">
         <p>
           Stop, assess, and compare legs side by side. If heat is focal or
-          swelling is sudden, reduce workload and cold hose. Rory usually settles
-          with 15 minutes of cold therapy; Nudge needs gentle movement afterward.
+          swelling is sudden, reduce workload and cold hose. Follow with gentle
+          movement once the area cools down.
         </p>
       </ArticleCard>
 

@@ -41,8 +41,8 @@ export default function Horses() {
     <Layout>
       <h1>Horse Logs</h1>
       <p>
-        Rory and Nudge each get their own log so every pattern is easy to spot.
-        Use quick entries and in-depth notes side by side.
+        Each horse gets their own log so every pattern is easy to spot. Use
+        quick entries and in-depth notes side by side.
       </p>
       <ArticleCard title="Build a Living Timeline" eyebrow="In-depth article">
         <p>

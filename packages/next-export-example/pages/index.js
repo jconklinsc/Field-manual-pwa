@@ -20,7 +20,7 @@ export default function Home() {
     <Layout>
       <h1>Field Manual</h1>
       <p>
-        Calm, in-depth care notes for Rory and Nudge. Use these articles to
+        Calm, in-depth care notes for steady routines. Use these articles to
         spot small changes, document patterns, and stay grounded in every
         decision.
       </p>
