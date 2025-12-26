@@ -104,6 +104,14 @@ const searchData = [
     text: "off uneven stride lameness stop discomfort check feet",
     preview: "Quick diagnostic steps under saddle.",
     href: "/quick-reference#off-under-saddle"
+  },
+
+  // TERMS LIBRARY
+  {
+    title: "Horse Health Terms Library",
+    text: "glossary terms tpr capillary refill time digital pulse gut sounds lameness laminitis thrush swelling heat stress colic ulcers metabolic syndrome white line disease scratches",
+    preview: "Comprehensive glossary of common horse health terms.",
+    href: "/horse-health-terms"
   }
 ];
 

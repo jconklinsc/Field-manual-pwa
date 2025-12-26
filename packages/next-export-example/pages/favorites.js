@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import ArticleCard from '../components/ArticleCard';
 import { loadSafeHorses } from '../components/safeStore';
 
 export default function FavoritesPage() {
@@ -28,6 +29,17 @@ export default function FavoritesPage() {
   return (
     <Layout>
       <h1>Favorites</h1>
+      <p>
+        Your starred Rory + Nudge entries live here, organized so you can
+        revisit key moments in seconds.
+      </p>
+      <ArticleCard title="Why Save Favorites?" eyebrow="In-depth article">
+        <p>
+          Use favorites for high-signal entries: sudden swelling, a training
+          breakthrough, or a response to new footing. This becomes a fast
+          reference when you need history in a hurry.
+        </p>
+      </ArticleCard>
 
       {favorites.length === 0 ? (
         <p>No favorites yet.</p>

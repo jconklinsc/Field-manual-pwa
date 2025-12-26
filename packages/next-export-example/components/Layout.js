@@ -4,48 +4,64 @@ export default function Layout({ children }) {
   return (
     <div
       style={{
-        maxWidth: '760px',
-        margin: '0 auto',
-        padding: '24px 16px 56px',
-        fontFamily:
-          'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
-        color: '#0f1111'
+        minHeight: '100vh',
+        background: '#f6efe6',
+        color: '#2a241d',
+        padding: '32px 0 64px'
       }}
     >
-      <header
+      <div
         style={{
-          marginBottom: '24px',
-          paddingBottom: '12px',
-          borderBottom: '1px solid #e5e7eb'
+          maxWidth: '860px',
+          margin: '0 auto',
+          padding: '0 20px',
+          fontFamily:
+            'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif'
         }}
       >
-        <Link href="/">
-          <a
-            style={{
-              fontSize: '18px',
-              fontWeight: 600,
-              textDecoration: 'none',
-              color: '#0f1111'
-            }}
-          >
-            Field Manual
-          </a>
-        </Link>
-      </header>
+        <header
+          style={{
+            marginBottom: '28px',
+            paddingBottom: '14px',
+            borderBottom: '1px solid #e4d7c7',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px'
+          }}
+        >
+          <Link href="/">
+            <a
+              style={{
+                fontSize: '20px',
+                fontWeight: 700,
+                textDecoration: 'none',
+                color: '#2a241d'
+              }}
+            >
+              Field Manual
+            </a>
+          </Link>
+          <span style={{ color: '#78be20', fontWeight: 600 }}>
+            Rory + Nudge Edition
+          </span>
+        </header>
 
-      <main>{children}</main>
+        <main>{children}</main>
 
-      <footer
-        style={{
-          marginTop: '40px',
-          paddingTop: '16px',
-          borderTop: '1px solid #e5e7eb',
-          fontSize: '12px',
-          color: '#6b7280'
-        }}
-      >
-        Offline ready · Built for daily use
-      </footer>
+        <footer
+          style={{
+            marginTop: '48px',
+            paddingTop: '18px',
+            borderTop: '1px solid #e4d7c7',
+            fontSize: '12px',
+            color: '#6b6256'
+          }}
+        >
+          Offline ready · Built for calm, consistent care with Rory and Nudge in
+          mind.
+        </footer>
+      </div>
     </div>
   );
 }

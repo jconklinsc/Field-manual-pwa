@@ -59,9 +59,9 @@ export default function SectionLogQuickAdd({ section }) {
       style={{
         marginTop: '24px',
         padding: '16px',
-        border: '1px solid #e5e5e5',
-        borderRadius: '8px',
-        background: '#fafafa'
+        border: '1px solid #e6d9c8',
+        borderRadius: '12px',
+        background: '#fffaf4'
       }}
     >
       <strong>Log for a Horse</strong>
@@ -92,10 +92,11 @@ export default function SectionLogQuickAdd({ section }) {
         style={{
           marginTop: '8px',
           padding: '8px 12px',
-          background: '#0f1111',
-          color: '#fff',
+          background: '#78be20',
+          color: '#1f2a10',
           border: 'none',
-          borderRadius: '6px'
+          borderRadius: '999px',
+          fontWeight: 600
         }}
       >
         Save to Horse Log

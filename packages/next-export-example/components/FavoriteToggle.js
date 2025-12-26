@@ -31,14 +31,15 @@ export default function FavoriteToggle({ id, label }) {
       aria-label="Toggle favorite"
       style={{
         marginLeft: '8px',
-        fontSize: '18px',
+        fontSize: '20px',
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        lineHeight: 1
+        lineHeight: 1,
+        color: active ? '#78be20' : '#9ca3af'
       }}
     >
-      {active ? '⭐' : '☆'}
+      {active ? '★' : '☆'}
     </button>
   );
 }

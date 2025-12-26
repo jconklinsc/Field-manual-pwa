@@ -56,8 +56,8 @@ export default function NotesPanel({ id, title }) {
         marginTop: '32px',
         padding: '16px 14px',
         borderRadius: '10px',
-        border: '1px solid #e5e5e5',
-        background: '#f7f8f8'
+        border: '1px solid #e6d9c8',
+        background: '#fffaf4'
       }}
     >
       <div
@@ -80,20 +80,23 @@ export default function NotesPanel({ id, title }) {
         <button
           onClick={toggleFavorite}
           style={{
-            background: isFavorite ? '#78be20' : '#ffffff',
-            color: isFavorite ? '#ffffff' : '#0f1111',
-            borderRadius: '999px',
-            border: '1px solid #78be20',
-            padding: '4px 10px',
-            fontSize: '13px',
-            cursor: 'pointer'
+            background: 'none',
+            color: isFavorite ? '#78be20' : '#6b6256',
+            border: 'none',
+            padding: 0,
+            fontSize: '14px',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px'
           }}
         >
-          {isFavorite ? '★ Favorited' : '☆ Favorite'}
+          <span style={{ fontSize: '16px' }}>{isFavorite ? '★' : '☆'}</span>
+          <span>{isFavorite ? 'Favorited' : 'Favorite'}</span>
         </button>
       </div>
 
-      <p style={{ margin: '0 0 8px', fontSize: '13px', color: '#586063' }}>
+      <p style={{ margin: '0 0 8px', fontSize: '13px', color: '#6b6256' }}>
         These notes are saved on this device for “{title}”.
       </p>
 
@@ -104,7 +107,7 @@ export default function NotesPanel({ id, title }) {
         style={{
           width: '100%',
           borderRadius: '8px',
-          border: '1px solid #d1d5db',
+          border: '1px solid #dccfc1',
           padding: '8px 10px',
           fontSize: '14px',
           fontFamily: 'system-ui, -apple-system, sans-serif',

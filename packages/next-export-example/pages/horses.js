@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import ArticleCard from '../components/ArticleCard';
 import { loadSafeHorses, saveSafeHorses } from '../components/safeStore';
 
 export default function HorsesPage() {
@@ -30,6 +31,16 @@ export default function HorsesPage() {
   return (
     <Layout>
       <h1>Horses</h1>
+      <p>
+        Track Rory and Nudge as individuals. Each horse has a dedicated log so
+        you can spot patterns in workload, recovery, and behavior.
+      </p>
+      <ArticleCard title="Build a Record" eyebrow="In-depth article">
+        <p>
+          Add horses by name, then use the quick log prompts in each section to
+          capture short updates. Small daily notes add up to a clear timeline.
+        </p>
+      </ArticleCard>
 
       <div style={{ marginBottom: '16px' }}>
         <input
@@ -39,10 +50,24 @@ export default function HorsesPage() {
           style={{
             padding: '8px',
             marginRight: '8px',
-            width: '200px'
+            width: '220px',
+            borderRadius: '999px',
+            border: '1px solid #dccfc1'
           }}
         />
-        <button onClick={addHorse}>Add</button>
+        <button
+          onClick={addHorse}
+          style={{
+            padding: '8px 14px',
+            borderRadius: '999px',
+            background: '#78be20',
+            color: '#1f2a10',
+            border: 'none',
+            fontWeight: 600
+          }}
+        >
+          Add
+        </button>
       </div>
 
       {horses.length === 0 ? (
