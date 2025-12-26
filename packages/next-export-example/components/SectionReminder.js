@@ -40,9 +40,9 @@ export default function SectionReminder({ section, days = 5 }) {
         marginTop: '16px',
         padding: '12px',
         borderRadius: '8px',
-        background: '#fff7ed',
-        border: '1px solid #fed7aa',
-        color: '#7c2d12'
+        background: '#f3f8ea',
+        border: '1px solid #cfe3b5',
+        color: '#35522a'
       }}
     >
       {message}
