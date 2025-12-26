@@ -91,8 +91,8 @@ export default function SectionLogQuickAdd({ section }) {
         style={{
           marginTop: '8px',
           padding: '8px 12px',
-          background: '#78be20',
-          color: '#1f2a10',
+          background: '#b6855a',
+          color: '#2a241d',
           border: 'none',
           borderRadius: '999px',
           fontWeight: 600

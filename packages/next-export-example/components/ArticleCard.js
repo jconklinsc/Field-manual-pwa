@@ -1,6 +1,7 @@
-export default function ArticleCard({ title, eyebrow, children }) {
+export default function ArticleCard({ title, eyebrow, children, id }) {
   return (
     <section
+      id={id}
       style={{
         marginTop: '18px',
         padding: '18px',
@@ -26,15 +27,6 @@ export default function ArticleCard({ title, eyebrow, children }) {
       <h2 style={{ margin: '0 0 8px', fontSize: '20px', color: '#2a241d' }}>
         {title}
       </h2>
-      <div
-        style={{
-          width: '48px',
-          height: '3px',
-          borderRadius: '999px',
-          background: '#78be20',
-          marginBottom: '12px'
-        }}
-      />
       <div style={{ color: '#4a4036', fontSize: '15px', lineHeight: 1.7 }}>
         {children}
       </div>

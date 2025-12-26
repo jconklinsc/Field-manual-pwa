@@ -10,15 +10,6 @@ export default function HorsesPage() {
   const [status, setStatus] = useState('');
 
   function createHorseId() {
-    try {
-      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-        return crypto.randomUUID();
-      }
-    } catch {}
-    return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
-  }
-
-  function createHorseId() {
     if (typeof crypto !== 'undefined' && crypto.randomUUID) {
       return crypto.randomUUID();
     }
@@ -58,10 +49,10 @@ export default function HorsesPage() {
     <Layout>
       <h1>Horses</h1>
       <p>
-        Track Rory and Nudge as individuals. Each horse has a dedicated log so
-        you can spot patterns in workload, recovery, and behavior.
+        Track each horse as an individual. Dedicated logs help you spot
+        patterns in workload, recovery, and behavior.
       </p>
-      <ArticleCard title="Build a Record" eyebrow="In-depth article">
+      <ArticleCard title="Build a Record" eyebrow="Guide">
         <p>
           Add horses by name, then use the quick log prompts in each section to
           capture short updates. Small daily notes add up to a clear timeline.
@@ -93,8 +84,8 @@ export default function HorsesPage() {
           style={{
             padding: '8px 14px',
             borderRadius: '999px',
-            background: '#78be20',
-            color: '#1f2a10',
+            background: '#b6855a',
+            color: '#2a241d',
             border: 'none',
             fontWeight: 600
           }}

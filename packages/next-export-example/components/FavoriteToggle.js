@@ -8,8 +8,14 @@ export default function FavoriteToggle({ id, label }) {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const stored = safeGet(KEY, []);
-    setActive(stored.some(f => f.id === id));
+    function syncFavorites() {
+      const stored = safeGet(KEY, []);
+      setActive(stored.some(f => f.id === id));
+    }
+
+    syncFavorites();
+    window.addEventListener('favoritesUpdated', syncFavorites);
+    return () => window.removeEventListener('favoritesUpdated', syncFavorites);
   }, [id]);
 
   function toggle() {
@@ -24,8 +30,11 @@ export default function FavoriteToggle({ id, label }) {
     }
 
     const saved = safeSet(KEY, updated);
-    if (!saved) return;
-    setActive(!active);
+    if (!saved) {
+      setActive(!active);
+    } else {
+      setActive(!active);
+    }
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new Event('favoritesUpdated'));
     }
@@ -42,7 +51,7 @@ export default function FavoriteToggle({ id, label }) {
         border: 'none',
         cursor: 'pointer',
         lineHeight: 1,
-        color: active ? '#78be20' : '#9ca3af'
+        color: active ? '#b6855a' : '#9ca3af'
       }}
     >
       {active ? '★' : '☆'}

@@ -13,14 +13,15 @@ export default function Home() {
     boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
     fontWeight: 600,
     color: '#2a241d',
-    minHeight: '56px'
+    minHeight: '56px',
+    textDecoration: 'none'
   };
 
   return (
     <Layout>
-      <h1>Field Manual</h1>
+      <h1>Draw It Out Field Manual</h1>
       <p>
-        Calm, in-depth care notes for Rory and Nudge. Use these articles to
+        Calm, in-depth care notes for steady routines. Use these articles to
         spot small changes, document patterns, and stay grounded in every
         decision.
       </p>
@@ -101,16 +102,13 @@ export default function Home() {
         </li>
         <li>
           <a href="/products" style={cardStyle}>
-            Draw It Out Best Sellers
+            Draw It Out Products
           </a>
         </li>
         <li>
           <a href="/articles" style={cardStyle}>
             In-Depth Articles
           </a>
-        </li>
-        <li>
-          <a href="/horse-health-terms">Horse Health Terms Library</a>
         </li>
 
         <hr style={{ margin: '16px 0' }} />
@@ -126,8 +124,8 @@ export default function Home() {
           </a>
         </li>
         <li>
-          <a href="/favorites">
-            Favorites <span style={{ color: '#78be20' }}>★</span>
+          <a href="/favorites" style={cardStyle}>
+            Favorites <span style={{ color: '#b6855a' }}>★</span>
           </a>
         </li>
       </ul>

@@ -52,6 +52,16 @@ const TERM_SECTIONS = [
         term: 'Hydration Status',
         definition:
           'Overall fluid balance assessed by gum moisture, skin turgor, and manure consistency.'
+      },
+      {
+        term: 'Temperature Trend',
+        definition:
+          'Pattern of daily temperatures; a slow climb can be an early illness indicator.'
+      },
+      {
+        term: 'Respiratory Effort',
+        definition:
+          'Work of breathing at rest; increased effort signals stress or respiratory compromise.'
       }
     ]
   },
@@ -97,6 +107,16 @@ const TERM_SECTIONS = [
         term: 'Compensatory Lameness',
         definition:
           'Secondary soreness from shifting weight off the primary injury.'
+      },
+      {
+        term: 'Hind-End Engagement',
+        definition:
+          'Quality of pushing power behind; reduced engagement can indicate discomfort.'
+      },
+      {
+        term: 'Cross-Canter',
+        definition:
+          'Different leads front to back; can signal balance or soreness issues.'
       }
     ]
   },
@@ -142,6 +162,16 @@ const TERM_SECTIONS = [
         term: 'Scratches (Mud Fever)',
         definition:
           'Crusty inflammation on pasterns, often from wet conditions or bacteria.'
+      },
+      {
+        term: 'Frog Health',
+        definition:
+          'Condition of the frog tissue; soft or ragged frog suggests moisture or infection.'
+      },
+      {
+        term: 'Sole Bruise',
+        definition:
+          'Tenderness in the sole, often from hard ground or stone impact.'
       }
     ]
   },
@@ -177,6 +207,16 @@ const TERM_SECTIONS = [
         term: 'Manure Consistency',
         definition:
           'Dry, hard balls or loose stool can indicate hydration or diet issues.'
+      },
+      {
+        term: 'Feed Sensitivity',
+        definition:
+          'Digestive response to new hay or grain; track changes when feeds shift.'
+      },
+      {
+        term: 'Slow Feeder Impact',
+        definition:
+          'How hay nets or slow feeders affect eating pace and hydration.'
       }
     ]
   },
@@ -212,6 +252,91 @@ const TERM_SECTIONS = [
         term: 'Stiffness vs. Soreness',
         definition:
           'Stiffness eases with warm-up; soreness often worsens with movement.'
+      },
+      {
+        term: 'Change in Appetite',
+        definition:
+          'Reduced interest in feed or water that can signal pain, stress, or illness.'
+      },
+      {
+        term: 'Over-Alertness',
+        definition:
+          'Unusually heightened reactivity that can be tied to discomfort or environmental stress.'
+      }
+    ]
+  },
+  {
+    title: 'Hoof Care & Farrier',
+    terms: [
+      {
+        term: 'Trim Cycle',
+        definition:
+          'Regular schedule for balancing the hoof; consistent cycles support soundness.'
+      },
+      {
+        term: 'Heel Support',
+        definition:
+          'Balance in the heel area that keeps the foot landing evenly.'
+      },
+      {
+        term: 'Toe Length',
+        definition:
+          'Length of the toe; long toes can strain tendons and delay breakover.'
+      },
+      {
+        term: 'Breakover',
+        definition:
+          'The moment the hoof leaves the ground; delayed breakover adds strain.'
+      }
+    ]
+  },
+  {
+    title: 'Conditioning & Performance',
+    terms: [
+      {
+        term: 'Warm-Up Duration',
+        definition:
+          'Time spent at low intensity to prepare muscles and joints for work.'
+      },
+      {
+        term: 'Recovery Window',
+        definition:
+          'Time needed for heart rate and breathing to normalize post-ride.'
+      },
+      {
+        term: 'Workload Spike',
+        definition:
+          'Sudden increase in intensity or duration that can raise injury risk.'
+      },
+      {
+        term: 'Deload Week',
+        definition:
+          'Planned lighter week to allow tissues to recover and adapt.'
+      }
+    ]
+  },
+  {
+    title: 'Pain & Inflammation',
+    terms: [
+      {
+        term: 'Localized Heat',
+        definition:
+          'Heat confined to a specific area, often indicating inflammation or injury.'
+      },
+      {
+        term: 'Diffuse Swelling',
+        definition:
+          'Widespread swelling that can suggest fluid retention or systemic issues.'
+      },
+      {
+        term: 'Palpation Response',
+        definition:
+          'Reaction when pressure is applied to a muscle or joint; sharp response suggests pain.'
+      },
+      {
+        term: 'Anti-Inflammatory Response',
+        definition:
+          'Observed change after cold therapy or rest; track to confirm improvement.'
       }
     ]
   },
@@ -298,15 +423,15 @@ export default function HorseHealthTerms() {
       <h1>Horse Health Terms Library</h1>
       <p>
         A comprehensive glossary of common horse health terms to support daily
-        care, observation, and quick decision-making for Rory and Nudge.
+        care, observation, and quick decision-making.
       </p>
 
-      <ArticleCard title="How to Use This Library" eyebrow="Rory + Nudge">
+      <ArticleCard title="How to Use This Library" eyebrow="Guide">
         <p>
-          Keep this glossary open during checks or while writing notes. Rory’s
-          calm nature makes subtle changes easy to miss; Nudge gives fast clues
-          that benefit from precise language. The more specific you are, the
-          stronger your care plan becomes.
+          Keep this glossary open during checks or while writing notes. Subtle
+          changes can be easy to miss, so precise language helps you catch
+          patterns early. The more specific you are, the stronger your care plan
+          becomes.
         </p>
       </ArticleCard>
 
@@ -333,7 +458,11 @@ export default function HorseHealthTerms() {
                 border: '1px solid #dccfc1',
                 borderRadius: '999px',
                 padding: '4px 10px',
-                background: '#ffffff'
+                background: '#ffffff',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                minHeight: '34px'
               }}
             >
               {section.title}

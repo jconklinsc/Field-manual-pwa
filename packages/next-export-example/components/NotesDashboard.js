@@ -13,14 +13,22 @@ export default function NotesDashboard() {
   const [status, setStatus] = useState('');
 
   useEffect(() => {
-    const n = readJson(NOTES_KEY, []);
+    const n = safeGet(NOTES_KEY, []);
     setNotes(Array.isArray(n) ? n : []);
-    const f = readJson(FAV_KEY, []);
+    const f = safeGet(FAV_KEY, []);
     setFavorites(Array.isArray(f) ? f : []);
+
+    function handleFavoritesUpdate() {
+      const updated = safeGet(FAV_KEY, []);
+      setFavorites(Array.isArray(updated) ? updated : []);
+    }
+
+    window.addEventListener('favoritesUpdated', handleFavoritesUpdate);
+    return () => window.removeEventListener('favoritesUpdated', handleFavoritesUpdate);
   }, []);
 
   useEffect(() => {
-    writeJson(NOTES_KEY, notes);
+    safeSet(NOTES_KEY, notes);
   }, [notes]);
 
   function addNote() {
@@ -31,7 +39,7 @@ export default function NotesDashboard() {
       ...notes,
     ];
     setNotes(next);
-    writeJson(NOTES_KEY, next);
+    safeSet(NOTES_KEY, next);
     setText('');
     setError('');
     setStatus('Note saved.');
@@ -118,8 +126,8 @@ export default function NotesDashboard() {
           onClick={addNote}
           style={{
             padding: '10px 14px',
-            background: '#78be20',
-            color: '#1f2a10',
+            background: '#b6855a',
+            color: '#2a241d',
             border: 'none',
             borderRadius: '999px',
             fontWeight: 600,

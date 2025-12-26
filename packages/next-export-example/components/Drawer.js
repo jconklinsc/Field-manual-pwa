@@ -38,11 +38,11 @@ function NavItem({ router, href, label }) {
       <a
         style={{
           pointerEvents: 'auto',
-          color: isActive ? '#78be20' : '#fff',
+          color: isActive ? '#b6855a' : '#fff',
           fontWeight: isActive ? 700 : 500,
           fontSize: '14px',
           textDecoration: 'none',
-          borderBottom: isActive ? '2px solid #78be20' : 'none',
+          borderBottom: isActive ? '2px solid #b6855a' : 'none',
           padding: '10px 12px',
           borderRadius: '999px',
           minWidth: '64px',

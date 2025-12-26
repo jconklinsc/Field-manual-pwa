@@ -14,15 +14,19 @@ export default function PostRide() {
       </h1>
 
       <p>
-        Rory and Nudge recover best when cool-down is unhurried and consistent.
-        Treat post-ride care like its own short training session.
+        Horses recover best when cool-down is unhurried and consistent. Treat
+        post-ride care like its own short training session.
       </p>
 
-      <ArticleCard title="Cool-Down Sequence" eyebrow="Rory + Nudge">
+      <ArticleCard
+        id="cooldown"
+        title="Cool-Down Sequence"
+        eyebrow="Daily routine"
+      >
         <p>
           Walk until respiration normalizes and the skin feels cool to the touch.
-          Rory needs a longer walk after hills; Nudge benefits from a loose rein
-          stretch to settle his back.
+          Add extra time after hills and finish with a loose rein stretch to
+          settle the back.
         </p>
         <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
           <li>Check heart rate recovery within 10 minutes.</li>
@@ -31,15 +35,15 @@ export default function PostRide() {
         </ul>
       </ArticleCard>
 
-      <ArticleCard title="Legs, Hooves, and Heat" eyebrow="In-depth article">
+      <ArticleCard title="Legs, Hooves, and Heat" eyebrow="Guide">
         <p>
-          Use your hands to confirm even temperature in all four legs. Rory
-          sometimes holds heat in his hocks; Nudge runs warmer in front hooves
-          after fast work. Cold hose if heat is localized or swelling is new.
+          Use your hands to confirm even temperature in all four legs. Some
+          horses hold heat in the hocks or front hooves after fast work. Cold
+          hose if heat is localized or swelling is new.
         </p>
       </ArticleCard>
 
-      <ArticleCard title="Next-Day Readiness" eyebrow="In-depth article">
+      <ArticleCard id="next-day" title="Next-Day Readiness" eyebrow="Guide">
         <p>
           The morning after a workout, repeat the baseline scan. Compare notes
           from today with how they show up tomorrow so you can adjust workload.
