@@ -45,16 +45,10 @@ export default function Search({ data = [] }) {
                 key={item.href}
                 href={item.href}
                 style={{
-                  display: 'block',
-                  marginBottom: '12px',
-                  padding: '16px',
-                  borderRadius: '16px',
-                  border: '1px solid #e6d9c8',
-                  background: '#fffaf4',
-                  color: '#2a241d',
-                  textDecoration: 'none',
-                  boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
-                  minHeight: '56px'
+                  fontSize: '16px',
+                  textDecoration: 'underline',
+                  fontWeight: '600',
+                  color: '#2a241d'
                 }}
               >
                 <div style={{ fontSize: '16px', fontWeight: 600 }}>

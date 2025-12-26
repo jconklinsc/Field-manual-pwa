@@ -14,32 +14,35 @@ export default function NotesDashboard() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const n = safeGet(NOTES_KEY, []);
-    setNotes(Array.isArray(n) ? n : []);
-    const f = safeGet(FAV_KEY, []);
-    setFavorites(Array.isArray(f) ? f : []);
+    try {
+      const n = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
+      setNotes(Array.isArray(n) ? n : []);
+    } catch {
+      setNotes([]);
+    }
+    try {
+      const f = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+      setFavorites(Array.isArray(f) ? f : []);
+    } catch {
+      setFavorites([]);
+    }
   }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    safeSet(NOTES_KEY, notes);
+    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
   }, [notes]);
 
   function addNote() {
     const trimmed = text.trim();
-    if (!trimmed) {
-      setError('Write a note before saving.');
-      return;
-    }
+    if (!trimmed) return;
     const next = [
       { id: Date.now(), text: trimmed, date: new Date().toISOString() },
       ...notes,
     ];
     setNotes(next);
-    const saved = safeSet(NOTES_KEY, next);
-    if (!saved) {
-      setError('Unable to save on this device.');
-      return;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(NOTES_KEY, JSON.stringify(next));
     }
     setText('');
     setError('');
@@ -126,14 +129,12 @@ export default function NotesDashboard() {
           type="button"
           onClick={addNote}
           style={{
-            padding: '12px 18px',
+            padding: '10px 14px',
             background: '#78be20',
             color: '#1f2a10',
             border: 'none',
             borderRadius: '999px',
-            fontWeight: 700,
-            cursor: 'pointer',
-            minWidth: '140px',
+            fontWeight: 600,
           }}
         >
           Save Note
@@ -143,12 +144,11 @@ export default function NotesDashboard() {
           type="button"
           onClick={exportData}
           style={{
-            padding: '12px 18px',
+            padding: '10px 14px',
             background: '#fffaf4',
             border: '1px solid #dccfc1',
             borderRadius: '999px',
-            fontWeight: 700,
-            minWidth: '140px',
+            fontWeight: 600,
           }}
         >
           Export Notes

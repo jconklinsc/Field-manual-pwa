@@ -14,52 +14,37 @@ export default function PostRide() {
       </h1>
 
       <p>
-        Recovery is best when cool-down is unhurried and consistent. Treat
-        post-ride care like its own short training session.
+        Rory and Nudge recover best when cool-down is unhurried and consistent.
+        Treat post-ride care like its own short training session.
       </p>
 
-      <section id="cooldown">
-        <ArticleCard
-          title="Cool-Down Sequence"
-          eyebrow="In-depth article"
-          href="/articles#cool-down-sequence"
-        >
-          <p>
-            Walk until respiration normalizes and the skin feels cool to the
-            touch. Offer a loose rein stretch to help the back settle.
-          </p>
-          <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
-            <li>Check heart rate recovery within 10 minutes.</li>
-            <li>Offer small sips of water before full turnout.</li>
-            <li>Note any post-ride stiffness or unevenness.</li>
-          </ul>
-        </ArticleCard>
-      </section>
-
-      <ArticleCard
-        title="Legs, Hooves, and Heat"
-        eyebrow="In-depth article"
-        href="/articles#legs-hooves-and-heat"
-      >
+      <ArticleCard title="Cool-Down Sequence" eyebrow="Rory + Nudge">
         <p>
-          Use your hands to confirm even temperature in all four legs. Cold hose
-          if heat is localized or swelling is new.
+          Walk until respiration normalizes and the skin feels cool to the touch.
+          Rory needs a longer walk after hills; Nudge benefits from a loose rein
+          stretch to settle his back.
+        </p>
+        <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
+          <li>Check heart rate recovery within 10 minutes.</li>
+          <li>Offer small sips of water before full turnout.</li>
+          <li>Note any post-ride stiffness or unevenness.</li>
+        </ul>
+      </ArticleCard>
+
+      <ArticleCard title="Legs, Hooves, and Heat" eyebrow="In-depth article">
+        <p>
+          Use your hands to confirm even temperature in all four legs. Rory
+          sometimes holds heat in his hocks; Nudge runs warmer in front hooves
+          after fast work. Cold hose if heat is localized or swelling is new.
         </p>
       </ArticleCard>
 
-      <section id="next-day">
-        <ArticleCard
-          title="Next-Day Readiness"
-          eyebrow="In-depth article"
-          href="/articles#next-day-readiness"
-        >
-          <p>
-            The morning after a workout, repeat the baseline scan. Compare notes
-            from today with how they show up tomorrow so you can adjust
-            workload.
-          </p>
-        </ArticleCard>
-      </section>
+      <ArticleCard title="Next-Day Readiness" eyebrow="In-depth article">
+        <p>
+          The morning after a workout, repeat the baseline scan. Compare notes
+          from today with how they show up tomorrow so you can adjust workload.
+        </p>
+      </ArticleCard>
 
       <SectionReminder section="Post-Ride Recovery" days={3} />
       <SmartPrompt section="Post-Ride Recovery" />

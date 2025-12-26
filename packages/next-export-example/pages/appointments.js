@@ -1,18 +1,21 @@
 import { useEffect, useMemo, useState } from 'react';
 import Layout from '../components/Layout';
 import ArticleCard from '../components/ArticleCard';
-import { safeGet, safeSet } from '../components/safeStorage';
 
 const APPOINTMENTS_KEY = 'fieldManualAppointments';
 
 function loadAppointments() {
   if (typeof window === 'undefined') return [];
-  return safeGet(APPOINTMENTS_KEY, []);
+  try {
+    return JSON.parse(localStorage.getItem(APPOINTMENTS_KEY) || '[]');
+  } catch {
+    return [];
+  }
 }
 
 function saveAppointments(items) {
   if (typeof window === 'undefined') return;
-  return safeSet(APPOINTMENTS_KEY, items);
+  localStorage.setItem(APPOINTMENTS_KEY, JSON.stringify(items));
 }
 
 export default function Appointments() {
@@ -23,8 +26,6 @@ export default function Appointments() {
   const [time, setTime] = useState('');
   const [notes, setNotes] = useState('');
   const [reminderOffset, setReminderOffset] = useState('none');
-  const [error, setError] = useState('');
-  const [status, setStatus] = useState('');
 
   useEffect(() => {
     setAppointments(loadAppointments());
@@ -70,10 +71,7 @@ export default function Appointments() {
   }, [appointments]);
 
   function addAppointment() {
-    if (!date || !horse.trim()) {
-      setError('Add a horse name and date to schedule a visit.');
-      return;
-    }
+    if (!date || !horse.trim()) return;
 
     const next = [
       ...appointments,
@@ -90,21 +88,14 @@ export default function Appointments() {
       }
     ];
 
-    const saved = saveAppointments(next);
-    if (!saved) {
-      setError('Unable to save on this device.');
-      return;
-    }
     setAppointments(next);
+    saveAppointments(next);
     setHorse('');
     setType('Vet');
     setDate('');
     setTime('');
     setNotes('');
     setReminderOffset('none');
-    setError('');
-    setStatus('Appointment saved.');
-    setTimeout(() => setStatus(''), 2000);
   }
 
   function removeAppointment(id) {
@@ -121,38 +112,12 @@ export default function Appointments() {
         cracks.
       </p>
 
-      <ArticleCard
-        title="Stay Ahead of the Calendar"
-        eyebrow="In-depth article"
-        href="/articles#stay-ahead-of-the-calendar"
-      >
+      <ArticleCard title="Stay Ahead of the Calendar" eyebrow="In-depth article">
         <p>
           Log each appointment with a date, time, and quick notes. When the week
           gets busy, this list keeps the next visit front and center.
         </p>
       </ArticleCard>
-
-      <div style={{ marginTop: '18px', marginBottom: '8px' }}>
-        <button
-          type="button"
-          onClick={() => {
-            const input = document.getElementById('appointment-horse-input');
-            if (input) input.focus();
-          }}
-          style={{
-            padding: '8px 14px',
-            borderRadius: '999px',
-            border: '1px solid #dccfc1',
-            background: '#f1e6d9',
-            color: '#2a241d',
-            fontWeight: 600,
-            cursor: 'pointer',
-            minHeight: '44px'
-          }}
-        >
-          Schedule Appointment
-        </button>
-      </div>
 
       <section
         style={{
@@ -164,17 +129,10 @@ export default function Appointments() {
         }}
       >
         <h3 style={{ marginTop: 0 }}>Add Appointment</h3>
-        <div style={{ display: 'grid', gap: '12px' }}>
+        <div style={{ display: 'grid', gap: '10px' }}>
           <input
-            id="appointment-horse-input"
             value={horse}
-            onChange={e => {
-              setHorse(e.target.value);
-              if (error) setError('');
-            }}
-            onKeyDown={e => {
-              if (e.key === 'Enter') addAppointment();
-            }}
+            onChange={e => setHorse(e.target.value)}
             placeholder="Horse name"
             style={{
               padding: '10px',
@@ -201,10 +159,7 @@ export default function Appointments() {
             <input
               type="date"
               value={date}
-              onChange={e => {
-                setDate(e.target.value);
-                if (error) setError('');
-              }}
+              onChange={e => setDate(e.target.value)}
               style={{
                 flex: 1,
                 padding: '10px',
@@ -252,24 +207,19 @@ export default function Appointments() {
           </select>
         </div>
         <button
-          type="button"
           onClick={addAppointment}
           style={{
-            marginTop: '16px',
-            padding: '12px 18px',
+            marginTop: '12px',
+            padding: '10px 16px',
             borderRadius: '999px',
             border: 'none',
             background: '#78be20',
             color: '#1f2a10',
-            fontWeight: 700,
-            cursor: 'pointer',
-            minWidth: '180px'
+            fontWeight: 600
           }}
         >
           Save Appointment
         </button>
-        {error && <p style={{ color: '#9b4a1b', marginTop: '8px' }}>{error}</p>}
-        {status && <p style={{ color: '#2a241d', marginTop: '8px' }}>{status}</p>}
       </section>
 
       <section style={{ marginTop: '24px' }}>
@@ -303,18 +253,14 @@ export default function Appointments() {
                   </div>
                 )}
                 {item.notes && <p style={{ margin: '6px 0 0' }}>{item.notes}</p>}
-        <button
-          type="button"
-          onClick={() => removeAppointment(item.id)}
+                <button
+                  onClick={() => removeAppointment(item.id)}
                   style={{
                     marginTop: '8px',
-                    padding: '6px 12px',
-                    borderRadius: '999px',
-                    border: '1px solid #e6d9c8',
-                    background: '#fff0e6',
+                    background: 'none',
+                    border: 'none',
                     color: '#9b4a1b',
-                    cursor: 'pointer',
-                    fontWeight: 600
+                    cursor: 'pointer'
                   }}
                 >
                   Remove

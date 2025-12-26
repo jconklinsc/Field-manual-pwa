@@ -1,22 +1,29 @@
-import { safeGet, safeSet } from './safeStorage';
-
 const HORSE_KEY = 'fieldManualHorses';
+
+function safeParse(raw, fallback) {
+  if (!raw) return fallback;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return fallback;
+  }
+}
 
 export function loadSafeHorses() {
   if (typeof window === 'undefined') return [];
 
-  const primary = safeGet(HORSE_KEY, null);
+  const primary = safeParse(localStorage.getItem(HORSE_KEY), null);
   if (primary) return primary;
 
-  const legacy = safeGet('dio-fm-horses', null);
+  const legacy = safeParse(localStorage.getItem('dio-fm-horses'), null);
   if (legacy?.horses) {
-    safeSet(HORSE_KEY, legacy.horses);
+    localStorage.setItem(HORSE_KEY, JSON.stringify(legacy.horses));
     return legacy.horses;
   }
 
-  const legacyFlat = safeGet('horses', null);
+  const legacyFlat = safeParse(localStorage.getItem('horses'), null);
   if (legacyFlat) {
-    safeSet(HORSE_KEY, legacyFlat);
+    localStorage.setItem(HORSE_KEY, JSON.stringify(legacyFlat));
     return legacyFlat;
   }
 
@@ -24,6 +31,6 @@ export function loadSafeHorses() {
 }
 
 export function saveSafeHorses(horses) {
-  if (typeof window === 'undefined') return false;
-  return safeSet(HORSE_KEY, horses);
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(HORSE_KEY, JSON.stringify(horses));
 }

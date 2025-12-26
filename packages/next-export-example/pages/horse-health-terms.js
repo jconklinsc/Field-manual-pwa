@@ -1,4 +1,3 @@
-import { useMemo, useState } from 'react';
 import Layout from '../components/Layout';
 import ArticleCard from '../components/ArticleCard';
 
@@ -53,16 +52,6 @@ const TERM_SECTIONS = [
         term: 'Hydration Status',
         definition:
           'Overall fluid balance assessed by gum moisture, skin turgor, and manure consistency.'
-      },
-      {
-        term: 'Perfusion',
-        definition:
-          'Blood flow through tissue; poor perfusion can show as cool extremities or slow CRT.'
-      },
-      {
-        term: 'Pain Score',
-        definition:
-          'Observable indicators of discomfort including posture, expression, and appetite.'
       }
     ]
   },
@@ -108,16 +97,6 @@ const TERM_SECTIONS = [
         term: 'Compensatory Lameness',
         definition:
           'Secondary soreness from shifting weight off the primary injury.'
-      },
-      {
-        term: 'Ataxia',
-        definition:
-          'Uncoordinated movement or stumbling that can indicate neurologic involvement.'
-      },
-      {
-        term: 'Stiffness',
-        definition:
-          'Reduced flexibility or range of motion, often noted after rest or hard work.'
       }
     ]
   },
@@ -158,16 +137,6 @@ const TERM_SECTIONS = [
         term: 'White Line Disease',
         definition:
           'Separation and infection along the hoof wall/sole junction.'
-      },
-      {
-        term: 'Digital Cushion',
-        definition:
-          'Shock-absorbing tissue within the hoof that supports soundness.'
-      },
-      {
-        term: 'Laminitis',
-        definition:
-          'Inflammation of the laminae that can cause hoof pain and rotation.'
       },
       {
         term: 'Scratches (Mud Fever)',
@@ -270,21 +239,6 @@ const TERM_SECTIONS = [
           'Rapid swelling with heat and pain; treat as urgent and reduce workload.'
       },
       {
-        term: 'Soft Tissue Strain',
-        definition:
-          'Overstretching of muscles or tendons causing soreness and swelling.'
-      },
-      {
-        term: 'Cold Therapy',
-        definition:
-          'Cold hosing or ice application to reduce heat and inflammation.'
-      },
-      {
-        term: 'Compression Wrap',
-        definition:
-          'Supportive bandaging used to limit swelling and stabilize soft tissue.'
-      },
-      {
         term: 'Neurologic Red Flags',
         definition:
           'Ataxia, stumbling, or abnormal stance that requires immediate vet evaluation.'
@@ -339,52 +293,22 @@ const TERM_SECTIONS = [
 ];
 
 export default function HorseHealthTerms() {
-  const [query, setQuery] = useState('');
-  const normalized = query.trim().toLowerCase();
-  const filteredSections = useMemo(() => {
-    if (!normalized) return TERM_SECTIONS;
-    return TERM_SECTIONS.map(section => {
-      const terms = section.terms.filter(item =>
-        item.term.toLowerCase().includes(normalized) ||
-        item.definition.toLowerCase().includes(normalized)
-      );
-      return { ...section, terms };
-    }).filter(section => section.terms.length > 0);
-  }, [normalized]);
-
   return (
     <Layout>
       <h1>Horse Health Terms Library</h1>
       <p>
         A comprehensive glossary of common horse health terms to support daily
-        care, observation, and quick decision-making.
+        care, observation, and quick decision-making for Rory and Nudge.
       </p>
 
-      <ArticleCard
-        title="How to Use This Library"
-        eyebrow="In-depth article"
-        href="/articles#how-to-use-the-terms-library"
-      >
+      <ArticleCard title="How to Use This Library" eyebrow="Rory + Nudge">
         <p>
-          Keep this glossary open during checks or while writing notes. The more
-          specific you are, the stronger your care plan becomes.
+          Keep this glossary open during checks or while writing notes. Rory’s
+          calm nature makes subtle changes easy to miss; Nudge gives fast clues
+          that benefit from precise language. The more specific you are, the
+          stronger your care plan becomes.
         </p>
       </ArticleCard>
-
-      <section style={{ marginTop: '20px' }}>
-        <input
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder="Search terms..."
-          style={{
-            width: '100%',
-            padding: '12px',
-            borderRadius: '999px',
-            border: '1px solid #dccfc1',
-            background: '#fffaf4'
-          }}
-        />
-      </section>
 
       <section
         style={{
@@ -399,7 +323,7 @@ export default function HorseHealthTerms() {
           Jump to a section
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-          {filteredSections.map(section => (
+          {TERM_SECTIONS.map(section => (
             <a
               key={section.title}
               href={`#${makeId(section.title)}`}
@@ -408,11 +332,8 @@ export default function HorseHealthTerms() {
                 color: '#2a241d',
                 border: '1px solid #dccfc1',
                 borderRadius: '999px',
-                padding: '8px 12px',
-                background: '#ffffff',
-                minHeight: '40px',
-                display: 'inline-flex',
-                alignItems: 'center'
+                padding: '4px 10px',
+                background: '#ffffff'
               }}
             >
               {section.title}
@@ -421,15 +342,11 @@ export default function HorseHealthTerms() {
         </div>
       </section>
 
-      {filteredSections.map(section => (
+      {TERM_SECTIONS.map(section => (
         <section
           key={section.title}
           id={makeId(section.title)}
-          style={{
-            marginTop: '28px',
-            paddingTop: '12px',
-            borderTop: '1px solid #e6d9c8'
-          }}
+          style={{ marginTop: '24px' }}
         >
           <h2 style={{ marginBottom: '12px' }}>{section.title}</h2>
           <div style={{ display: 'grid', gap: '12px' }}>
@@ -452,11 +369,6 @@ export default function HorseHealthTerms() {
           </div>
         </section>
       ))}
-      {filteredSections.length === 0 && (
-        <p style={{ marginTop: '16px', color: '#9b4a1b' }}>
-          No matching terms. Try a different keyword.
-        </p>
-      )}
     </Layout>
   );
 }
