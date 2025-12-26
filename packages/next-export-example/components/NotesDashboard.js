@@ -8,6 +8,7 @@ export default function NotesDashboard() {
   const [favorites, setFavorites] = useState([]);
   const [text, setText] = useState('');
   const [query, setQuery] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -42,6 +43,7 @@ export default function NotesDashboard() {
       localStorage.setItem(NOTES_KEY, JSON.stringify(next));
     }
     setText('');
+    setError('');
   }
 
   function deleteNote(id) {
@@ -102,7 +104,10 @@ export default function NotesDashboard() {
 
       <textarea
         value={text}
-        onChange={e => setText(e.target.value)}
+        onChange={e => {
+          setText(e.target.value);
+          if (error) setError('');
+        }}
         placeholder="Write a note…"
         rows={4}
         style={{
@@ -117,6 +122,7 @@ export default function NotesDashboard() {
       <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
         <button
           onClick={addNote}
+          disabled={!text.trim()}
           style={{
             padding: '10px 14px',
             background: '#78be20',
@@ -142,6 +148,7 @@ export default function NotesDashboard() {
           Export
         </button>
       </div>
+      {error && <p style={{ color: '#9b4a1b', marginTop: '8px' }}>{error}</p>}
 
       <ul style={{ marginTop: '24px', padding: 0 }}>
         {filteredNotes.map(n => (
