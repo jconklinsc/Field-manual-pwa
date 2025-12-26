@@ -10,22 +10,37 @@ export default function NotesDashboard() {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    const n = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
-    const f = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
-    setNotes(n);
-    setFavorites(f);
+    if (typeof window === 'undefined') return;
+    try {
+      const n = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
+      setNotes(Array.isArray(n) ? n : []);
+    } catch {
+      setNotes([]);
+    }
+    try {
+      const f = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+      setFavorites(Array.isArray(f) ? f : []);
+    } catch {
+      setFavorites([]);
+    }
   }, []);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
   }, [notes]);
 
   function addNote() {
-    if (!text.trim()) return;
-    setNotes([
-      { id: Date.now(), text, date: new Date().toISOString() },
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    const next = [
+      { id: Date.now(), text: trimmed, date: new Date().toISOString() },
       ...notes,
-    ]);
+    ];
+    setNotes(next);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(NOTES_KEY, JSON.stringify(next));
+    }
     setText('');
   }
 
@@ -79,8 +94,8 @@ export default function NotesDashboard() {
           width: '100%',
           padding: '10px',
           fontSize: '16px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
+          borderRadius: '10px',
+          border: '1px solid #dccfc1',
           marginBottom: '12px',
         }}
       />
@@ -94,8 +109,8 @@ export default function NotesDashboard() {
           width: '100%',
           padding: '12px',
           fontSize: '16px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
+          borderRadius: '10px',
+          border: '1px solid #dccfc1',
         }}
       />
 
@@ -104,10 +119,11 @@ export default function NotesDashboard() {
           onClick={addNote}
           style={{
             padding: '10px 14px',
-            background: '#0f1111',
-            color: '#fff',
+            background: '#78be20',
+            color: '#1f2a10',
             border: 'none',
-            borderRadius: '6px',
+            borderRadius: '999px',
+            fontWeight: 600,
           }}
         >
           Add Note
@@ -117,9 +133,10 @@ export default function NotesDashboard() {
           onClick={exportData}
           style={{
             padding: '10px 14px',
-            background: '#eee',
-            border: '1px solid #ccc',
-            borderRadius: '6px',
+            background: '#fffaf4',
+            border: '1px solid #dccfc1',
+            borderRadius: '999px',
+            fontWeight: 600,
           }}
         >
           Export
@@ -132,10 +149,11 @@ export default function NotesDashboard() {
             key={n.id}
             style={{
               listStyle: 'none',
-              background: '#f7f7f7',
+              background: '#fffaf4',
               padding: '12px',
               marginBottom: '10px',
-              borderRadius: '6px',
+              borderRadius: '12px',
+              border: '1px solid #e6d9c8',
             }}
           >
             <div style={{ whiteSpace: 'pre-wrap' }}>{n.text}</div>

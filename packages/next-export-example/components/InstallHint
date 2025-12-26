@@ -32,8 +32,8 @@ export default function InstallHint() {
         bottom: '64px',
         left: '50%',
         transform: 'translateX(-50%)',
-        background: '#0f1111',
-        color: '#ffffff',
+        background: '#2a241d',
+        color: '#fefaf5',
         padding: '10px 14px',
         borderRadius: '8px',
         fontSize: '14px',
@@ -53,7 +53,7 @@ export default function InstallHint() {
         style={{
           background: 'transparent',
           border: 'none',
-          color: '#ffffff',
+          color: '#78be20',
           cursor: 'pointer',
           fontSize: '16px'
         }}

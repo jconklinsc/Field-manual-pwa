@@ -104,6 +104,20 @@ const searchData = [
     text: "off uneven stride lameness stop discomfort check feet",
     preview: "Quick diagnostic steps under saddle.",
     href: "/quick-reference#off-under-saddle"
+  },
+
+  // TERMS LIBRARY
+  {
+    title: "Horse Health Terms Library",
+    text: "glossary terms tpr capillary refill time digital pulse gut sounds lameness laminitis thrush swelling heat stress colic ulcers metabolic syndrome white line disease scratches",
+    preview: "Comprehensive glossary of common horse health terms.",
+    href: "/horse-health-terms"
+  },
+  {
+    title: "Draw It Out Best Sellers",
+    text: "draw it out liniment poultice hoof soak hoof clay thrush wound treatment shampoo usage",
+    preview: "How to use Draw It Out products and what they help with.",
+    href: "/products"
   }
 ];
 
