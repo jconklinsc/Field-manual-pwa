@@ -79,8 +79,8 @@ export default function NotesDashboard() {
           width: '100%',
           padding: '10px',
           fontSize: '16px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
+          borderRadius: '10px',
+          border: '1px solid #dccfc1',
           marginBottom: '12px',
         }}
       />
@@ -94,8 +94,8 @@ export default function NotesDashboard() {
           width: '100%',
           padding: '12px',
           fontSize: '16px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
+          borderRadius: '10px',
+          border: '1px solid #dccfc1',
         }}
       />
 
@@ -104,10 +104,11 @@ export default function NotesDashboard() {
           onClick={addNote}
           style={{
             padding: '10px 14px',
-            background: '#0f1111',
-            color: '#fff',
+            background: '#78be20',
+            color: '#1f2a10',
             border: 'none',
-            borderRadius: '6px',
+            borderRadius: '999px',
+            fontWeight: 600,
           }}
         >
           Add Note
@@ -117,9 +118,10 @@ export default function NotesDashboard() {
           onClick={exportData}
           style={{
             padding: '10px 14px',
-            background: '#eee',
-            border: '1px solid #ccc',
-            borderRadius: '6px',
+            background: '#fffaf4',
+            border: '1px solid #dccfc1',
+            borderRadius: '999px',
+            fontWeight: 600,
           }}
         >
           Export
@@ -132,10 +134,11 @@ export default function NotesDashboard() {
             key={n.id}
             style={{
               listStyle: 'none',
-              background: '#f7f7f7',
+              background: '#fffaf4',
               padding: '12px',
               marginBottom: '10px',
-              borderRadius: '6px',
+              borderRadius: '12px',
+              border: '1px solid #e6d9c8',
             }}
           >
             <div style={{ whiteSpace: 'pre-wrap' }}>{n.text}</div>

@@ -1,5 +1,6 @@
 import Layout from '../components/Layout';
 import FavoriteToggle from '../components/FavoriteToggle';
+import ArticleCard from '../components/ArticleCard';
 import SectionReminder from '../components/SectionReminder';
 import SmartPrompt from '../components/SmartPrompt';
 import SectionLogQuickAdd from '../components/SectionLogQuickAdd';
@@ -12,7 +13,38 @@ export default function Environment() {
         <FavoriteToggle id="environment" label="Environment & Stress" />
       </h1>
 
-      <p>Weather, footing, hauling, and routine changes.</p>
+      <p>
+        Rory and Nudge react to the world around them. Track how weather, footing,
+        and routine shifts show up in their bodies and behavior.
+      </p>
+
+      <ArticleCard title="Weather Shifts" eyebrow="Rory + Nudge">
+        <p>
+          Rory stiffens in cold snaps. Nudge gets dull when humidity spikes.
+          Adjust warm-up time, water intake, and workload with the forecast.
+        </p>
+        <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
+          <li>Note temperature swings and wind exposure.</li>
+          <li>Plan extra cool-down time in heat.</li>
+          <li>Track hydration and electrolytes.</li>
+        </ul>
+      </ArticleCard>
+
+      <ArticleCard title="Footing + Terrain" eyebrow="In-depth article">
+        <p>
+          Deep footing builds strength but strains tendons. Hard ground increases
+          concussion. Log what they worked on so you can connect footing with how
+          they felt the next day.
+        </p>
+      </ArticleCard>
+
+      <ArticleCard title="Routine Changes" eyebrow="In-depth article">
+        <p>
+          Hauling, feed changes, or new pasture mates can impact appetite and
+          attitude. For Rory and Nudge, we flag any change with a quick note and
+          check TPR twice that day.
+        </p>
+      </ArticleCard>
 
       <SectionReminder section="Environment & Stress" days={7} />
       <SmartPrompt section="Environment & Stress" />

@@ -6,7 +6,11 @@ export default function Home() {
   return (
     <Layout>
       <h1>Field Manual</h1>
-      <p>Practical care. Clear decisions.</p>
+      <p>
+        Calm, in-depth care notes for Rory and Nudge. Use these articles to
+        spot small changes, document patterns, and stay grounded in every
+        decision.
+      </p>
 
       {/* Global Search */}
       <Search data={searchData} />
@@ -38,6 +42,9 @@ export default function Home() {
         <li>
           <a href="/quick-reference">Quick Reference</a>
         </li>
+        <li>
+          <a href="/horse-health-terms">Horse Health Terms Library</a>
+        </li>
 
         <hr style={{ margin: '16px 0' }} />
 
@@ -48,7 +55,9 @@ export default function Home() {
           <a href="/notes">Notes</a>
         </li>
         <li>
-          <a href="/favorites">Favorites ⭐</a>
+          <a href="/favorites">
+            Favorites <span style={{ color: '#78be20' }}>★</span>
+          </a>
         </li>
       </ul>
     </Layout>
