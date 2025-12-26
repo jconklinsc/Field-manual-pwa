@@ -1,13 +1,15 @@
 import { useState } from 'react';
 
-export default function Search({ data }) {
+export default function Search({ data = [] }) {
   const [query, setQuery] = useState('');
 
-  const results = query.length > 1
-    ? data.filter(item =>
-        item.text.toLowerCase().includes(query.toLowerCase()) ||
-        item.title.toLowerCase().includes(query.toLowerCase())
-      )
+  const normalizedQuery = query.trim().toLowerCase();
+  const results = normalizedQuery.length > 0
+    ? data.filter(item => {
+        const text = `${item.text || ''} ${item.preview || ''}`.toLowerCase();
+        const title = (item.title || '').toLowerCase();
+        return text.includes(normalizedQuery) || title.includes(normalizedQuery);
+      })
     : [];
 
   return (
@@ -17,36 +19,53 @@ export default function Search({ data }) {
         placeholder="Search the Field Manual..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.currentTarget.blur();
+          }
+        }}
         style={{
           width: '100%',
           padding: '12px',
           fontSize: '16px',
-          borderRadius: '8px',
-          border: '1px solid #ccc'
+          borderRadius: '999px',
+          border: '1px solid #dccfc1',
+          background: '#fffaf4',
+          color: '#2a241d'
         }}
       />
 
-      {query.length > 1 && (
+      {normalizedQuery.length > 0 && (
         <div style={{ marginTop: '16px' }}>
-          {results.length === 0 && (
-            <p>No matches found.</p>
-          )}
-
-          {results.map((item) => (
-            <div key={item.href} style={{ marginBottom: '16px' }}>
+          {results.length === 0 ? (
+            <p style={{ color: '#9b4a1b' }}>No results found.</p>
+          ) : (
+            results.map((item) => (
               <a
+                key={item.href}
                 href={item.href}
                 style={{
-                  fontSize: '16px',
-                  textDecoration: 'underline',
-                  fontWeight: '600'
+                  display: 'block',
+                  marginBottom: '12px',
+                  padding: '16px',
+                  borderRadius: '16px',
+                  border: '1px solid #e6d9c8',
+                  background: '#fffaf4',
+                  color: '#2a241d',
+                  textDecoration: 'none',
+                  boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)',
+                  minHeight: '56px'
                 }}
               >
-                {item.title}
+                <div style={{ fontSize: '16px', fontWeight: 600 }}>
+                  {item.title}
+                </div>
+                <p style={{ margin: '4px 0 0', color: '#4a4036' }}>
+                  {item.preview}
+                </p>
               </a>
-              <p style={{ marginTop: '4px' }}>{item.preview}</p>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       )}
     </div>

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { safeGet, safeSet } from './safeStorage';
 
 const NOTES_KEY = 'fieldManualNotes';
 const FAV_KEY = 'fieldManualFavorites';
@@ -8,25 +9,42 @@ export default function NotesDashboard() {
   const [favorites, setFavorites] = useState([]);
   const [text, setText] = useState('');
   const [query, setQuery] = useState('');
+  const [error, setError] = useState('');
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
-    const n = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]');
-    const f = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
-    setNotes(n);
-    setFavorites(f);
+    if (typeof window === 'undefined') return;
+    const n = safeGet(NOTES_KEY, []);
+    setNotes(Array.isArray(n) ? n : []);
+    const f = safeGet(FAV_KEY, []);
+    setFavorites(Array.isArray(f) ? f : []);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+    if (typeof window === 'undefined') return;
+    safeSet(NOTES_KEY, notes);
   }, [notes]);
 
   function addNote() {
-    if (!text.trim()) return;
-    setNotes([
-      { id: Date.now(), text, date: new Date().toISOString() },
+    const trimmed = text.trim();
+    if (!trimmed) {
+      setError('Write a note before saving.');
+      return;
+    }
+    const next = [
+      { id: Date.now(), text: trimmed, date: new Date().toISOString() },
       ...notes,
-    ]);
+    ];
+    setNotes(next);
+    const saved = safeSet(NOTES_KEY, next);
+    if (!saved) {
+      setError('Unable to save on this device.');
+      return;
+    }
     setText('');
+    setError('');
+    setStatus('Note saved.');
+    setTimeout(() => setStatus(''), 2000);
   }
 
   function deleteNote(id) {
@@ -79,52 +97,65 @@ export default function NotesDashboard() {
           width: '100%',
           padding: '10px',
           fontSize: '16px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
+          borderRadius: '10px',
+          border: '1px solid #dccfc1',
           marginBottom: '12px',
         }}
       />
 
       <textarea
+        id="notes-input"
         value={text}
-        onChange={e => setText(e.target.value)}
+        onChange={e => {
+          setText(e.target.value);
+          if (error) setError('');
+        }}
         placeholder="Write a note…"
         rows={4}
         style={{
           width: '100%',
           padding: '12px',
           fontSize: '16px',
-          borderRadius: '6px',
-          border: '1px solid #ccc',
+          borderRadius: '10px',
+          border: '1px solid #dccfc1',
         }}
       />
 
-      <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+      <div style={{ display: 'flex', gap: '12px', marginTop: '16px', flexWrap: 'wrap' }}>
         <button
+          type="button"
           onClick={addNote}
           style={{
-            padding: '10px 14px',
-            background: '#0f1111',
-            color: '#fff',
+            padding: '12px 18px',
+            background: '#78be20',
+            color: '#1f2a10',
             border: 'none',
-            borderRadius: '6px',
+            borderRadius: '999px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            minWidth: '140px',
           }}
         >
-          Add Note
+          Save Note
         </button>
 
         <button
+          type="button"
           onClick={exportData}
           style={{
-            padding: '10px 14px',
-            background: '#eee',
-            border: '1px solid #ccc',
-            borderRadius: '6px',
+            padding: '12px 18px',
+            background: '#fffaf4',
+            border: '1px solid #dccfc1',
+            borderRadius: '999px',
+            fontWeight: 700,
+            minWidth: '140px',
           }}
         >
-          Export
+          Export Notes
         </button>
       </div>
+      {error && <p style={{ color: '#9b4a1b', marginTop: '8px' }}>{error}</p>}
+      {status && <p style={{ color: '#2a241d', marginTop: '8px' }}>{status}</p>}
 
       <ul style={{ marginTop: '24px', padding: 0 }}>
         {filteredNotes.map(n => (
@@ -132,10 +163,11 @@ export default function NotesDashboard() {
             key={n.id}
             style={{
               listStyle: 'none',
-              background: '#f7f7f7',
+              background: '#fffaf4',
               padding: '12px',
               marginBottom: '10px',
-              borderRadius: '6px',
+              borderRadius: '12px',
+              border: '1px solid #e6d9c8',
             }}
           >
             <div style={{ whiteSpace: 'pre-wrap' }}>{n.text}</div>
@@ -143,10 +175,13 @@ export default function NotesDashboard() {
               onClick={() => deleteNote(n.id)}
               style={{
                 marginTop: '6px',
-                background: 'none',
-                border: 'none',
-                color: '#c00',
+                padding: '6px 12px',
+                borderRadius: '999px',
+                border: '1px solid #e6d9c8',
+                background: '#fff0e6',
+                color: '#9b4a1b',
                 cursor: 'pointer',
+                fontWeight: 600,
               }}
             >
               Delete
