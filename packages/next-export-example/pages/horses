@@ -41,14 +41,10 @@ export default function Horses() {
     <Layout>
       <h1>Horse Logs</h1>
       <p>
-        Each horse gets a dedicated log so every pattern is easy to spot. Use
-        quick entries and in-depth notes side by side.
+        Rory and Nudge each get their own log so every pattern is easy to spot.
+        Use quick entries and in-depth notes side by side.
       </p>
-      <ArticleCard
-        title="Build a Living Timeline"
-        eyebrow="In-depth article"
-        href="/articles#build-a-living-timeline"
-      >
+      <ArticleCard title="Build a Living Timeline" eyebrow="In-depth article">
         <p>
           Add horses, then log short updates after each check-in. Over time, the
           timeline becomes the clearest view of what helps and what hurts.
@@ -83,24 +79,10 @@ export default function Horses() {
         </button>
       </div>
 
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+      <ul>
         {horses.map(h => (
           <li key={h.id} style={{ marginBottom: '8px' }}>
-            <a
-              href={`/horses/${h.id}`}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                padding: '10px 16px',
-                borderRadius: '999px',
-                border: '1px solid #dccfc1',
-                background: '#f1e6d9',
-                color: '#2a241d',
-                fontWeight: 600,
-                minHeight: '44px',
-                textDecoration: 'none'
-              }}
-            >
+            <a href={`/horses/${h.id}`} style={{ fontWeight: 600 }}>
               {h.name}
             </a>
           </li>
