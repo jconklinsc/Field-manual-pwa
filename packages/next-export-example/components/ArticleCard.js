@@ -1,4 +1,4 @@
-export default function ArticleCard({ title, eyebrow, children, href }) {
+export default function ArticleCard({ title, eyebrow, children }) {
   return (
     <section
       style={{
@@ -24,13 +24,7 @@ export default function ArticleCard({ title, eyebrow, children, href }) {
         </div>
       )}
       <h2 style={{ margin: '0 0 8px', fontSize: '20px', color: '#2a241d' }}>
-        {href ? (
-          <a href={href} style={{ color: '#2a241d', textDecoration: 'none' }}>
-            {title}
-          </a>
-        ) : (
-          title
-        )}
+        {title}
       </h2>
       <div
         style={{
@@ -44,13 +38,6 @@ export default function ArticleCard({ title, eyebrow, children, href }) {
       <div style={{ color: '#4a4036', fontSize: '15px', lineHeight: 1.7 }}>
         {children}
       </div>
-      {href && (
-        <div style={{ marginTop: '12px' }}>
-          <a href={href} style={{ color: '#2a241d', fontWeight: 600 }}>
-            Read full article →
-          </a>
-        </div>
-      )}
     </section>
   );
 }

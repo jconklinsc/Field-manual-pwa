@@ -39,9 +39,12 @@ export default function Layout({ children }) {
                 color: '#2a241d'
               }}
             >
-              Draw It Out Field Manual
+              Field Manual
             </a>
           </Link>
+          <span style={{ color: '#78be20', fontWeight: 600 }}>
+            Rory + Nudge Edition
+          </span>
         </header>
 
         <main>{children}</main>
@@ -55,11 +58,8 @@ export default function Layout({ children }) {
             color: '#6b6256'
           }}
         >
-          Offline ready · All content is available offline. Visit{' '}
-          <a href="https://drawliniment.com" style={{ color: '#2a241d' }}>
-            drawliniment.com
-          </a>
-          .
+          Offline ready · Built for calm, consistent care with Rory and Nudge in
+          mind.
         </footer>
       </div>
     </div>

@@ -52,16 +52,6 @@ const TERM_SECTIONS = [
         term: 'Hydration Status',
         definition:
           'Overall fluid balance assessed by gum moisture, skin turgor, and manure consistency.'
-      },
-      {
-        term: 'Perfusion',
-        definition:
-          'Blood flow through tissue; poor perfusion can show as cool extremities or slow CRT.'
-      },
-      {
-        term: 'Pain Score',
-        definition:
-          'Observable indicators of discomfort including posture, expression, and appetite.'
       }
     ]
   },
@@ -107,16 +97,6 @@ const TERM_SECTIONS = [
         term: 'Compensatory Lameness',
         definition:
           'Secondary soreness from shifting weight off the primary injury.'
-      },
-      {
-        term: 'Ataxia',
-        definition:
-          'Uncoordinated movement or stumbling that can indicate neurologic involvement.'
-      },
-      {
-        term: 'Stiffness',
-        definition:
-          'Reduced flexibility or range of motion, often noted after rest or hard work.'
       }
     ]
   },
@@ -157,16 +137,6 @@ const TERM_SECTIONS = [
         term: 'White Line Disease',
         definition:
           'Separation and infection along the hoof wall/sole junction.'
-      },
-      {
-        term: 'Digital Cushion',
-        definition:
-          'Shock-absorbing tissue within the hoof that supports soundness.'
-      },
-      {
-        term: 'Laminitis',
-        definition:
-          'Inflammation of the laminae that can cause hoof pain and rotation.'
       },
       {
         term: 'Scratches (Mud Fever)',
@@ -269,21 +239,6 @@ const TERM_SECTIONS = [
           'Rapid swelling with heat and pain; treat as urgent and reduce workload.'
       },
       {
-        term: 'Soft Tissue Strain',
-        definition:
-          'Overstretching of muscles or tendons causing soreness and swelling.'
-      },
-      {
-        term: 'Cold Therapy',
-        definition:
-          'Cold hosing or ice application to reduce heat and inflammation.'
-      },
-      {
-        term: 'Compression Wrap',
-        definition:
-          'Supportive bandaging used to limit swelling and stabilize soft tissue.'
-      },
-      {
         term: 'Neurologic Red Flags',
         definition:
           'Ataxia, stumbling, or abnormal stance that requires immediate vet evaluation.'
@@ -343,17 +298,15 @@ export default function HorseHealthTerms() {
       <h1>Horse Health Terms Library</h1>
       <p>
         A comprehensive glossary of common horse health terms to support daily
-        care, observation, and quick decision-making.
+        care, observation, and quick decision-making for Rory and Nudge.
       </p>
 
-      <ArticleCard
-        title="How to Use This Library"
-        eyebrow="In-depth article"
-        href="/articles#how-to-use-the-terms-library"
-      >
+      <ArticleCard title="How to Use This Library" eyebrow="Rory + Nudge">
         <p>
-          Keep this glossary open during checks or while writing notes. The more
-          specific you are, the stronger your care plan becomes.
+          Keep this glossary open during checks or while writing notes. Rory’s
+          calm nature makes subtle changes easy to miss; Nudge gives fast clues
+          that benefit from precise language. The more specific you are, the
+          stronger your care plan becomes.
         </p>
       </ArticleCard>
 

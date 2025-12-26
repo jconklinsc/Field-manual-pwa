@@ -15,6 +15,13 @@ export default function HorsesPage() {
     return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
   }
 
+  function createHorseId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    return `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+  }
+
   useEffect(() => {
     setHorses(loadSafeHorses());
   }, []);
@@ -44,14 +51,10 @@ export default function HorsesPage() {
     <Layout>
       <h1>Horses</h1>
       <p>
-        Track each horse as an individual. Dedicated logs help you spot
-        patterns in workload, recovery, and behavior.
+        Track Rory and Nudge as individuals. Each horse has a dedicated log so
+        you can spot patterns in workload, recovery, and behavior.
       </p>
-      <ArticleCard
-        title="Build a Record"
-        eyebrow="In-depth article"
-        href="/articles#build-a-record"
-      >
+      <ArticleCard title="Build a Record" eyebrow="In-depth article">
         <p>
           Add horses by name, then use the quick log prompts in each section to
           capture short updates. Small daily notes add up to a clear timeline.
@@ -76,16 +79,13 @@ export default function HorsesPage() {
         />
         <button
           onClick={addHorse}
-          disabled={!name.trim()}
           style={{
             padding: '8px 14px',
             borderRadius: '999px',
             background: '#78be20',
             color: '#1f2a10',
             border: 'none',
-            fontWeight: 600,
-            opacity: name.trim() ? 1 : 0.6,
-            cursor: name.trim() ? 'pointer' : 'not-allowed'
+            fontWeight: 600
           }}
         >
           Add

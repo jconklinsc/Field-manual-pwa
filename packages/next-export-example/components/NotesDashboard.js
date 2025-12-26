@@ -33,10 +33,7 @@ export default function NotesDashboard() {
 
   function addNote() {
     const trimmed = text.trim();
-    if (!trimmed) {
-      setError('Write a note before saving.');
-      return;
-    }
+    if (!trimmed) return;
     const next = [
       { id: Date.now(), text: trimmed, date: new Date().toISOString() },
       ...notes,
@@ -133,8 +130,6 @@ export default function NotesDashboard() {
             border: 'none',
             borderRadius: '999px',
             fontWeight: 600,
-            opacity: text.trim() ? 1 : 0.6,
-            cursor: text.trim() ? 'pointer' : 'not-allowed',
           }}
         >
           Add Note
