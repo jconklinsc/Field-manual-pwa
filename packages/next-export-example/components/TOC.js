@@ -10,7 +10,20 @@ export default function TOC({ items }) {
       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
         {items.map((item) => (
           <li key={item.id} style={{ marginBottom: '8px' }}>
-            <a href={`#${item.id}`} style={{ textDecoration: 'underline' }}>
+            <a
+              href={`#${item.id}`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '6px 12px',
+                borderRadius: '999px',
+                border: '1px solid #dccfc1',
+                background: '#f1e6d9',
+                color: '#2a241d',
+                fontWeight: 600,
+                textDecoration: 'none'
+              }}
+            >
               {item.label}
             </a>
           </li>
