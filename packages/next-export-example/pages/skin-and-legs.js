@@ -14,32 +14,21 @@ export default function SkinAndLegs() {
       </h1>
 
       <p>
-        The earliest clues often show up in skin, legs, and hooves. This guide
-        highlights the small signals that prevent bigger setbacks.
+        Rory and Nudge show their earliest clues through skin, legs, and hooves.
+        This article digs into the small signals that prevent bigger setbacks.
       </p>
 
-      <section id="daily-check">
-        <ArticleCard title="Daily Leg Inspection" eyebrow="In-depth article">
-          <p>
-            Start at the hoof and move up. Compare left and right, and note
-            swelling, heat, or stiffness after stall time.
-          </p>
-          <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
-            <li>Compare left to right for heat or thickening.</li>
-            <li>Check for scrapes, scabs, or new hair loss.</li>
-            <li>Note any sensitivity when you run your hands.</li>
-          </ul>
-        </ArticleCard>
-      </section>
-
-      <section id="digital-pulse">
-        <ArticleCard title="Digital Pulse Check" eyebrow="In-depth article">
-          <p>
-            Feel for an increased digital pulse at the fetlock. A pounding pulse
-            can signal inflammation that needs a quick response.
-          </p>
-        </ArticleCard>
-      </section>
+      <ArticleCard title="Daily Leg Inspection" eyebrow="Rory + Nudge">
+        <p>
+          Start at the hoof and move up. Rory’s legs stay clean and cool when
+          he’s happy. Nudge can stock up after a stall day, so movement matters.
+        </p>
+        <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
+          <li>Compare left to right for heat or thickening.</li>
+          <li>Check for scrapes, scabs, or new hair loss.</li>
+          <li>Note any sensitivity when you run your hands.</li>
+        </ul>
+      </ArticleCard>
 
       <ArticleCard title="Skin Health, Rain, and Recovery" eyebrow="In-depth article">
         <p>
@@ -52,8 +41,8 @@ export default function SkinAndLegs() {
       <ArticleCard title="Hoof Signals" eyebrow="In-depth article">
         <p>
           Warm hooves after work are common, but a pounding digital pulse or
-          uneven heat pattern is not. Keep farrier cycles consistent, especially
-          when footing is hard.
+          uneven heat pattern is not. Rory responds to regular farrier cycles;
+          Nudge needs shorter intervals when footing is hard.
         </p>
       </ArticleCard>
 

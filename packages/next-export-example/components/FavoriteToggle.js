@@ -36,7 +36,7 @@ export default function FavoriteToggle({ id, label }) {
         border: 'none',
         cursor: 'pointer',
         lineHeight: 1,
-        color: active ? '#78be20' : '#6b6256'
+        color: active ? '#78be20' : '#9ca3af'
       }}
     >
       {active ? '★' : '☆'}

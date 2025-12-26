@@ -1,17 +1,7 @@
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import ArticleCard from '../components/ArticleCard';
-
-const FAVORITES_KEY = 'fieldManualFavorites';
-const PAGE_LINKS = {
-  'daily-care': '/daily-care',
-  'pre-ride': '/pre-ride',
-  'post-ride': '/post-ride',
-  'skin-and-legs': '/skin-and-legs',
-  environment: '/environment',
-  'quick-reference': '/quick-reference',
-  'horse-health-terms': '/horse-health-terms'
-};
+import { loadSafeHorses } from '../components/safeStore';
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
@@ -26,13 +16,14 @@ export default function FavoritesPage() {
     <Layout>
       <h1>Favorites</h1>
       <p>
-        Your starred pages live here, organized so you can jump back to what
-        matters most.
+        Your starred Rory + Nudge entries live here, organized so you can
+        revisit key moments in seconds.
       </p>
       <ArticleCard title="Why Save Favorites?" eyebrow="In-depth article">
         <p>
-          Use favorites to keep high-importance pages close. It becomes a fast
-          reference when you need guidance in a hurry.
+          Use favorites for high-signal entries: sudden swelling, a training
+          breakthrough, or a response to new footing. This becomes a fast
+          reference when you need history in a hurry.
         </p>
       </ArticleCard>
 

@@ -298,13 +298,15 @@ export default function HorseHealthTerms() {
       <h1>Horse Health Terms Library</h1>
       <p>
         A comprehensive glossary of common horse health terms to support daily
-        care, observation, and quick decision-making.
+        care, observation, and quick decision-making for Rory and Nudge.
       </p>
 
-      <ArticleCard title="How to Use This Library" eyebrow="In-depth article">
+      <ArticleCard title="How to Use This Library" eyebrow="Rory + Nudge">
         <p>
-          Keep this glossary open during checks or while writing notes. The more
-          specific you are, the stronger your care plan becomes.
+          Keep this glossary open during checks or while writing notes. Rory’s
+          calm nature makes subtle changes easy to miss; Nudge gives fast clues
+          that benefit from precise language. The more specific you are, the
+          stronger your care plan becomes.
         </p>
       </ArticleCard>
 

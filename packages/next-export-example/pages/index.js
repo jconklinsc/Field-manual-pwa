@@ -5,10 +5,11 @@ import searchData from '../data/searchData';
 export default function Home() {
   return (
     <Layout>
-      <h1>Draw It Out Field Manual</h1>
+      <h1>Field Manual</h1>
       <p>
-        Calm, in-depth care notes for your horses. Use these articles to spot
-        small changes, document patterns, and stay grounded in every decision.
+        Calm, in-depth care notes for Rory and Nudge. Use these articles to
+        spot small changes, document patterns, and stay grounded in every
+        decision.
       </p>
 
       {/* Global Search */}
@@ -43,12 +44,6 @@ export default function Home() {
         </li>
         <li>
           <a href="/horse-health-terms">Horse Health Terms Library</a>
-        </li>
-        <li>
-          <a href="/appointments">Vet & Farrier Appointments</a>
-        </li>
-        <li>
-          <a href="/products">Draw It Out Best Sellers</a>
         </li>
 
         <hr style={{ margin: '16px 0' }} />

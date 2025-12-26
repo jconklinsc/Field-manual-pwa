@@ -14,39 +14,35 @@ export default function Environment() {
       </h1>
 
       <p>
-        Horses react to the world around them. Track how weather, footing, and
-        routine shifts show up in their bodies and behavior.
+        Rory and Nudge react to the world around them. Track how weather, footing,
+        and routine shifts show up in their bodies and behavior.
       </p>
 
-      <section id="weather">
-        <ArticleCard title="Weather Shifts" eyebrow="In-depth article">
-          <p>
-            Cold snaps can tighten muscles, and humidity can dull energy. Adjust
-            warm-up time, water intake, and workload with the forecast.
-          </p>
-          <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
-            <li>Note temperature swings and wind exposure.</li>
-            <li>Plan extra cool-down time in heat.</li>
-            <li>Track hydration and electrolytes.</li>
-          </ul>
-        </ArticleCard>
-      </section>
+      <ArticleCard title="Weather Shifts" eyebrow="Rory + Nudge">
+        <p>
+          Rory stiffens in cold snaps. Nudge gets dull when humidity spikes.
+          Adjust warm-up time, water intake, and workload with the forecast.
+        </p>
+        <ul style={{ margin: '10px 0 0', paddingLeft: '18px' }}>
+          <li>Note temperature swings and wind exposure.</li>
+          <li>Plan extra cool-down time in heat.</li>
+          <li>Track hydration and electrolytes.</li>
+        </ul>
+      </ArticleCard>
 
-      <section id="footing">
-        <ArticleCard title="Footing + Terrain" eyebrow="In-depth article">
-          <p>
-            Deep footing builds strength but strains tendons. Hard ground
-            increases concussion. Log what they worked on so you can connect
-            footing with how they felt the next day.
-          </p>
-        </ArticleCard>
-      </section>
+      <ArticleCard title="Footing + Terrain" eyebrow="In-depth article">
+        <p>
+          Deep footing builds strength but strains tendons. Hard ground increases
+          concussion. Log what they worked on so you can connect footing with how
+          they felt the next day.
+        </p>
+      </ArticleCard>
 
       <ArticleCard title="Routine Changes" eyebrow="In-depth article">
         <p>
           Hauling, feed changes, or new pasture mates can impact appetite and
-          attitude. Flag any change with a quick note and check TPR twice that
-          day.
+          attitude. For Rory and Nudge, we flag any change with a quick note and
+          check TPR twice that day.
         </p>
       </ArticleCard>
 
