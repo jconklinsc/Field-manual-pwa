@@ -1,20 +1,5 @@
 import { useEffect, useState } from 'react';
-
-const HORSE_KEY = 'fieldManualHorses';
-
-function loadHorses() {
-  if (typeof window === 'undefined') return [];
-  try {
-    const raw = localStorage.getItem(HORSE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveHorses(horses) {
-  localStorage.setItem(HORSE_KEY, JSON.stringify(horses));
-}
+import { loadSafeHorses, saveSafeHorses } from './safeStore';
 
 export default function SectionLogQuickAdd({ section }) {
   const [horses, setHorses] = useState([]);
@@ -22,7 +7,7 @@ export default function SectionLogQuickAdd({ section }) {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    setHorses(loadHorses());
+    setHorses(loadSafeHorses());
   }, []);
 
   function submit() {
@@ -45,7 +30,8 @@ export default function SectionLogQuickAdd({ section }) {
         : h
     );
 
-    saveHorses(updated);
+    saveSafeHorses(updated);
+    setHorses(updated);
     setText('');
     alert('Logged ✔');
   }
@@ -59,9 +45,9 @@ export default function SectionLogQuickAdd({ section }) {
       style={{
         marginTop: '24px',
         padding: '16px',
-        border: '1px solid #e5e5e5',
-        borderRadius: '8px',
-        background: '#fafafa'
+        border: '1px solid #e6d9c8',
+        borderRadius: '12px',
+        background: '#fffaf4'
       }}
     >
       <strong>Log for a Horse</strong>
@@ -69,7 +55,14 @@ export default function SectionLogQuickAdd({ section }) {
       <select
         value={horseId}
         onChange={e => setHorseId(e.target.value)}
-        style={{ width: '100%', marginTop: '8px', padding: '8px' }}
+        style={{
+          width: '100%',
+          marginTop: '8px',
+          padding: '8px',
+          borderRadius: '10px',
+          border: '1px solid #dccfc1',
+          background: '#ffffff'
+        }}
       >
         <option value="">Select horse…</option>
         {horses.map(h => (
@@ -84,7 +77,13 @@ export default function SectionLogQuickAdd({ section }) {
         onChange={e => setText(e.target.value)}
         placeholder={`Log a note for ${section}…`}
         rows={3}
-        style={{ width: '100%', marginTop: '8px', padding: '10px' }}
+        style={{
+          width: '100%',
+          marginTop: '8px',
+          padding: '10px',
+          borderRadius: '10px',
+          border: '1px solid #dccfc1'
+        }}
       />
 
       <button
@@ -92,10 +91,11 @@ export default function SectionLogQuickAdd({ section }) {
         style={{
           marginTop: '8px',
           padding: '8px 12px',
-          background: '#0f1111',
-          color: '#fff',
+          background: '#78be20',
+          color: '#1f2a10',
           border: 'none',
-          borderRadius: '6px'
+          borderRadius: '999px',
+          fontWeight: 600
         }}
       >
         Save to Horse Log
