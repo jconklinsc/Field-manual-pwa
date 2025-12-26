@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { readJson, readText, writeJson, writeText } from './storage';
 
 export default function NotesPanel({ id, title }) {
   const [note, setNote] = useState('');
@@ -7,38 +8,21 @@ export default function NotesPanel({ id, title }) {
   const favoritesKey = 'fieldManualFavorites';
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const storedNote = window.localStorage.getItem(`dio-fm-notes-${id}`);
+    const storedNote = readText(`dio-fm-notes-${id}`, '');
     if (storedNote) setNote(storedNote);
 
-    const favRaw = window.localStorage.getItem(favoritesKey);
-    if (favRaw) {
-      try {
-        const favs = JSON.parse(favRaw);
-        setIsFavorite(favs.some(item => item.id === id));
-      } catch {}
-    }
+    const favs = readJson(favoritesKey, []);
+    setIsFavorite(favs.some(item => item.id === id));
   }, [id]);
 
   const handleNoteChange = (e) => {
     const v = e.target.value;
     setNote(v);
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(`dio-fm-notes-${id}`, v);
-    }
+    writeText(`dio-fm-notes-${id}`, v);
   };
 
   const toggleFavorite = () => {
-    if (typeof window === 'undefined') return;
-
-    const favRaw = window.localStorage.getItem(favoritesKey);
-    let favs = [];
-    if (favRaw) {
-      try {
-        favs = JSON.parse(favRaw);
-      } catch {}
-    }
+    const favs = readJson(favoritesKey, []);
 
     let nextFavs;
     if (isFavorite) {
@@ -52,7 +36,7 @@ export default function NotesPanel({ id, title }) {
       setIsFavorite(true);
     }
 
-    window.localStorage.setItem(favoritesKey, JSON.stringify(nextFavs));
+    writeJson(favoritesKey, nextFavs);
   };
 
   return (

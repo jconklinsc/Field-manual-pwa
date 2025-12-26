@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { readJson, writeJson } from './storage';
 
 const AppContext = createContext();
 
@@ -6,25 +7,30 @@ export function AppProvider({ children }) {
   const [horses, setHorses] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [hydrated, setHydrated] = useState(false);
 
   // Load from localStorage
   useEffect(() => {
-    setHorses(JSON.parse(localStorage.getItem('horses') || '[]'));
-    setFavorites(JSON.parse(localStorage.getItem('favorites') || '[]'));
-    setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
+    setHorses(readJson('horses', []));
+    setFavorites(readJson('favorites', []));
+    setNotes(readJson('notes', []));
+    setHydrated(true);
   }, []);
 
   // Persist
   useEffect(() => {
-    localStorage.setItem('horses', JSON.stringify(horses));
+    if (!hydrated) return;
+    writeJson('horses', horses);
   }, [horses]);
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    if (!hydrated) return;
+    writeJson('favorites', favorites);
   }, [favorites]);
 
   useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes));
+    if (!hydrated) return;
+    writeJson('notes', notes);
   }, [notes]);
 
   return (

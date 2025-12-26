@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { readJson } from '../components/storage';
 
 const HORSE_KEY = 'fieldManualHorses';
 
@@ -7,7 +8,7 @@ export default function SmartPrompt({ section }) {
 
   useEffect(() => {
     try {
-      const horses = JSON.parse(localStorage.getItem(HORSE_KEY) || '[]');
+      const horses = readJson(HORSE_KEY, []);
       const allEntries = horses.flatMap(h =>
         (h.entries || []).map(e => ({
           ...e,

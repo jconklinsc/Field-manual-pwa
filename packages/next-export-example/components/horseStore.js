@@ -1,20 +1,14 @@
+import { readJson, writeJson } from './storage';
+
 const KEY = 'fieldManualHorses';
 
 export function loadHorses() {
-  if (typeof window === 'undefined') return [];
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
+  const parsed = readJson(KEY, []);
+  return Array.isArray(parsed) ? parsed : [];
 }
 
 export function saveHorses(horses) {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(KEY, JSON.stringify(horses));
+  writeJson(KEY, horses);
 }
 
 export function makeId() {

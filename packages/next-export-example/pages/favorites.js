@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import ArticleCard from '../components/ArticleCard';
-import { loadSafeHorses } from '../components/safeStore';
+import { readJson } from '../components/storage';
+
+const FAVORITES_KEY = 'fieldManualFavorites';
+const PAGE_LINKS = {
+  'daily-care': '/daily-care',
+  'pre-ride': '/pre-ride',
+  'post-ride': '/post-ride',
+  'skin-and-legs': '/skin-and-legs',
+  'environment': '/environment',
+  'quick-reference': '/quick-reference',
+};
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const stored = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
-    setFavorites(stored);
+    setFavorites(readJson(FAVORITES_KEY, []));
   }, []);
 
   return (
