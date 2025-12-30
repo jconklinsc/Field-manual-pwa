@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 
 export default function Search({ data = [] }) {
+  const [inputValue, setInputValue] = useState('');
   const [query, setQuery] = useState('');
   const suggestionListId = 'field-manual-search-suggestions';
   const normalizeForSearch = (value) =>
@@ -20,9 +21,11 @@ export default function Search({ data = [] }) {
   };
 
   const normalizedQuery = normalizeForSearch(query);
+  const normalizedInput = normalizeForSearch(inputValue);
   const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
   const maxResults = 8;
   const maxSuggestions = 5;
+  const maxPopular = 6;
 
   const results = useMemo(() => {
     if (queryTokens.length === 0) return [];
@@ -58,7 +61,7 @@ export default function Search({ data = [] }) {
   }, [data, normalizedQuery, queryTokens]);
 
   const suggestions = useMemo(() => {
-    if (normalizedQuery.length < 1) return [];
+    if (normalizedInput.length < 1) return [];
 
     return data
       .map((item) => {
@@ -66,8 +69,8 @@ export default function Search({ data = [] }) {
         const normalizedTitle = normalizeForSearch(title);
         let score = 0;
 
-        if (normalizedTitle.startsWith(normalizedQuery)) score += 3;
-        if (normalizedTitle.includes(normalizedQuery)) score += 1;
+        if (normalizedTitle.startsWith(normalizedInput)) score += 3;
+        if (normalizedTitle.includes(normalizedInput)) score += 1;
 
         return { title, score };
       })
@@ -75,22 +78,33 @@ export default function Search({ data = [] }) {
       .sort((a, b) => b.score - a.score)
       .slice(0, maxSuggestions)
       .map(({ title }) => title);
-  }, [data, normalizedQuery]);
+  }, [data, normalizedInput]);
+
+  const popularSearches = useMemo(
+    () =>
+      data
+        .map((item) => item.title)
+        .filter(Boolean)
+        .slice(0, maxPopular),
+    [data]
+  );
 
   return (
     <div style={{ marginBottom: '24px' }}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          setQuery((value) => value.trim());
+          const trimmed = inputValue.trim();
+          setInputValue(trimmed);
+          setQuery(trimmed);
         }}
         style={{ display: 'flex', gap: '12px', alignItems: 'center' }}
       >
         <input
           type="text"
           placeholder="Search the Draw It Out Field Manual..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           list={suggestionListId}
           style={{
             flex: 1,
@@ -125,6 +139,84 @@ export default function Search({ data = [] }) {
         ))}
       </datalist>
 
+      {normalizedQuery.length === 0 && popularSearches.length > 0 && (
+        <div
+          style={{
+            marginTop: '16px',
+            padding: '12px',
+            borderRadius: '12px',
+            border: '1px solid #e6d9c8',
+            background: '#fffdf9',
+          }}
+        >
+          <div style={{ fontWeight: 600, marginBottom: '8px' }}>
+            Popular searches
+          </div>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {popularSearches.map((title) => (
+              <button
+                key={title}
+                type="button"
+                onClick={() => {
+                  setInputValue(title);
+                  setQuery(title);
+                }}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '999px',
+                  border: '1px solid #dccfc1',
+                  background: '#fffaf4',
+                  cursor: 'pointer',
+                  fontWeight: 600,
+                  color: '#2a241d',
+                }}
+              >
+                {title}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {normalizedInput.length > 0 && suggestions.length > 0 && (
+        <div
+          style={{
+            marginTop: '16px',
+            padding: '12px',
+            borderRadius: '12px',
+            border: '1px solid #e6d9c8',
+            background: '#fffdf9',
+          }}
+        >
+          <div style={{ fontWeight: 600, marginBottom: '8px' }}>
+            Predictive matches
+          </div>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {suggestions.map((title) => (
+              <button
+                key={title}
+                type="button"
+                onClick={() => {
+                  setInputValue(title);
+                  setQuery(title);
+                }}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '999px',
+                  border: '1px solid #dccfc1',
+                  background: '#fffaf4',
+                  cursor: 'pointer',
+                  fontWeight: 600,
+                  color: '#2a241d',
+                }}
+              >
+                {title}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {normalizedQuery.length > 0 && (
         <div style={{ marginTop: '16px', display: 'grid', gap: '12px' }}>
           {results.length === 0 ? (
@@ -144,41 +236,6 @@ export default function Search({ data = [] }) {
                 </p>
               </a>
             ))
-          )}
-          {suggestions.length > 0 && (
-            <div
-              style={{
-                marginTop: '8px',
-                padding: '12px',
-                borderRadius: '12px',
-                border: '1px solid #e6d9c8',
-                background: '#fffdf9',
-              }}
-            >
-              <div style={{ fontWeight: 600, marginBottom: '8px' }}>
-                Suggestions
-              </div>
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                {suggestions.map((title) => (
-                  <button
-                    key={title}
-                    type="button"
-                    onClick={() => setQuery(title)}
-                    style={{
-                      padding: '6px 12px',
-                      borderRadius: '999px',
-                      border: '1px solid #dccfc1',
-                      background: '#fffaf4',
-                      cursor: 'pointer',
-                      fontWeight: 600,
-                      color: '#2a241d',
-                    }}
-                  >
-                    {title}
-                  </button>
-                ))}
-              </div>
-            </div>
           )}
         </div>
       )}
