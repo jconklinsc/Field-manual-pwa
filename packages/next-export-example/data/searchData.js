@@ -1,5 +1,23 @@
 const searchData = [
   {
+    title: "Notes",
+    text: "notes journal log observations daily entries",
+    preview: "Capture daily observations and track trends.",
+    href: "/notes"
+  },
+  {
+    title: "Horse Logs",
+    text: "horses horse log entries timeline records",
+    preview: "Track each horse with a dedicated log.",
+    href: "/horses"
+  },
+  {
+    title: "Favorites",
+    text: "favorites saved pages quick access",
+    preview: "Keep go-to pages one tap away.",
+    href: "/favorites"
+  },
+  {
     title: "Daily Observation Checklist",
     text: "Eyes clear nostrils airflow swelling heat legs manure demeanor normal baseline",
     preview: "Recognize early changes in your horse’s daily baseline.",

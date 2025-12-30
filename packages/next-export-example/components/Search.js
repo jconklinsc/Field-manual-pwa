@@ -14,11 +14,20 @@ export default function Search({ data = [] }) {
   };
 
   const normalizedQuery = query.trim().toLowerCase();
-  const results = normalizedQuery.length > 0
+  const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
+  const results = queryTokens.length > 0
     ? data.filter(item => {
-        const text = `${item.text || ''} ${item.preview || ''}`.toLowerCase();
-        const title = (item.title || '').toLowerCase();
-        return text.includes(normalizedQuery) || title.includes(normalizedQuery);
+        const haystack = [
+          item.title,
+          item.text,
+          item.preview,
+          item.keywords,
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase();
+
+        return queryTokens.every(token => haystack.includes(token));
       })
     : [];
 
