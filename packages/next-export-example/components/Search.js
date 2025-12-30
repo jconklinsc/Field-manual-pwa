@@ -2,6 +2,11 @@ import { useState } from 'react';
 
 export default function Search({ data = [] }) {
   const [query, setQuery] = useState('');
+  const normalizeForSearch = (value) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
   const resultStyle = {
     display: 'block',
     padding: '14px 16px',
