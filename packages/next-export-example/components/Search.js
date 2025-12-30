@@ -18,20 +18,19 @@ export default function Search({ data = [] }) {
     boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)'
   };
 
-  const normalizedQuery = normalizeForSearch(query);
+  const normalizedQuery = query.trim().toLowerCase();
   const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
   const results = queryTokens.length > 0
     ? data.filter(item => {
-        const haystack = normalizeForSearch(
-          [
-            item.title,
-            item.text,
-            item.preview,
-            item.keywords,
-          ]
-            .filter(Boolean)
-            .join(' ')
-        );
+        const haystack = [
+          item.title,
+          item.text,
+          item.preview,
+          item.keywords,
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase();
 
         return queryTokens.every(token => haystack.includes(token));
       })
