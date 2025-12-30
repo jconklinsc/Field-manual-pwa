@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 export default function Search({ data = [] }) {
   const [query, setQuery] = useState('');
+  const suggestionListId = 'field-manual-search-suggestions';
   const normalizeForSearch = (value) =>
     value
       .toLowerCase()
@@ -57,7 +58,7 @@ export default function Search({ data = [] }) {
   }, [data, normalizedQuery, queryTokens]);
 
   const suggestions = useMemo(() => {
-    if (normalizedQuery.length < 2) return [];
+    if (normalizedQuery.length < 1) return [];
 
     return data
       .map((item) => {
@@ -78,26 +79,51 @@ export default function Search({ data = [] }) {
 
   return (
     <div style={{ marginBottom: '24px' }}>
-      <input
-        type="text"
-        placeholder="Search the Draw It Out Field Manual..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            e.currentTarget.blur();
-          }
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          setQuery((value) => value.trim());
         }}
-        style={{
-          width: '100%',
-          padding: '12px',
-          fontSize: '16px',
-          borderRadius: '999px',
-          border: '1px solid #dccfc1',
-          background: '#fffaf4',
-          color: '#2a241d'
-        }}
-      />
+        style={{ display: 'flex', gap: '12px', alignItems: 'center' }}
+      >
+        <input
+          type="text"
+          placeholder="Search the Draw It Out Field Manual..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          list={suggestionListId}
+          style={{
+            flex: 1,
+            width: '100%',
+            padding: '12px',
+            fontSize: '16px',
+            borderRadius: '999px',
+            border: '1px solid #dccfc1',
+            background: '#fffaf4',
+            color: '#2a241d'
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            padding: '12px 18px',
+            borderRadius: '999px',
+            border: 'none',
+            background: '#b6855a',
+            color: '#2a241d',
+            fontWeight: 600,
+            cursor: 'pointer',
+            boxShadow: '0 8px 16px rgba(42, 36, 29, 0.12)'
+          }}
+        >
+          Search
+        </button>
+      </form>
+      <datalist id={suggestionListId}>
+        {suggestions.map((title) => (
+          <option key={title} value={title} />
+        ))}
+      </datalist>
 
       {normalizedQuery.length > 0 && (
         <div style={{ marginTop: '16px', display: 'grid', gap: '12px' }}>
