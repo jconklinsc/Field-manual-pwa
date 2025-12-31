@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "node scripts/ensure-node.js",
     "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
-    "start": "next start",
-    "dev": "next dev"
+    "predev": "node scripts/ensure-node.js",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
+    "start": "next start"
   },
   "dependencies": {
     "next": "9.3.2",
