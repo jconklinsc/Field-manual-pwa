@@ -90,15 +90,19 @@ export default function Search({ data = [] }) {
     [data]
   );
 
+  const handleSubmit = () => {
+    const trimmed = inputValue.trim();
+    setInputValue(trimmed);
+    setSubmittedQuery(trimmed);
+    setHasSubmitted(true);
+  };
+
   return (
     <div style={{ marginBottom: '24px' }}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          const trimmed = inputValue.trim();
-          setInputValue(trimmed);
-          setSubmittedQuery(trimmed);
-          setHasSubmitted(true);
+          handleSubmit();
         }}
         style={{ display: 'flex', gap: '12px', alignItems: 'center' }}
       >
@@ -187,7 +191,7 @@ export default function Search({ data = [] }) {
         </div>
       )}
 
-      {normalizedInput.length > 0 && suggestions.length > 0 && (
+      {normalizedInput.length > 0 && (
         <div
           style={{
             marginTop: '16px',
@@ -200,30 +204,36 @@ export default function Search({ data = [] }) {
           <div style={{ fontWeight: 600, marginBottom: '8px' }}>
             Predictive matches
           </div>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            {suggestions.map((title) => (
-              <button
-                key={title}
-                type="button"
-                onClick={() => {
-                  setInputValue(title);
-                  setSubmittedQuery(title);
-                  setHasSubmitted(true);
-                }}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: '999px',
-                  border: '1px solid #dccfc1',
-                  background: '#fffaf4',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  color: '#2a241d',
-                }}
-              >
-                {title}
-              </button>
-            ))}
-          </div>
+          {suggestions.length > 0 ? (
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              {suggestions.map((title) => (
+                <button
+                  key={title}
+                  type="button"
+                  onClick={() => {
+                    setInputValue(title);
+                    setSubmittedQuery(title);
+                    setHasSubmitted(true);
+                  }}
+                  style={{
+                    padding: '6px 12px',
+                    borderRadius: '999px',
+                    border: '1px solid #dccfc1',
+                    background: '#fffaf4',
+                    cursor: 'pointer',
+                    fontWeight: 600,
+                    color: '#2a241d',
+                  }}
+                >
+                  {title}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p style={{ margin: 0, color: '#9b4a1b' }}>
+              No predictive matches yet.
+            </p>
+          )}
         </div>
       )}
 
@@ -248,6 +258,11 @@ export default function Search({ data = [] }) {
             ))
           )}
         </div>
+      )}
+      {hasSubmitted && normalizedQuery.length === 0 && (
+        <p style={{ marginTop: '16px', color: '#9b4a1b' }}>
+          Enter a search term to see results.
+        </p>
       )}
     </div>
   );
