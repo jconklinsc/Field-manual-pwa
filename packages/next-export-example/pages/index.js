@@ -110,6 +110,11 @@ export default function Home() {
             In-Depth Articles
           </a>
         </li>
+        <li>
+          <a href="/account" style={cardStyle}>
+            Account Area
+          </a>
+        </li>
 
         <hr style={{ margin: '16px 0' }} />
 
