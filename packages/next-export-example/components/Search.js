@@ -2,7 +2,8 @@ import { useMemo, useState } from 'react';
 
 export default function Search({ data = [] }) {
   const [inputValue, setInputValue] = useState('');
-  const [query, setQuery] = useState('');
+  const [submittedQuery, setSubmittedQuery] = useState('');
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const suggestionListId = 'field-manual-search-suggestions';
   const normalizeForSearch = (value) =>
     value
@@ -20,7 +21,7 @@ export default function Search({ data = [] }) {
     boxShadow: '0 12px 24px rgba(42, 36, 29, 0.08)'
   };
 
-  const normalizedQuery = normalizeForSearch(query);
+  const normalizedQuery = normalizeForSearch(submittedQuery);
   const normalizedInput = normalizeForSearch(inputValue);
   const queryTokens = normalizedQuery.split(/\s+/).filter(Boolean);
   const maxResults = 8;
@@ -96,7 +97,8 @@ export default function Search({ data = [] }) {
           event.preventDefault();
           const trimmed = inputValue.trim();
           setInputValue(trimmed);
-          setQuery(trimmed);
+          setSubmittedQuery(trimmed);
+          setHasSubmitted(true);
         }}
         style={{ display: 'flex', gap: '12px', alignItems: 'center' }}
       >
@@ -104,7 +106,13 @@ export default function Search({ data = [] }) {
           type="text"
           placeholder="Search the Draw It Out Field Manual..."
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            if (!e.target.value.trim()) {
+              setHasSubmitted(false);
+              setSubmittedQuery('');
+            }
+          }}
           list={suggestionListId}
           style={{
             flex: 1,
@@ -123,7 +131,7 @@ export default function Search({ data = [] }) {
             padding: '12px 18px',
             borderRadius: '999px',
             border: 'none',
-            background: '#b6855a',
+            background: '#78be20',
             color: '#2a241d',
             fontWeight: 600,
             cursor: 'pointer',
@@ -159,7 +167,8 @@ export default function Search({ data = [] }) {
                 type="button"
                 onClick={() => {
                   setInputValue(title);
-                  setQuery(title);
+                  setSubmittedQuery(title);
+                  setHasSubmitted(true);
                 }}
                 style={{
                   padding: '6px 12px',
@@ -198,7 +207,8 @@ export default function Search({ data = [] }) {
                 type="button"
                 onClick={() => {
                   setInputValue(title);
-                  setQuery(title);
+                  setSubmittedQuery(title);
+                  setHasSubmitted(true);
                 }}
                 style={{
                   padding: '6px 12px',
@@ -217,7 +227,7 @@ export default function Search({ data = [] }) {
         </div>
       )}
 
-      {normalizedQuery.length > 0 && (
+      {hasSubmitted && normalizedQuery.length > 0 && (
         <div style={{ marginTop: '16px', display: 'grid', gap: '12px' }}>
           {results.length === 0 ? (
             <p style={{ color: '#9b4a1b' }}>No results found.</p>
